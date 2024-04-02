@@ -30,6 +30,9 @@ Route::get('blogs/least-interactions-all', [BlogController::class, 'leastInterac
 // Beispiel mit einem Array von Tags: /api/blogs/by-tags?tags[]=ipsum&tags[]=lorem
 Route::get('blogs/by-tags', [BlogController::class, 'getBlogsByTags']);
 
+Route::post('/user', [UserController::class, 'store']);
+
+
 
 
 /**
