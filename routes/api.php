@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\AuthController;
 
 
 Route::post('/sanctum/token', [TokenController::class]);
@@ -30,7 +31,7 @@ Route::get('blogs/least-interactions-all', [BlogController::class, 'leastInterac
 // Beispiel mit einem Array von Tags: /api/blogs/by-tags?tags[]=ipsum&tags[]=lorem
 Route::get('blogs/by-tags', [BlogController::class, 'getBlogsByTags']);
 
-Route::post('/user', [UserController::class, 'store']);
+Route::get('/all-users', [UserController::class, 'showUser']);
 
 
 

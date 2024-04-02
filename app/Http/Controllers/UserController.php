@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function store(Request $request)
+    public function register(Request $request)
     {
         try {
             //Validated
@@ -55,6 +55,11 @@ class UserController extends Controller
 
     public function show(){
         return new UserResource(User::findOrFail(auth()->id()));
+    }
+
+    public function showUser(){
+        return User::all();
+    
     }
 
 
