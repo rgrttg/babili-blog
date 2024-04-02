@@ -12,7 +12,7 @@ class BlogController extends Controller
     public function latestThreeBlogs()
     {
         $blogs = Blog::latest()->take(3)->get();
-        return response()->json($blogs);
+        return BlogResource::collection($blogs);
     }
 
     public function allBlogsByLatest()
@@ -116,6 +116,7 @@ class BlogController extends Controller
             'profile_picture' => optional($blog->user)->profile_picture,
             'title' => $blog->title,
             'image_url' => $blog->image_url,
+            'description' => $blog->description,
             'content' => $blog->content,
             'published_at' => optional($blog->published_at)->format($dateFormatBlog),
             'tags' => $blog->tags->pluck('tag'),

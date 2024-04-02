@@ -18,6 +18,7 @@ class BlogResource extends JsonResource
             'profile_picture' => optional($this->user)->profile_picture,
             'title' => $this->title,
             'image_url' => $this->image_url,
+            'description' => $this->description,
             'content' => $this->content,
             'published_at' => optional($this->published_at)->format($dateFormat),
             'interactions' => $this->interactions,

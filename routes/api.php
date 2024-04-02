@@ -1,20 +1,16 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-use App\Models\User;
-use App\Models\Blog;
-
 use App\Http\Controllers\TokenController;
-
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
 
-Route::post('/sanctum/token', TokenController::class);
 
+Route::post('/sanctum/token', [TokenController::class]);
+
+Route::get('test', function(){return "test";});
 // Blog per Id
-Route::get('blogs/{id}', [BlogController::class, 'mitOhneAllesScharf']);
+Route::get('blogs/detail/{id}', [BlogController::class, 'mitOhneAllesScharf']);
 // drei neuste
 Route::get('blogs/latest-three', [BlogController::class, 'latestThreeBlogs']);
 // alle neuste
@@ -45,5 +41,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Diese Route ermöglicht authentifizierten Benutzern das Bewerten eines Blogs mit einer positiven oder negativen Bewertung.
     // Beispielanfrage: POST /api/blogs/{BlogId}/rate
     // Beispiel request body: { "rating": 1 } (für positiv) oder { "rating": 0 } (für negativ)
-    Route::post('/blogs/{id}/rate', [BlogController::class, 'rateBlog']);
+    Route::post('blogs/rate/{id}', [BlogController::class, 'rateBlog']);
 });
