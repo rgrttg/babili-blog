@@ -1,5 +1,5 @@
 
-
+import {createRouter, createWebHistory} from 'vue-router';
 
 export const routes = [
     {
@@ -9,7 +9,7 @@ export const routes = [
     
     {
         path: "/login",
-        component: () => import("./pages/Auth/Login.vue"),
+        component: () => import("./pages/Login.vue"),
     },
 
     {
@@ -19,11 +19,24 @@ export const routes = [
     },
     {
         path: "/register",
-        component: () => import("./pages/Auth/Register.vue"),
+        component: () => import("./pages/Register.vue"),
     }
 ];
 
 
+const router = createRouter({
+    history: createWebHistory(),
+    routes
+})
 
+router.beforeEach((to, from, next)) => {
+    const isAuthenticated = !!localStorage.getItem('tocken');
 
+    if(!to.meta.public && !isAuthenticated) {
+        next({name: 'Login'});
+    } else {
+        next();
+    }
+}
 
+export default router;

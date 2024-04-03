@@ -3,6 +3,7 @@ import { useAuthStore } from '@/stores/AuthStore';
 import AuthService from "@/services/AuthService";
 import {ref} from 'vue';
 import {useRouter} from 'vue-router';
+import { createStore } from 'vuex';
 
 const router = useRouter();
 const store = useAuthStore();

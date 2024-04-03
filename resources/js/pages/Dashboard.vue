@@ -8,9 +8,5 @@
 
 
 <template>
-    <header>
-        <LogoutButton/>
-    </header>
-    <span>Dashboard</span>
-    <h1>Hallo {{ store.authUser.name }}</h1>
+<h1>Hi, you are on the Dashboard</h1>
 </template>

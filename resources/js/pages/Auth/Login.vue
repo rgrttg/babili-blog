@@ -22,7 +22,7 @@ const login = async() => {
         const authUser = await store.getAuthUser();
 
         if(authUser) {
-          router.push("/register");
+          router.push("/Dashboard");
         }
         else {
             console.log('error');
@@ -37,7 +37,7 @@ const login = async() => {
 <template>
 
 
-    <form action="Register.vue" method="post" @submit.prevent="login">
+    <form action="../Dashboard" method="post" @submit.prevent="login">
 
 
         <div class="form__group">
