@@ -39,7 +39,7 @@ Route::get('/all-users', [UserController::class, 'showUser']);
 /**
  * AUTH ROUTES
  */
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/users/auth', [UserController::class, 'show']);
     
     // Diese Route ermöglicht authentifizierten Benutzern das Bewerten eines Blogs mit einer positiven oder negativen Bewertung.
@@ -47,3 +47,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Beispiel request body: { "rating": 1 } (für positiv) oder { "rating": 0 } (für negativ)
     Route::post('blogs/rate/{id}', [BlogController::class, 'rateBlog']);
 });
+
+
+// TODO: PHP-Mailer aufsetzen
