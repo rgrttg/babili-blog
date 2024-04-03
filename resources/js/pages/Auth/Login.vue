@@ -37,7 +37,7 @@ const login = async() => {
 <template>
 
 
-    <form action="" method="post" @submit.prevent="login">
+    <form action="login" method="post" @submit.prevent="login">
 
 
         <div class="form__group">
