@@ -17,6 +17,10 @@ export const routes = [
         component: () => import("./pages/Dashboard.vue"),
         meta: { requiresAuth: true },
     },
+    {
+        path: "/register",
+        component: () => import("./pages/Auth/Register.vue"),
+    }
 ];
 
 

@@ -37,7 +37,7 @@ const login = async() => {
 <template>
 
 
-    <form action="Register.vue" method="post" @submit.prevent="login">
+    <form action="register" method="post" @submit.prevent="login">
 
 
         <div class="form__group">
