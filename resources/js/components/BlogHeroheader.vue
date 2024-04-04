@@ -4,7 +4,7 @@ import { onMounted } from 'vue';
 onMounted(()=>{
 
 
-const digits = document.querySelectorAll('.ca, .ab, .bc, .cd, .ae, .bf, .ag, .cg, .ah, .ai, .aj, .ak, .bk, .al, .am, .an, .bo, .cp, .aq, .cq, .cr, .as, .bs, .at, .au, .cv, .bw, .cx, .ay, .az, .bz');
+const digits = document.querySelectorAll('.aa, .ca, .ab, .cb, .bc, .cc, .cd, .ae, .ce, .bf, .ag, .cg, .ah, .ch, .ai, .bi, .aj, .ak, .bk, .al, .bl, .am, .an, .bo, .cp, .aq, .cq, .cr, .as, .bs, .at, .au, .cv, .bw, .cx, .bx, .ay, .az, .bz');
 
 function getRandomDigits() {
   const randomDigits = [];
@@ -29,11 +29,16 @@ setInterval(toggleOpacity, 1000);
 
 
 <template>
-<div>
-
+<div class="container">
     <div class="img-container">
-        <img src="/public/img/Frame 10.png" alt="tech-blog logo">
+        <img src="/public/img/Frame 10.png" width="553" height="321" alt="tech-blog logo">
     </div>
+
+        <div class="hero-text">
+            <h1>Blogbeiträge, News</h1>
+            <p>und Informationen</p>
+        </div>
+
         <div class="matrix-container">
             <div class="aa">0</div>
             <div class="ab">0</div>
@@ -114,7 +119,7 @@ setInterval(toggleOpacity, 1000);
             <div class="cy">0</div>
             <div class="cz">1</div>
         </div>
-    </div>
+</div>
 </template>
 
 
@@ -124,8 +129,25 @@ setInterval(toggleOpacity, 1000);
     color: aliceblue;
 }
 
+
 .img-container {
-    display: flex;
+    margin: 0 0 0 100px;
+    
+}
+
+.hero-text {
+    margin: 0 0 0 150px;
+    
+}
+
+h1 {
+    font-size: 48px;
+    margin: 0;
+}
+
+p {
+    font-size: 32px;
+    margin: 0;
 }
 
 .hidden {
@@ -133,22 +155,24 @@ setInterval(toggleOpacity, 1000);
   }
 
 .matrix-container {
-    position: absolute;
-    width: 550px;
-    height: 350px;
+    position: fixed;
+    right: 20px;
+    top: 20%;
+    transform: translateY(-50%);
+    width: 750px;
+    height: 250px;
     background-color: transparent;
-    top: 50px;
-    left: 800px;
-}
+    /* background-color: black;*/
+} 
 
 .aa {
     position: absolute;
-    top: 25px;
-    left: 30px;
+    top: 0px;
+    left: 3px;
     color: rgb(168, 83, 247);
     font-size: 80px;
     font-weight: 900;
-    opacity: 0.9;
+    opacity: 0.7;
 }
 
 .ab {
@@ -163,8 +187,8 @@ setInterval(toggleOpacity, 1000);
 
 .ac {
     position: absolute;
-    top: 70px;
-    left: 76px;
+    top: 115px;
+    left: 33px;
     color: rgb(17, 180, 244);
     font-size: 35px;
     font-weight: 900;
@@ -203,10 +227,10 @@ setInterval(toggleOpacity, 1000);
 
 .ag {
     position: absolute;
-    top: 50px;
+    top: 30px;
     left: 200px;
     color: rgb(47, 145, 231);
-    font-size: 45px;
+    font-size: 30px;
     font-weight: 900;
     opacity: 0.7;
 }
@@ -253,18 +277,18 @@ setInterval(toggleOpacity, 1000);
 
 .al {
     position: absolute;
-    top: 45px;
-    left: 325px;
+    top: 18px;
+    left: 323px;
     color: rgb(17, 180, 244);
-    font-size: 45px;
+    font-size: 30px;
     font-weight: 900;
     opacity: 0.9;
 }
 
 .am {
     position: absolute;
-    top: 25px;
-    left: 335px;
+    top: 3px;
+    left: 350px;
     color: rgb(17, 180, 244);
     font-size: 100px;
     font-weight: 900;
@@ -273,8 +297,8 @@ setInterval(toggleOpacity, 1000);
 
 .an {
     position: absolute;
-    top: 55px;
-    left: 385px;
+    top: 39px;
+    left: 548px;
     color: rgb(17, 180, 244);
     font-size: 45px;
     font-weight: 900;
@@ -283,8 +307,8 @@ setInterval(toggleOpacity, 1000);
 
 .ao {
     position: absolute;
-    top: 45px;
-    left: 410px;
+    top: 44px;
+    left: 557px;
     color: rgb(17, 180, 244);
     font-size: 65px;
     font-weight: 900;
@@ -293,8 +317,8 @@ setInterval(toggleOpacity, 1000);
 
 .ap {
     position: absolute;
-    top: 42px;
-    left: 435px;
+    top: 20px;
+    left: 619px;
     color: rgb(168, 83, 247);
     font-size: 35px;
     font-weight: 900;
@@ -303,8 +327,8 @@ setInterval(toggleOpacity, 1000);
 
 .aq {
     position: absolute;
-    top: 70px;
-    left: 435px;
+    top: 20px;
+    left: 700px;
     color: rgb(168, 83, 247);
     font-size: 45px;
     font-weight: 900;
@@ -313,10 +337,10 @@ setInterval(toggleOpacity, 1000);
 
 .ar {
     position: absolute;
-    top: 30px;
-    left: 460px;
+    top: 16px;
+    left: 646px;
     color: rgb(168, 83, 247);
-    font-size:93px;
+    font-size:85px;
     font-weight: 900;
     opacity: 0.9;
 }
@@ -345,8 +369,8 @@ setInterval(toggleOpacity, 1000);
 
 .au {
     position: absolute;
-    top: 95px;
-    left: 100px;
+    top: 119px;
+    left: 426px;
     color: rgb(17, 180, 244);
     font-size: 45px;
     font-weight: 900;
@@ -385,8 +409,8 @@ setInterval(toggleOpacity, 1000);
 
 .ay {
     position: absolute;
-    top: 120px;
-    left: 190px;
+    top: 70px;
+    left: 208px;
     color: rgb(17, 180, 244);
     font-size: 35px;
     font-weight: 900;
@@ -425,8 +449,8 @@ setInterval(toggleOpacity, 1000);
 
 .bc {
     position: absolute;
-    top: 80px;
-    left: 305px;
+    top: 47px;
+    left: 322px;
     color: rgb(17, 180, 244);
     font-size: 65px;
     font-weight: 900;
@@ -435,8 +459,8 @@ setInterval(toggleOpacity, 1000);
 
 .bd {
     position: absolute;
-    top: 90px;
-    left: 335px;
+    top: 75px;
+    left: 350px;
     color: rgb(168, 83, 247);
     font-size: 45px;
     font-weight: 900;
@@ -445,8 +469,8 @@ setInterval(toggleOpacity, 1000);
 
 .be {
     position: absolute;
-    top: 90px;
-    left: 360px;
+    top: 59px;
+    left: 392px;
     color: rgb(17, 180, 244);
     font-size: 55px;
     font-weight: 900;
@@ -465,8 +489,8 @@ setInterval(toggleOpacity, 1000);
 
 .bg {
     position: absolute;
-    top: 90px;
-    left: 415px;
+    top: 113px;
+    left: 441px;
     color: rgb(17, 180, 244);
     font-size: 85px;
     font-weight: 900;
@@ -476,7 +500,7 @@ setInterval(toggleOpacity, 1000);
 .bh {
     position: absolute;
     top: 110px;
-    left: 465px;
+    left: 650px;
     color: rgb(17, 180, 244);
     font-size: 45px;
     font-weight: 900;
@@ -485,8 +509,8 @@ setInterval(toggleOpacity, 1000);
 
 .bi {
     position: absolute;
-    top: 130px;
-    left: 25px;
+    top: 141px;
+    left: 242px;
     color: rgb(17, 180, 244);
     font-size: 95px;
     font-weight: 900;
@@ -495,8 +519,8 @@ setInterval(toggleOpacity, 1000);
 
 .bj {
     position: absolute;
-    top: 150px;
-    left: 75px;
+    top: 181px;
+    left: 95px;
     color: rgb(168, 83, 247);
     font-size: 45px;
     font-weight: 900;
@@ -505,10 +529,10 @@ setInterval(toggleOpacity, 1000);
 
 .bk {
     position: absolute;
-    top: 130px;
-    left: 100px;
+    top: 106px;
+    left: 231px;
     color: rgb(168, 83, 247);
-    font-size: 75px;
+    font-size: 30px;
     font-weight: 900;
     opacity: 0.9;
 }
@@ -555,8 +579,8 @@ setInterval(toggleOpacity, 1000);
 
 .bp {
     position: absolute;
-    top: 145px;
-    left: 250px;
+    top: 194px;
+    left: 243px;
     color: rgb(168, 83, 247);
     font-size: 45px;
     font-weight: 900;
@@ -585,10 +609,10 @@ setInterval(toggleOpacity, 1000);
 
 .bs {
     position: absolute;
-    top: 120px;
-    left: 330px;
+    top: 108px;
+    left: 338px;
     color: rgb(168, 83, 247);
-    font-size: 140px;
+    font-size: 85px;
     font-weight: 900;
     opacity: 0.9;
 }
@@ -605,10 +629,10 @@ setInterval(toggleOpacity, 1000);
 
 .bu {
     position: absolute;
-    top: 130px;
-    left: 425px;
+    top: 147px;
+    left: 468px;
     color: rgb(168, 83, 247);
-    font-size: 90px;
+    font-size: 70px;
     font-weight: 900;
     opacity: 0.9;
 }
@@ -616,7 +640,7 @@ setInterval(toggleOpacity, 1000);
 .bv {
     position: absolute;
     top: 145px;
-    left: 465px;
+    left: 640px;
     color: rgb(168, 83, 247);
     font-size: 45px;
     font-weight: 900;
@@ -655,8 +679,8 @@ setInterval(toggleOpacity, 1000);
 
 .bz {
     position: absolute;
-    top: 160px;
-    left: 215px;
+    top: 36px;
+    left: 440px;
     color: rgb(168, 83, 247);
     font-size: 120px;
     font-weight: 900;
@@ -665,38 +689,38 @@ setInterval(toggleOpacity, 1000);
 
 .ca {
     position: absolute;
-    top: 170px;
-    left: 65px;
+    top: 184px;
+    left: 41px;
     color: rgb(17, 180, 244);
-    font-size: 55px;
+    font-size: 40px;
     font-weight: 900;
     opacity: 0.6;
 }
 
 .cb {
     position: absolute;
-    top: 190px;
-    left: 280px;
+    top: 78px;
+    left: 311px;
     color: rgb(17, 180, 244);
-    font-size: 55px;
+    font-size: 83px;
     font-weight: 900;
-    opacity: 0.9;
+    opacity: 0.4;
 }
 
 .cc {
     position: absolute;
-    top: 180px;
-    left: 100px;
+    top: 104px;
+    left: 95px;
     color: rgb(17, 180, 244);
-    font-size: 120px;
+    font-size: 100px;
     font-weight: 900;
-    opacity: 0.9;
+    opacity: 0.4;
 }
 
 .cd {
     position: absolute;
-    top: 225px;
-    left: 300px;
+    top: 164px;
+    left: 515px;
     color: rgb(168, 83, 247);
     font-size: 45px;
     font-weight: 900;
@@ -715,18 +739,18 @@ setInterval(toggleOpacity, 1000);
 
 .cf {
     position: absolute;
-    top: 210px;
-    left: 470px;
+    top: 199px;
+    left: 658px;
     color: rgb(168, 83, 247);
-    font-size: 45px;
+    font-size: 30px;
     font-weight: 900;
     opacity: 0.7;
 }
 
 .cg {
     position: absolute;
-    top: 190px;
-    left: 415px;
+    top: 88px;
+    left: 499px;
     color: rgb(17, 180, 244);
     font-size: 100px;
     font-weight: 900;
@@ -745,8 +769,8 @@ setInterval(toggleOpacity, 1000);
 
 .ci {
     position: absolute;
-    top: 235px;
-    left: 205px;
+    top: 152px;
+    left: 431px;
     color: rgb(17, 180, 244);
     font-size: 75px;
     font-weight: 900;
@@ -755,18 +779,18 @@ setInterval(toggleOpacity, 1000);
 
 .cj {
     position: absolute;
-    top: 240px;
-    left: 55px;
+    top: 170px;
+    left: 17px;
     color: rgb(168, 83, 247);
-    font-size: 45px;
+    font-size: 26px;
     font-weight: 900;
     opacity: 0.9;
 }
 
 .ck {
     position: absolute;
-    top: 205px;
-    left: 80px;
+    top: -7px;
+    left: 496px;
     color: rgb(168, 83, 247);
     font-size: 75px;
     font-weight: 900;
@@ -775,18 +799,18 @@ setInterval(toggleOpacity, 1000);
 
 .cl {
     position: absolute;
-    top: 220px;
-    left: 160px;
+    top: 166px;
+    left: 551px;
     color: rgb(17, 180, 244);
-    font-size: 45px;
+    font-size: 30px;
     font-weight: 900;
     opacity: 0.7;
 }
 
 .cm {
     position: absolute;
-    top: 270px;
-    left: 175px;
+    top: 54px;
+    left: 427px;
     color: rgb(168, 83, 247);
     font-size: 45px;
     font-weight: 900;
@@ -795,8 +819,8 @@ setInterval(toggleOpacity, 1000);
 
 .cn {
     position: absolute;
-    top: 255px;
-    left: 260px;
+    top: 82px;
+    left: 490px;
     color: rgb(17, 180, 244);
     font-size: 45px;
     font-weight: 900;
@@ -805,8 +829,8 @@ setInterval(toggleOpacity, 1000);
 
 .co {
     position: absolute;
-    top: 250px;
-    left: 325px;
+    top: 207px;
+    left: 482px;
     color: rgb(17, 180, 244);
     font-size: 45px;
     font-weight: 900;
@@ -815,8 +839,8 @@ setInterval(toggleOpacity, 1000);
 
 .cp {
     position: absolute;
-    top: 245px;
-    left: 360px;
+    top: 109px;
+    left: 557px;
     color: rgb(168, 83, 247);
     font-size: 45px;
     font-weight: 900;
@@ -825,8 +849,8 @@ setInterval(toggleOpacity, 1000);
 
 .cq {
     position: absolute;
-    top: 235px;
-    left: 280px;
+    top: 92px;
+    left: 589px;
     color: rgb(17, 180, 244);
     font-size: 65px;
     font-weight: 900;
@@ -835,8 +859,8 @@ setInterval(toggleOpacity, 1000);
 
 .cr {
     position: absolute;
-    top: 280px;
-    left: 35px;
+    top: 113px;
+    left: 361px;
     color: rgb(17, 180, 244);
     font-size: 45px;
     font-weight: 900;
@@ -845,8 +869,8 @@ setInterval(toggleOpacity, 1000);
 
 .cs {
     position: absolute;
-    top: 245px;
-    left: 460px;
+    top: 114px;
+    left: 565px;
     color: rgb(168, 83, 247);
     font-size: 100px;
     font-weight: 900;
@@ -855,8 +879,8 @@ setInterval(toggleOpacity, 1000);
 
 .ct {
     position: absolute;
-    top: 270px;
-    left: 385px;
+    top: 169px;
+    left: 529px;
     color: rgb(17, 180, 244);
     font-size: 65px;
     font-weight: 900;
@@ -865,8 +889,8 @@ setInterval(toggleOpacity, 1000);
 
 .cu {
     position: absolute;
-    top: 250px;
-    left: 125px;
+    top: 56px;
+    left: 513px;
     color: rgb(168, 83, 247);
     font-size: 90px;
     font-weight: 900;
@@ -876,7 +900,7 @@ setInterval(toggleOpacity, 1000);
 .cv {
     position: absolute;
     top: 165px;
-    left: 500px;
+    left: 685px;
     color: rgb(17, 180, 244);
     font-size: 45px;
     font-weight: 900;
@@ -885,18 +909,18 @@ setInterval(toggleOpacity, 1000);
 
 .cw {
     position: absolute;
-    top: 280px;
-    left: 300px;
+    top: 152px;
+    left: 498px;
     color: rgb(168, 83, 247);
-    font-size: 55px;
+    font-size: 30px;
     font-weight: 900;
     opacity: 0.7;
 }
 
 .cx {
     position: absolute;
-    top: 280px;
-    left: 70px;
+    top: 100px;
+    left: 414px;
     color: rgb(168, 83, 247);
     font-size: 45px;
     font-weight: 900;
@@ -905,18 +929,18 @@ setInterval(toggleOpacity, 1000);
 
 .cy {
     position: absolute;
-    top: 10px;
-    left: 395px;
+    top: 28px;
+    left: 594px;
     color: rgb(168, 83, 247);
-    font-size: 75px;
+    font-size: 65px;
     font-weight: 900;
     opacity: 0.6;
 }
 
 .cz {
     position: absolute;
-    top: 260px;
-    left: 335px;
+    top: 19px;
+    left: 464px;
     color: rgb(17, 180, 244);
     font-size: 80px;
     font-weight: 900;
