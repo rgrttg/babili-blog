@@ -39,7 +39,7 @@ Route::get('/all-users', [UserController::class, 'showUser']);
 /**
  * AUTH ROUTES
  */
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/auth', [UserController::class, 'show']);
     
     // Diese Route ermöglicht authentifizierten Benutzern das Bewerten eines Blogs mit einer positiven oder negativen Bewertung.

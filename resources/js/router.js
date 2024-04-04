@@ -1,5 +1,6 @@
 
 import {createRouter, createWebHistory} from 'vue-router';
+import BlogCard from '/home/petra/Documents/gitfolder/babili-blog/resources/js/components/BlogCard.vue'
 
 export const routes = [
     {
@@ -18,6 +19,11 @@ export const routes = [
         meta: { requiresAuth: true },
     },
     {
+        path: "/dashboard",
+        component: () => import("./pages/Dashboard.vue"),
+        meta: { requiresAuth: true },
+    },
+    {
         path: "/register",
         component: () => import("./pages/Register.vue"),
     }
@@ -27,9 +33,9 @@ export const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes
-})
+});
 
-router.beforeEach((to, from, next)) => {
+router.beforeEach((to, from, next) => {
     const isAuthenticated = !!localStorage.getItem('tocken');
 
     if(!to.meta.public && !isAuthenticated) {
@@ -37,6 +43,6 @@ router.beforeEach((to, from, next)) => {
     } else {
         next();
     }
-}
+});
 
 export default router;
