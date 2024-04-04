@@ -158,4 +158,9 @@ class BlogController extends Controller
 
         return response()->json(['message' => 'Blog rated successfully']);
     }
+    
+    public function writeComment(Request $request, $blogId)
+    {
+    
+    }
 }
