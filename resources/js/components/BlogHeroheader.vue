@@ -345,8 +345,6 @@ p {
     opacity: 0.9;
 }
 
-/*-------------------------zweite linie ------------------------*/
-
 .as {
     position: absolute;
     top: 95px;
@@ -945,6 +943,140 @@ p {
     font-size: 80px;
     font-weight: 900;
     opacity: 0.7;
+}
+
+
+@media screen and (max-width: 1419px) {
+
+    .matrix-container {
+    position: fixed;
+    right: 20px;
+    top: 20%;
+    transform: translateY(-50%);
+    width: 550px;
+    height: 250px;
+    background-color: transparent;
+    }
+
+
+    .an {
+        display: none;        
+    }
+
+    .ao {
+        display: none;
+    }
+
+    .ap {
+        display: none;
+    }
+
+    .aq {
+        display: none;
+    }
+
+    .ar {
+        display: none;
+    }
+
+    .au {
+        display: none;
+    }
+
+    .bh {
+        display: none;
+    }
+
+    .bu {
+        display: none;
+    }
+
+    .bv {  
+        display: none;
+    }
+
+    .bz {
+        display: none;
+    }
+
+    .cd {
+        display: none;
+    }
+
+    .cf {
+        display: none;
+    }
+
+    .cg {
+        display: none;
+    }
+
+    .ck {
+        display: none;
+    }
+
+    .cl {
+        display: none;
+    }
+
+    .cp {
+        display: none;
+    }
+
+    .cq {
+        display: none;
+    }
+
+    .cs {
+        display: none;
+    }
+
+    .ct {
+        display: none;
+    }
+
+    .cu {
+        display: none;
+    }
+
+    .cv {
+        display: none;
+    }
+
+    .cy {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 1210px){
+
+    img {
+        width: 276px;
+        height: 160px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .matrix-container {
+    display: none;
+    }
+
+    .img-container {
+    margin: 0 0 0 50px;
+    
+    }
+
+    .hero-text {
+    margin: 0 0 0 75px;
+    
+    }
 }
 
 </style>
