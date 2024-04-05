@@ -162,7 +162,6 @@ p {
     width: 750px;
     height: 250px;
     background-color: transparent;
-    /* background-color: black;*/
 } 
 
 .aa {
