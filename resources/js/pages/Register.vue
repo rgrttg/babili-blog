@@ -3,26 +3,32 @@ import { useAuthStore } from '@/stores/AuthStore';
 import AuthService from "@/services/AuthService";
 import {ref} from 'vue';
 import {useRouter} from 'vue-router';
+import Navbar from '@/components/Navbar.vue';
+
+import { createStore } from 'vuex';
+import { Axios } from 'axios';
 
 const router = useRouter();
 const store = useAuthStore();
 
 const user = ref({
+    name : '',
     email : '',
     password : ''
 });
 
 
-const login = async() => {
+const register = async() => {
 
     try {
 
-        await AuthService.login(user.value);
+        await AuthService.registerUser(user.value);
+        router.push("/dashboard");
 
         const authUser = await store.getAuthUser();
 
         if(authUser) {
-          router.push("/register");
+          router.push("/dashboard");
         }
         else {
             console.log('error');
@@ -32,47 +38,17 @@ const login = async() => {
       }
 }
 
-/* export default {
-    data() {
-        return {
-        // Data model for the form inputs
-        name: "",
-        email: "",
-        password: ""
-        };
-    },
-    methods: {
-        async register() {
-            try {
-            // Making POST request to "/register" endpoint with name, email, and password as data
-            const response = await axios.post("/register", {
-            name: this.name,
-            email: this.email,
-            password: this.password
-            });
-            // Here you could handle the response, for example, store the received token,
-            // update the 'isLoggedIn' state, and redirect to the dashboard or any other page
-            }
-            catch (error) {
-            console.error("An error occurred:", error);
-            if (error.response) {
-            console.error('Error details:', error.response.data);
-            }
-            }
-        }
-    }
-}; */
 </script>
 
 <template>
-
+    <Navbar></Navbar>
     <!-- Form for registration -->
     <div class="form-container">
         <form @submit.prevent="register" class="register-form">
         <!-- Name, email, and password inputs -->
-        <input type="text" v-model="name" placeholder="Name" required />
-        <input type="email" v-model="email" placeholder="Email" required />
-        <input type="password" v-model="password" placeholder="Password" required />
+        <input type="text" v-model="user.name" placeholder="Name" required />
+        <input type="email" v-model="user.email" placeholder="Email" required />
+        <input type="password" v-model="user.password" placeholder="Password" required />
 
         <button type="submit">Register</button>
 

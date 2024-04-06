@@ -1,6 +1,6 @@
 
 import {createRouter, createWebHistory} from 'vue-router';
-import BlogCard from '/home/petra/Documents/gitfolder/babili-blog/resources/js/components/BlogCard.vue'
+import {useAuthStore} from "@/stores/AuthStore";
 
 export const routes = [
     {
@@ -18,11 +18,11 @@ export const routes = [
         component: () => import("./pages/Dashboard.vue"),
         meta: { requiresAuth: true },
     },
-    {
+/*     {
         path: "/dashboard",
         component: () => import("./pages/Dashboard.vue"),
         meta: { requiresAuth: true },
-    },
+    }, */
     {
         path: "/register",
         component: () => import("./pages/Register.vue"),
@@ -44,5 +44,7 @@ router.beforeEach((to, from, next) => {
         next();
     }
 });
+
+router.beforeEach(useAuthStore); 
 
 export default router;

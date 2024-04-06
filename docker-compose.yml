@@ -23,7 +23,6 @@ services:
             - sail
         depends_on:
             - mysql
-            
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -48,11 +47,10 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
-
     phpmyadmin:
-        image: phpmyadmin/phpmyadmin:5
+        image: 'phpmyadmin/phpmyadmin:5'
         ports:
-            - 8080:80
+            - '8080:80'
         links:
             - mysql
         environment:
