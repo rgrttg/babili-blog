@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\Rating;
+use App\Models\Tag;
 use App\Http\Resources\BlogResource;
 
 class BlogController extends Controller
@@ -157,5 +158,52 @@ class BlogController extends Controller
         }
 
         return response()->json(['message' => 'Blog rated successfully']);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string|max:500',
+            'content' => 'required|array',
+            'image_url' => 'nullable|string',
+            'tags' => 'nullable|array',
+            'tags.*' => 'string',
+        ]);
+        if ($request->has('id')) {
+            $blog = Blog::findOrFail($request->id);
+        } else {
+            $blog = new Blog();
+            $blog->user_id = auth()->id();
+        }
+        $blog->title = $request->title;
+        $blog->description = $request->description;
+        $blog->content = $request->content;
+        $blog->image_url = $request->image_url;
+
+        $blog->save();
+
+        if ($request->has('tags')) {
+            foreach ($request->tags as $tagName) {
+                $tag = Tag::firstOrCreate(['tag' => $tagName]);
+                $blog->tags()->attach($tag->id);
+            }
+        }
+
+        return response()->json(['message' => 'Blog post created successfully'], 201);
+    }
+    public function publish($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->published = !$blog->published;
+
+        if ($blog->published) {
+            $blog->published_at = now();
+        } else {
+            $blog->published_at = null;
+        }
+        $blog->save();
+
+        return response()->json(['message' => 'Blog published/unpublished successfully'], 200);
     }
 }
