@@ -51,7 +51,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //         { "type": "paragraph", "value": "Inhalt des Absatzes" }
     //         // Weitere Inhaltsabschnitte können hinzugefügt werden
     //     ],
-    //     "image_url": "URL des Bildes (optional)",
+    //     "image": "Das Bild für den Blog-Beitrag (optional, Dateiupload)"
     //     "tags": ["Tag1", "Tag2"] // Liste von Tags (optional)
     // }
     // Wenn die Anfrage mit PUT erfolgt, sollte die URL zusätzlich die ID des zu aktualisierenden Blogs enthalten.
@@ -62,7 +62,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Beispielanfrage: PUT /api/blogs/publish/{id}
     // Es wird kein Request-Body benötigt. Der Veröffentlichungsstatus wird automatisch umgeschaltet.
     Route::put('/blogs/publish/{id}', [BlogController::class, 'publish']);
-    
+
     // Diese Route ermöglicht authentifizierten Benutzern das Bewerten eines Blogs mit einer positiven oder negativen Bewertung.
     // Beispielanfrage: POST /api/blogs/{BlogId}/rate
     // Beispiel request body: { "rating": 1 } (für positiv) oder { "rating": 0 } (für negativ)

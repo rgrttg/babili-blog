@@ -4,7 +4,7 @@
             <h2 v-if="item.type === 'subheader'" @click="editInput(i, item.value)">{{ item.value }}</h2>
             <p v-else-if="item.type === 'paragraph'" @click="editInput(i, item.value)">{{ item.value }}</p>
             <div v-else-if="item.type === 'input'">
-                <input v-model="item.value" type="text" :placeholder="'Dein Text...'" v-if="item.visible">
+                <input v-model="item.value" type="textarea" :placeholder="'Dein Text...'" v-if="item.visible">
                 <button v-if="item.visible" @click="hideInputField(i)">OK</button>
                 <button v-if="item.visible" @click="deleteInputField(i)">Löschen</button>
                 <button v-if="i > 0 && item.visible" @click="moveUp(i)">Nach oben</button>

@@ -18,7 +18,7 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('set null');
             $table->string('title');
-            $table->string('image_url')->nullable();
+            $table->string('blog_image')->nullable();
             $table->string('description', 500);
             $table->json('content');
             $table->boolean('published')->default(false);

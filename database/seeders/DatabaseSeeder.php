@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
             [
                 'user_id' => $author->id,
                 'title' => 'Sample Blog 1',
-                'image_url' => null,
+                'blog_image' => null,
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat voluptatibus facilis doloremque eligendi obcaecati, quidem voluptatem enim voluptate quas corporis. Accusantium nihil quod sunt autem voluptas ratione exercitationem ut odit!',
                 'content' => $json,                
                 'published' => true,
@@ -75,7 +75,7 @@ class DatabaseSeeder extends Seeder
             [
                 'user_id' => $author->id,
                 'title' => 'Sample Blog 2',
-                'image_url' => null,
+                'blog_image' => null,
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat voluptatibus facilis doloremque eligendi obcaecati, quidem voluptatem enim voluptate quas corporis. Accusantium nihil quod sunt autem voluptas ratione exercitationem ut odit!',
                 'content' => $json,
                 'published' => true,
@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
             [
                 'user_id' => $author->id,
                 'title' => 'Sample Blog 3',
-                'image_url' => null,
+                'blog_image' => null,
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat voluptatibus facilis doloremque eligendi obcaecati, quidem voluptatem enim voluptate quas corporis. Accusantium nihil quod sunt autem voluptas ratione exercitationem ut odit!',
                 'content' => $json,
                 'published' => true,

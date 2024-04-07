@@ -11,13 +11,16 @@ class BlogResource extends JsonResource
     {
         $dateFormat = 'd. M Y';
 
+        $defaultImagePath = asset('blog_images/default.png');
+        $image = $this->blog_image ? asset('blog_images/' . $this->blog_image) : $defaultImagePath;
+
         return [
             'id' => $this->id,
             'author_id' => optional($this->user)->id,
             'author_name' => optional($this->user)->name,
             'profile_picture' => optional($this->user)->profile_picture,
             'title' => $this->title,
-            'image_url' => $this->image_url,
+            'blog_image' => $image,
             'description' => $this->description,
             'content' => $this->content,
             'published_at' => optional($this->published_at)->format($dateFormat),
