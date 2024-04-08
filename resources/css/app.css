@@ -5,6 +5,6 @@ html, body {
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to top right, #000000, #5c1e7c);
-    color: white;
+    /* background: #e1e1e1; */
+    
 }
