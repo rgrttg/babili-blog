@@ -229,4 +229,9 @@ class BlogController extends Controller
 
         return response()->json(['message' => 'Blog published/unpublished successfully'], 200);
     }
+    
+    public function writeComment(Request $request, $blogId)
+    {
+    
+    }
 }
