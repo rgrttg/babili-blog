@@ -14,7 +14,8 @@ const store = useAuthStore();
 const user = ref({
     name : '',
     email : '',
-    password : ''
+    password : '',
+    password_confirmation : ''
 });
 
 
@@ -23,7 +24,8 @@ const register = async() => {
     try {
 
         await AuthService.registerUser(user.value);
-        router.push("/dashboard");
+        
+        // router.push("/dashboard");
 
         const authUser = await store.getAuthUser();
 
@@ -49,6 +51,8 @@ const register = async() => {
         <input type="text" v-model="user.name" placeholder="Name" required />
         <input type="email" v-model="user.email" placeholder="Email" required />
         <input type="password" v-model="user.password" placeholder="Password" required />
+        <input type="password" v-model="user.password_confirmation" placeholder="Password" required />
+
 
         <button type="submit">Register</button>
 
