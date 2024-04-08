@@ -31,7 +31,7 @@ setInterval(toggleOpacity, 1000);
 <template>
 <div class="container">
     <div class="img-container">
-        <img src="/public/img/Frame 10.png" width="553" height="321" alt="tech-blog logo">
+        <img src="/public/img/Logo-new.png" width="553" height="325" alt="tech-blog logo">
     </div>
 
         <div class="hero-text">
