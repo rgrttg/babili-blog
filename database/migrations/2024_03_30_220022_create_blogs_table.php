@@ -18,8 +18,9 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('set null');
             $table->string('title');
-            $table->string('image_url')->nullable();
-            $table->mediumText('content');
+            $table->string('blog_image')->nullable();
+            $table->string('description', 500);
+            $table->json('content');
             $table->boolean('published')->default(false);
             $table->timestamp('published_at')->nullable();
             $table->integer('interactions')->default(0);

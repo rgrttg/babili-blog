@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\Rating;
+use App\Models\Tag;
 use App\Http\Resources\BlogResource;
 
 class BlogController extends Controller
@@ -12,7 +13,7 @@ class BlogController extends Controller
     public function latestThreeBlogs()
     {
         $blogs = Blog::latest()->take(3)->get();
-        return response()->json($blogs);
+        return BlogResource::collection($blogs);
     }
 
     public function allBlogsByLatest()
@@ -83,7 +84,9 @@ class BlogController extends Controller
                         'id' => $comment->id,
                         'author_id' => optional($comment->user)->id,
                         'author_name' => optional($comment->user)->name,
-                        'profile_picture' => optional($comment->user)->profile_picture,
+                        'profile_picture' => optional($comment->user)->profile_picture
+                            ? asset('profile_images/' . $comment->user->profile_picture)
+                            : asset('profile_images/default.jpg'),
                         'content' => $comment->content,
                         'created_at' => $comment->created_at->format($dateFormatComment),
                         'updated_at' => $comment->updated_at->format($dateFormatComment),
@@ -96,7 +99,9 @@ class BlogController extends Controller
                                 'id' => $subComment->id,
                                 'author_id' => optional($subComment->user)->id,
                                 'author_name' => optional($subComment->user)->name,
-                                'profile_picture' => optional($subComment->user)->profile_picture,
+                                'profile_picture' => optional($subComment->user)->profile_picture
+                                    ? asset('profile_images/' . $subComment->user->profile_picture)
+                                    : asset('profile_images/default.jpg'),
                                 'content' => $subComment->content,
                                 'created_at' => $subComment->created_at->format($dateFormatComment),
                                 'updated_at' => $subComment->updated_at->format($dateFormatComment),
@@ -113,9 +118,14 @@ class BlogController extends Controller
             'id' => $blog->id,
             'author_id' => optional($blog->user)->id,
             'author_name' => optional($blog->user)->name,
-            'profile_picture' => optional($blog->user)->profile_picture,
+            'profile_picture' => optional($blog->user)->profile_picture
+                ? asset('profile_images/' . $blog->user->profile_picture)
+                : asset('profile_images/default.jpg'),
             'title' => $blog->title,
-            'image_url' => $blog->image_url,
+            'image_url' => $blog->image_url
+                ? asset('blog_images/' . $blog->image_url)
+                : asset('blog_images/default.png'),
+            'description' => $blog->description,
             'content' => $blog->content,
             'published_at' => optional($blog->published_at)->format($dateFormatBlog),
             'tags' => $blog->tags->pluck('tag'),
@@ -156,5 +166,72 @@ class BlogController extends Controller
         }
 
         return response()->json(['message' => 'Blog rated successfully']);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string|max:500',
+            'content' => 'required|array',
+            'image_url' => 'nullable|string',
+            'tags' => 'nullable|array',
+            'tags.*' => 'string',
+        ]);
+        if ($request->has('id')) {
+            $blog = Blog::findOrFail($request->id);
+        } else {
+            $blog = new Blog();
+            $blog->user_id = auth()->id();
+        }
+
+        $oldImageUrl = $blog->image_url;
+
+        $blog->title = $request->title;
+        $blog->description = $request->description;
+        $blog->content = $request->content;
+
+        if ($request->hasFile('image')) {
+            if ($oldImageUrl) {
+                $oldImagePath = public_path($oldImageUrl);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+            $image = $request->file('image');
+            $imageName = 'blog_' . $blog->id . '_' . date('YmdHis') . '.' . $image->extension();
+            $image->storeAs('public/blog_images', $imageName);
+            $blog->image_url = 'storage/blog_images/' . $imageName;
+        }
+
+        $blog->save();
+
+        if ($request->has('tags')) {
+            foreach ($request->tags as $tagName) {
+                $tag = Tag::firstOrCreate(['tag' => $tagName]);
+                $blog->tags()->attach($tag->id);
+            }
+        }
+
+        return response()->json(['message' => 'Blog post created successfully'], 201);
+    }
+    public function publish($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->published = !$blog->published;
+
+        if ($blog->published) {
+            $blog->published_at = now();
+        } else {
+            $blog->published_at = null;
+        }
+        $blog->save();
+
+        return response()->json(['message' => 'Blog published/unpublished successfully'], 200);
+    }
+    
+    public function writeComment(Request $request, $blogId)
+    {
+    
     }
 }

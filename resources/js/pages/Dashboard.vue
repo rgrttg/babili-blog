@@ -1,16 +1,14 @@
 <script setup>
-    import { useAuthStore } from '../stores/AuthStore';
-    import LogoutButton from '@/components/LogoutButton.vue';
+import { useAuthStore } from "../stores/AuthStore";
+import LogoutButton from "@/components/LogoutButton.vue";
 
-    const store = useAuthStore();
-
+const store = useAuthStore();
 </script>
-
 
 <template>
     <header>
-        <LogoutButton/>
+        <LogoutButton />
     </header>
     <span>Dashboard</span>
-    <h1>Hallo {{ store.authUser.name }}</h1>
+    <h1>Hallo {{ store?.authUser?.name }}</h1>
 </template>
