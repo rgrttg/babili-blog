@@ -69,6 +69,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('blogs/rate/{id}', [BlogController::class, 'rateBlog']);
 
     // Diese Route ermöglicht authentifizierten Benutzern einen Kommentar zu schreiben /ro
-    Route::post('blogs/write-comment/{id}', [BlogController::class, 'writeComment']);
+    Route::post('blogs/comment/{id}', [BlogController::class, 'writeComment']);
     
 });
