@@ -130,8 +130,8 @@ setInterval(toggleOpacity, 1000);
 }
 
 .container {
-    /* background-image: linear-gradient(180deg, rgb(0, 0, 0) 95%, rgb(59, 57, 57 )0%, rgb(109, 109, 109) 95%); */
     background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(59,57,57,1) 86%, rgba(109,109,109,1) 100%);
+    height: 577px;
 }
 
 .img-container {
