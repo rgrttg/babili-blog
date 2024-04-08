@@ -5,9 +5,15 @@ import { createPinia } from 'pinia'
 import { createApp } from "vue";
 import { useAuthStore } from "./stores/AuthStore";
 import App from "./App.vue";
+import Creator from './components/Creator.vue';
+
+
 
 
 const app = createApp(App);
+
+app.component('creator', Creator);
+
 app.use(createPinia());
 const store = useAuthStore();
 

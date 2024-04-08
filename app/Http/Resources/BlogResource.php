@@ -10,14 +10,18 @@ class BlogResource extends JsonResource
     public function toArray(Request $request): array
     {
         $dateFormat = 'd. M Y';
-
+        
         return [
             'id' => $this->id,
             'author_id' => optional($this->user)->id,
             'author_name' => optional($this->user)->name,
-            'profile_picture' => optional($this->user)->profile_picture,
+            'profile_picture' => optional($this->user)->profile_picture
+                ? asset(optional($this->user)->profile_picture)
+                : asset('profile_images/default.jpg'),
             'title' => $this->title,
-            'image_url' => $this->image_url,
+            'blog_image' => $this->blog_image
+                ? asset('blog_images/' . $this->blog_image)
+                : asset('blog_images/default.png'),
             'description' => $this->description,
             'content' => $this->content,
             'published_at' => optional($this->published_at)->format($dateFormat),

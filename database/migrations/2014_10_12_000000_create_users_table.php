@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('profile_picture')->nullable();
             $table->string('about_me', 500)->nullable();
             $table->string('interests', 500)->nullable();
-            $table->text('social_media_links')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
