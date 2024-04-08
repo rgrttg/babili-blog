@@ -68,7 +68,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Beispiel request body: { "rating": 1 } (für positiv) oder { "rating": 0 } (für negativ)
     Route::post('blogs/rate/{id}', [BlogController::class, 'rateBlog']);
 
-    // Diese Route ermöglicht authentifizierten Benutzern einen Kommentar zu schreiben /ro
+    // Diese Route ermöglicht authentifizierten Benutzern 
+    // einen Kommentar zu einem Blog (id) zu schreiben /ro
     Route::post('blogs/comment/{id}', [BlogController::class, 'writeComment']);
     
 });
