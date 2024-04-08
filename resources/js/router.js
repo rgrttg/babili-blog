@@ -20,6 +20,11 @@ export const routes = [
     {
         path: "/register",
         component: () => import("./pages/Auth/Register.vue"),
+    },
+
+    {
+        path: "/mtest",
+        component: () => import("./pages/MatildaTest.vue"), // test page of matilda may no stay here
     }
 ];
 
