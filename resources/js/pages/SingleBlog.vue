@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import axios from 'axios';
 // import { convertToHtml } from '@/components/Creator.vue';
 
@@ -20,7 +20,7 @@ const loadBlog = async () => {
 //   // Do something with the generated HTML
 // };
 
-onMounted(() => {
+onBeforeMount(() => {
   loadBlog();
 });
 </script>
@@ -34,13 +34,19 @@ onMounted(() => {
 <div class="card">
 
   <div class="title" v-if="blog">
-      <h1>{{ blog.title }}</h1>
+      <h1>{{ blog?.title }}</h1>
   </div> 
+
+  <div class="description" v-if="blog">
+    <p>{{ blog?.description }}</p>
+  </div>
 
   <div class="user-details">
     <div class="image">
         <img v-if="blog?.image_url" :src="blog?.image_url" class="profile-image"/>
+        <p v-if="blog"> {{ blog?.author_name }} </p>
     </div>
+    
     <div class="socials">
       SOCIAL ICONS
     </div>
@@ -48,9 +54,9 @@ onMounted(() => {
       
   <div v-if="blog?.content" v-for="(entry,index) in blog.content" :key="index">
      
-        <h2 v-if="entry.type='subtitle'">{{ entry.value }}</h2> 
+        <h2 v-if="entry.type=='subheader'">{{ entry.value }}</h2> 
      
-        <p v-if="entry.type='paragraph'">{{ entry.value }}</p>
+        <p v-if="entry.type=='paragraph'">{{ entry.value }}</p>
     
   </div>
 
@@ -77,6 +83,12 @@ h1,h2, p {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+
+.image {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .profile-image {
