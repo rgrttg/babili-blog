@@ -3,7 +3,12 @@
     import LogoutButton from '@/components/LogoutButton.vue';
     import BlogCardSelf from '@/components/BlogCardSelf.vue';
     import Navbar from '@/components/Navbar.vue';
+    import Creator from '@/components/Creator.vue';
 
+    import { ref } from 'vue';
+    const content = ref('');
+    const getJson = (json) => {
+    content.value = json;};
 
     const store = useAuthStore();
 
@@ -12,9 +17,7 @@
 
 <template>
     <Navbar></Navbar>
-    
-    <h1>Hi, you are on the Dashboard</h1>
-
+    <creator @saved="getJson" />
     <LogoutButton></LogoutButton>
 
     <BlogCardSelf></BlogCardSelf>

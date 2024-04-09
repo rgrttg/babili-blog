@@ -41,11 +41,38 @@ Route::get('/all-users', [UserController::class, 'showUser']);
  */
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/auth', [UserController::class, 'show']);
-    
+
+    // Diese Route ermöglicht das Erstellen oder Aktualisieren eines Blog-Beitrags.
+    // Beispielanfrage: POST /api/blogs/store (für die Erstellung eines neuen Beitrags)
+    // oder PUT /api/blogs/store/{id} (für die Aktualisierung eines bestehenden Beitrags)
+    // Der Anfrage-Body sollte die folgenden Felder enthalten:
+    // {
+    //     "title": "Titel des Blog-Beitrags",
+    //     "description": "Beschreibung des Blog-Beitrags (maximal 500 Zeichen)",
+    //     "content": [
+    //         { "type": "paragraph", "value": "Inhalt des Absatzes" }
+    //         // Weitere Inhaltsabschnitte können hinzugefügt werden
+    //     ],
+    //     "image": "Das Bild für den Blog-Beitrag (optional, Dateiupload)"
+    //     "tags": ["Tag1", "Tag2"] // Liste von Tags (optional)
+    // }
+    // Wenn die Anfrage mit PUT erfolgt, sollte die URL zusätzlich die ID des zu aktualisierenden Blogs enthalten.
+    Route::post('/api/blogs/store', [BlogController::class, 'store']);
+    Route::put('/api/blogs/store/{id}', [BlogController::class, 'store']);
+
+    // Diese Route ermöglicht das Umschalten (Toggle) des Veröffentlichungsstatus eines Blogs.
+    // Beispielanfrage: PUT /api/blogs/publish/{id}
+    // Es wird kein Request-Body benötigt. Der Veröffentlichungsstatus wird automatisch umgeschaltet.
+    Route::put('/blogs/publish/{id}', [BlogController::class, 'publish']);
+
     // Diese Route ermöglicht authentifizierten Benutzern das Bewerten eines Blogs mit einer positiven oder negativen Bewertung.
     // Beispielanfrage: POST /api/blogs/{BlogId}/rate
     // Beispiel request body: { "rating": 1 } (für positiv) oder { "rating": 0 } (für negativ)
     Route::post('blogs/rate/{id}', [BlogController::class, 'rateBlog']);
+
+    // Diese Route ermöglicht authentifizierten Benutzern einen Kommentar zu schreiben /ro
+    Route::post('blogs/write-comment/{id}', [BlogController::class, 'writeComment']);
+    
 });
 
 

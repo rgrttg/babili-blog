@@ -16,7 +16,7 @@
             <router-link class="edit-link" :to="{ title: 'Editpost', params: { id: post.id } }">Edit</router-link>
             
             <!-- Link to view post details -->
-            <router-link class="details-link" :to="{ title: 'postDetails', params: { id: post.id } }">View Details</router-link>
+            <router-link class="details-link" :to="{ title: '/blogs/deatail', params: { id: post.id } }">View Details</router-link>
             
             <!-- Button to delete the post -->
             <!-- Use Vue's 'v-on' directive (shorthand '@') to bind the click event with the 'deletepost' method -->
@@ -29,7 +29,6 @@
     
 <script setup>
 
-
 import { onBeforeMount, ref } from 'vue';
 import axios from 'axios';
 
@@ -39,7 +38,6 @@ const posts = ref([])
 async function allPosts(){
     let res = await axios.get('api/blogs/all-latest');
     posts.value = res.data.data;
-    console.log(res);
 }
 allPosts();
 /* onBeforeMount(() => {

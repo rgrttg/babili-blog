@@ -17,28 +17,32 @@ const user = ref({
     password : '',
     password_confirmation : ''
 });
-
-
-const register = async() => {
-
-    try {
-
-        await AuthService.registerUser(user.value);
-        
-        // router.push("/dashboard");
-
-        const authUser = await store.getAuthUser();
-
-        if(authUser) {
-          router.push("/dashboard");
-        }
-        else {
-            console.log('error');
-        }
-      } catch (error) {
-        console.log(error);
-      }
+function registerUser(){
+    AuthService.registerUser(user.value)
+        .then(() => router.push("/dashboard"))
+        .catch((error) => (console.log(error)));
 }
+
+// const register = async() => {
+
+//     try {
+
+//         await AuthService.registerUser(user.value);
+        
+//         // router.push("/dashboard");
+
+//         const authUser = await store.getAuthUser();
+
+//         if(authUser) {
+//           router.push("/dashboard");
+//         }
+//         else {
+//             console.log('error');
+//         }
+//       } catch (error) {
+//         console.log(error);
+//       }
+// }
 
 </script>
 
@@ -46,12 +50,12 @@ const register = async() => {
     <Navbar></Navbar>
     <!-- Form for registration -->
     <div class="form-container">
-        <form @submit.prevent="register" class="register-form">
+        <form @submit.prevent="registerUser" class="register-form">
         <!-- Name, email, and password inputs -->
-        <input type="text" v-model="user.name" placeholder="Name" required />
-        <input type="email" v-model="user.email" placeholder="Email" required />
-        <input type="password" v-model="user.password" placeholder="Password" required />
-        <input type="password" v-model="user.password_confirmation" placeholder="Password" required />
+        <input name="name" type="text" v-model="user.name" placeholder="Name" required />
+        <input name="email" type="email" v-model="user.email" placeholder="Email" required />
+        <input name="password" type="password" v-model="user.password" placeholder="Password" required />
+        <input name="password_confirmation"  type="password"  v-model="user.password_confirmation" placeholder="Password" required />
 
 
         <button type="submit">Register</button>
