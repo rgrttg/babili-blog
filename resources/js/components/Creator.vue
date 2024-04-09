@@ -4,14 +4,16 @@
             <h2 v-if="item.type === 'subheader'" @click="editInput(i, item.value)">{{ item.value }}</h2>
             <p v-else-if="item.type === 'paragraph'" @click="editInput(i, item.value)">{{ item.value }}</p>
             <div v-else-if="item.type === 'input'">
-                <input v-model="item.value" type="textarea" :placeholder="'Dein Text...'" v-if="item.visible">
+                <textarea v-model="item.value" type="textarea" :placeholder="'Dein Text...'" :rows="5" v-if="item.visible"></textarea>
+                <div class="input">
                 <button v-if="item.visible" @click="hideInputField(i)">OK</button>
                 <button v-if="item.visible" @click="deleteInputField(i)">Löschen</button>
                 <button v-if="i > 0 && item.visible" @click="moveUp(i)">Nach oben</button>
                 <button v-if="i < blogContent.length - 1 && item.visible" @click="moveDown(i)">Nach unten</button>
             </div>
+            </div>
         </template>
-        <div>
+        <div class="button-funktion">
             <button @click="addInput('subheader')">Zwischentitel einfügen</button>
             <button @click="addInput('paragraph')">Paragraph einfügen</button>
             <button v-if="!hasOpenInputFields && blogContent.length > 0" @click="saveBlogContent">Speichern</button>
@@ -89,3 +91,25 @@ export default {
 //     return html;
 // };
 </script>
+
+<style scoped>
+
+textarea{
+    max-width: 800px;
+    width: 100%;
+    font-size: 20px;
+}
+
+.input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.button-funktion {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+</style>
