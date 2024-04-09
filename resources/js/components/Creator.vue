@@ -30,12 +30,8 @@ export default {
     },
     data() {
         return {
-            blogContent: [
-            { type: 'subheader', value: 'Test' },
-            { type: 'paragraph', value: 'Beispiel-Text' }
-        ],
-            inputType: '',
-            
+            blogContent: [],
+            inputType: '',    
         };
     },
     computed: {
@@ -79,17 +75,7 @@ export default {
         
     }
 };
-// export const convertToHtml = (content) => {
-//     let html = '';
-//     content.forEach(item => {
-//         if (item.type === 'subheader') {
-//             html += <h2>${item.value}</h2>;
-//         } else if (item.type === 'paragraph') {
-//             html += <p>${item.value}</p>;
-//         }
-//     });
-//     return html;
-// };
+
 </script>
 
 <style scoped>
