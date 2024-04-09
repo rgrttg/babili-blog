@@ -122,7 +122,7 @@ class BlogController extends Controller
                 ? asset('profile_images/' . $blog->user->profile_picture)
                 : asset('profile_images/default.jpg'),
             'title' => $blog->title,
-            'image_url' => $blog->image_url
+            'blog_image' => $blog->image_url
                 ? asset('blog_images/' . $blog->image_url)
                 : asset('blog_images/default.png'),
             'description' => $blog->description,

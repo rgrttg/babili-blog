@@ -20,6 +20,16 @@ export const routes = [
     {
         path: "/register",
         component: () => import("./pages/Auth/Register.vue"),
+    },
+
+    {
+        path:"/create",
+        component: () => import("./pages/CreateBlog.vue"),
+    },
+
+    {
+        path:"/single-blog",
+        component: () => import("./pages/SingleBlog.vue"),
     }
 ];
 
