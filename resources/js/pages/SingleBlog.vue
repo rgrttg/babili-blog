@@ -43,8 +43,11 @@ onBeforeMount(() => {
 
   <div class="user-details">
     <div class="image">
-        <img v-if="blog?.image_url" :src="blog?.image_url" class="profile-image"/>
-        <p v-if="blog"> {{ blog?.author_name }} </p>
+            <img v-if="blog?.profile_picture" :src="blog?.blog_image" class="profile-picture"/>
+        <div class="author-info">
+            <p v-if="blog">{{ blog?.author_name }}</p>
+            <p v-if="blog">{{ blog?.published_at }}</p>
+        </div>
     </div>
     
     <div class="socials">
@@ -91,11 +94,17 @@ h1,h2, p {
   align-items: center;
 }
 
-.profile-image {
+.profile-picture {
   width: 100px; /* Ändern Sie die Breite und Höhe nach Bedarf */
   height: 100px;
   border-radius: 50%; /* Rundes Bild */
   object-fit: cover; /* Das Bild wird in das festgelegte Rechteck gezoomt, um es zu füllen */
+}
+
+.author-info {
+  display: flex; /* Flexbox verwenden */
+  justify-content: space-between; 
+  margin: 0 5px;
 }
 
 </style>
