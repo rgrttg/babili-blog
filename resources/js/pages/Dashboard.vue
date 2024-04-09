@@ -2,6 +2,8 @@
 import { useAuthStore } from "../stores/AuthStore";
 import LogoutButton from "@/components/LogoutButton.vue";
 
+
+
 const store = useAuthStore();
 </script>
 
