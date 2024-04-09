@@ -13,10 +13,10 @@
             <!-- Container for action links -->
             <div class="action-links">
             <!-- Link to edit the post -->
-            <router-link class="edit-link" :to="{ title: 'Editpost', params: { id: post.id } }">Edit</router-link>
+            <router-link class="edit-link" :to="{ path: 'Editpost', params: { id: post.id } }">Edit</router-link>
             
             <!-- Link to view post details -->
-            <router-link class="details-link" :to="{ title: '/blogs/deatail', params: { id: post.id } }">View Details</router-link>
+            <router-link class="details-link" :to="{ name: 'blogdetail', params: { id: post.id } }">View Details {{ post.id }}</router-link>
             
             <!-- Button to delete the post -->
             <!-- Use Vue's 'v-on' directive (shorthand '@') to bind the click event with the 'deletepost' method -->

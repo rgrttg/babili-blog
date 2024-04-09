@@ -21,6 +21,7 @@ export const routes = [
     },
     {
         path: "/blogs/detail/:id",
+        name: 'blogdetail',
         component: () => import("./pages/BlogDetails.vue"),
         // meta: { requiresAuth: true },
     },
