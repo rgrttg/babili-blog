@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
-
+use App\Http\Controllers\CommentController;
 
 Route::post('/sanctum/token', [TokenController::class]);
 
@@ -70,6 +70,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // Diese Route ermöglicht authentifizierten Benutzern 
     // einen Kommentar zu einem Blog (id) zu schreiben /ro
-    Route::post('blogs/comment/{id}', [BlogController::class, 'writeComment']);
+    Route::post('/comment/blog/{id}', [CommentController::class, 'writeComment']);
     
 });

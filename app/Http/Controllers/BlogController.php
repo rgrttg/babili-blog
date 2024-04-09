@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blog;
-use App\Models\Comment;
 use App\Models\Rating;
 use App\Models\Tag;
 use App\Http\Resources\BlogResource;
@@ -231,27 +230,5 @@ class BlogController extends Controller
 
         return response()->json(['message' => 'Blog published/unpublished successfully'], 200);
     }
-    
-    public function writeComment(Request $request, $blogId)
-    {
-        // validieren des Requests
-        $request->validate([
-            'content' => 'required|string'
-        ]);
-        // ist es ein Sub/Kommentar
 
-        // schreibe Inhalt und Blog id
-        Comment::create([
-            'user_id' => auth()->id(),
-            'blog_id' => $blogId,
-            'content' => $request->content
-        ]);
-
-        // inkrementiere Interaktion des Blogs
-        $blog = Blog::findOrFail($blogId);
-        $blog->IncrementInteraction();
-
-        // Gib ein OK zurück
-        return response()->json(['message' => 'Comment created successfully'], 201);
-    }
 }
