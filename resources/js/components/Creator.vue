@@ -19,23 +19,30 @@
     </div>
 </template>
 
-<script>
+<script >
+
+
 export default {
+    props: {
+        content: {}
+    },
     data() {
         return {
-            blogContent: [],
+            blogContent: [
+            { type: 'subheader', value: 'Test' },
+            { type: 'paragraph', value: 'Beispiel-Text' }
+        ],
             inputType: '',
-            blog: []
+            
         };
     },
     computed: {
         hasOpenInputFields() {
+            this.blogContent= this.content?this.content:this.blog.content;
             return this.blogContent.some(item => item.visible);
         }
     },
-    mounted() {
-        this.getBlog();
-    },
+    
     methods: {
         addInput(type) {
             this.blogContent.push({ type: 'input', subtype: type, value: '', visible: true });
@@ -68,15 +75,6 @@ export default {
             this.blogContent[i + 1] = temp;
         },
         
-        async getBlog() {
-            try {
-                const blogID = 2;
-                const response = await axios.get(`/api/blogs/detail/${blogID}`);
-                this.blog = response.data;
-            } catch (error) {
-                console.log(error);
-            }
-        }
     }
 };
 // export const convertToHtml = (content) => {
