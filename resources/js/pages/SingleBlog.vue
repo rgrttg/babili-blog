@@ -43,10 +43,10 @@ onBeforeMount(() => {
 
   <div class="user-details">
     <div class="image">
-            <img v-if="blog?.profile_picture" :src="blog?.blog_image" class="profile-picture"/>
+            <img v-if="blog?.profile_picture" :src="blog?.profile_picture" class="profile-picture"/>
         <div class="author-info">
-            <p v-if="blog">{{ blog?.author_name }}</p>
-            <p v-if="blog">{{ blog?.published_at }}</p>
+            <span v-if="blog">{{ blog?.author_name }} </span>&nbsp;
+            <span v-if="blog">{{ blog?.published_at }}</span>
         </div>
     </div>
     
@@ -102,9 +102,7 @@ h1,h2, p {
 }
 
 .author-info {
-  display: flex; /* Flexbox verwenden */
-  justify-content: space-between; 
-  margin: 0 5px;
+  margin-left: 10px;
 }
 
 </style>
