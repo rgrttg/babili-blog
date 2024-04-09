@@ -9,7 +9,7 @@ export const routes = [
     
     {
         path: "/login",
-        component: () => import("./pages/Auth/Login.vue"),
+        component: () => import("./pages/Login.vue"),
     },
 
     {
@@ -19,7 +19,7 @@ export const routes = [
     },
     {
         path: "/register",
-        component: () => import("./pages/Auth/Register.vue"),
+        component: () => import("./pages/Register.vue"),
     },
 
     {
