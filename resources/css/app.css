@@ -6,6 +6,6 @@ body {
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    /* background: #e1e1e1; */
-    
+    background: rgb(234, 234, 234);
+    color: white;
 }

@@ -77,7 +77,6 @@ const truncate = (text, maxLength) => {
     display: flex;
     align-items: center;
     background-color: #ffffff;
-    background-image: linear-gradient(to bottom, #ffffff, #c5c5c5);
     max-width: 1200px;
     min-height: 300px;
     border: 1px solid rgba(0, 0, 0, 0.523);
