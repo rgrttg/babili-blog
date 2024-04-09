@@ -21,6 +21,12 @@ export const routes = [
         path: "/register",
         component: () => import("./pages/Register.vue"),
     },
+    {
+        path: "/blogs/detail/:id",
+        name: 'blogdetail',
+        component: () => import("./pages/BlogDetails.vue"),
+        // meta: { requiresAuth: true },
+    },
 
     {
         path:"/create",
