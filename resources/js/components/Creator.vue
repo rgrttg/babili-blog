@@ -67,17 +67,7 @@ export default {
             this.blogContent[i] = this.blogContent[i + 1];
             this.blogContent[i + 1] = temp;
         },
-        convertToHtml(content) {
-            let html = '';
-            content.forEach(item => {
-                if (item.type === 'subheader') {
-                    html += `<h2>${item.value}</h2>`;
-                } else if (item.type === 'paragraph') {
-                    html += `<p>${item.value}</p>`;
-                }
-            });
-            return html;
-        },
+        
         async getBlog() {
             try {
                 const blogID = 2;
@@ -89,4 +79,15 @@ export default {
         }
     }
 };
+// export const convertToHtml = (content) => {
+//     let html = '';
+//     content.forEach(item => {
+//         if (item.type === 'subheader') {
+//             html += <h2>${item.value}</h2>;
+//         } else if (item.type === 'paragraph') {
+//             html += <p>${item.value}</p>;
+//         }
+//     });
+//     return html;
+// };
 </script>
