@@ -252,6 +252,6 @@ class BlogController extends Controller
         $blog->IncrementInteraction();
 
         // Gib ein OK zurück
-        return response()->json(['message' => 'Comment created successfully'], 200);
+        return response()->json(['message' => 'Comment created successfully'], 201);
     }
 }
