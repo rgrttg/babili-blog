@@ -4,10 +4,10 @@ import axios from 'axios';
 // import { convertToHtml } from '@/components/Creator.vue';
 
 const blog = ref(null);
-
+// const blogId = this.$router.
 const loadBlog = async () => {
   try {
-    const response = await axios.get('/api/blogs/detail/2'); // Beispiel: ID 2
+    const response = await axios.get(`/api/blogs/detail/2`); // Beispiel: ID 2
     blog.value = await response.data;
     // console.log(response.data);
   } catch (error) {
@@ -30,9 +30,10 @@ onBeforeMount(() => {
      <!-- <div class="header"> -->
     <!-- //hier kommt der header -->
   <!-- </div> -->
-
+<body>
 <div class="card">
 
+  <div class="card-container">
   <div class="title" v-if="blog">
       <h1>{{ blog?.title }}</h1>
   </div> 
@@ -62,23 +63,34 @@ onBeforeMount(() => {
         <p v-if="entry.type=='paragraph'">{{ entry.value }}</p>
     
   </div>
-
+</div>
   
 </div>
-
+</body>
 </template>
  
 <style scoped>
+
+body {
+  height: 100%;
+  background-color: gainsboro;
+}
 
 h1,h2, p {
     color: black;
 }
 
 .card {
-  background-color: gainsboro;
   display: flex;
+  align-items: center;
   flex-direction: column;
-  padding: 10%;
+  height: 100%;
+  font-size: 21px;
+}
+
+.card-container {
+  max-width: 1000px;
+  padding: 5%;
 }
 
 .user-details {
