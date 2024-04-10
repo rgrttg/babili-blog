@@ -47,7 +47,7 @@ const store = useAuthStore();
                     <li v-if="!store?.authUser?.name && !route?.meta?.getStarted" id="sign">
                         <router-link :to="{ name: 'register' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
-                                Sign in
+                                Register
                             </div>
                         </router-link>
                     </li>
