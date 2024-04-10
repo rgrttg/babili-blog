@@ -42,6 +42,21 @@ export const routes = [
         path:"/single-blog",
         name:"singleBlog",
         component: () => import("./pages/SingleBlog.vue"),
+    },
+    {
+        path:"/edit-profile",
+        component: () => import("./pages/EditProfile.vue"),
+    },
+    
+    {
+        path:"/alle-blogs",
+        component: () => import("./pages/AllBlog.vue"),
+    },
+
+
+    {
+        path:"/edit-blog",
+        component: () => import("./pages/EditBlog.vue"),
         meta: { showLogo: true, allBlogs:false, getStarted: false},
 
     },
