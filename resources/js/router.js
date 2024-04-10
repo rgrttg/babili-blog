@@ -6,7 +6,7 @@ export const routes = [
         path: "/",
         name:"home",
         component: () => import("./pages/Home.vue"),
-        meta: { showLogo: false, allBlogs: true, getStarted: true, home: true},
+        meta: { showLogo: false, allBlogs: true, getStarted: true, home: false},
     },
     
     {
