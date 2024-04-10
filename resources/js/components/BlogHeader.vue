@@ -59,7 +59,7 @@ const store = useAuthStore();
                             </div>
                         </router-link>
                     </li>
-   <!-- <li v-if="store?.authUser?.name" id="logout"> -->
+  
                         
                     <li v-if=" ! store?.authUser?.name && route?.meta?.getStarted" id="getStarted">
                         <router-link :to="{ name: 'register' }" customv-slot="{ navigate }">
