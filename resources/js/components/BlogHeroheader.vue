@@ -31,7 +31,7 @@ setInterval(toggleOpacity, 1000);
 <template>
 <div class="container">
     <div class="img-container">
-        <img src="/public/img/Frame 10.png" width="553" height="321" alt="tech-blog logo">
+        <img src="/public/img/Logo-new.png" width="553" height="325" alt="tech-blog logo">
     </div>
 
         <div class="hero-text">
@@ -129,6 +129,10 @@ setInterval(toggleOpacity, 1000);
     color: aliceblue;
 }
 
+.container {
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(59,57,57,1) 86%, rgba(109,109,109,1) 100%);
+    height: 577px;
+}
 
 .img-container {
     margin: 0 0 0 100px;
@@ -168,7 +172,7 @@ p {
     position: absolute;
     top: 0px;
     left: 3px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 80px;
     font-weight: 900;
     opacity: 0.7;
@@ -178,7 +182,7 @@ p {
     position: absolute;
     top: 35px;
     left: 75px;
-    color: rgb(47, 145, 231);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.7;
@@ -188,7 +192,7 @@ p {
     position: absolute;
     top: 115px;
     left: 33px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 35px;
     font-weight: 900;
     opacity: 0.7;
@@ -198,7 +202,7 @@ p {
     position: absolute;
     top: 50px;
     left: 100px;
-    color: rgb(47, 145, 231);
+    color: rgb(166, 166, 166);
     font-size: 60px;
     font-weight: 900;
     opacity: 0.9;
@@ -208,7 +212,7 @@ p {
     position: absolute;
     top: 15px;
     left: 125px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 100px;
     font-weight: 900;
     opacity: 0.7;
@@ -218,7 +222,7 @@ p {
     position: absolute;
     top: 45px;
     left: 175px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -228,7 +232,7 @@ p {
     position: absolute;
     top: 30px;
     left: 200px;
-    color: rgb(47, 145, 231);
+    color: rgb(166, 166, 166);
     font-size: 30px;
     font-weight: 900;
     opacity: 0.7;
@@ -238,7 +242,7 @@ p {
     position: absolute;
     top: 45px;
     left: 225px;
-    color: rgb(47, 145, 231);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -248,7 +252,7 @@ p {
     position: absolute;
     top: 50px;
     left: 250px;
-    color: rgb(47, 145, 231);
+    color: rgb(166, 166, 166);
     font-size: 80px;
     font-weight: 900;
     opacity: 0.9;
@@ -258,7 +262,7 @@ p {
     position: absolute;
     top: 50px;
     left: 275px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -268,7 +272,7 @@ p {
     position: absolute;
     top: 50px;
     left: 300px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.7;
@@ -278,7 +282,7 @@ p {
     position: absolute;
     top: 18px;
     left: 323px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 30px;
     font-weight: 900;
     opacity: 0.9;
@@ -288,7 +292,7 @@ p {
     position: absolute;
     top: 3px;
     left: 350px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 100px;
     font-weight: 900;
     opacity: 0.7;
@@ -298,7 +302,7 @@ p {
     position: absolute;
     top: 39px;
     left: 548px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.7;
@@ -308,7 +312,7 @@ p {
     position: absolute;
     top: 44px;
     left: 557px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 65px;
     font-weight: 900;
     opacity: 0.9;
@@ -318,7 +322,7 @@ p {
     position: absolute;
     top: 20px;
     left: 619px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 35px;
     font-weight: 900;
     opacity: 0.7;
@@ -328,7 +332,7 @@ p {
     position: absolute;
     top: 20px;
     left: 700px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.7;
@@ -338,7 +342,7 @@ p {
     position: absolute;
     top: 16px;
     left: 646px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size:85px;
     font-weight: 900;
     opacity: 0.9;
@@ -348,7 +352,7 @@ p {
     position: absolute;
     top: 95px;
     left: 45px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 40px;
     font-weight: 900;
     opacity: 0.9;
@@ -358,7 +362,7 @@ p {
     position: absolute;
     top: 95px;
     left: 70px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 68px;
     font-weight: 900;
     opacity: 0.7;
@@ -368,7 +372,7 @@ p {
     position: absolute;
     top: 119px;
     left: 426px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -378,7 +382,7 @@ p {
     position: absolute;
     top: 90px;
     left: 125px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.5;
@@ -388,7 +392,7 @@ p {
     position: absolute;
     top: 95px;
     left: 150px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 55px;
     font-weight: 900;
     opacity: 0.9;
@@ -398,7 +402,7 @@ p {
     position: absolute;
     top: 80px;
     left: 180px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -408,7 +412,7 @@ p {
     position: absolute;
     top: 70px;
     left: 208px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 35px;
     font-weight: 900;
     opacity: 0.9;
@@ -418,7 +422,7 @@ p {
     position: absolute;
     top: 60px;
     left: 200px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 110px;
     font-weight: 900;
     opacity: 0.5;
@@ -428,7 +432,7 @@ p {
     position: absolute;
     top: 100px;
     left: 255px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 55px;
     font-weight: 900;
     opacity: 1;
@@ -438,7 +442,7 @@ p {
     position: absolute;
     top: 100px;
     left: 285px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -448,7 +452,7 @@ p {
     position: absolute;
     top: 47px;
     left: 322px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 65px;
     font-weight: 900;
     opacity: 0.5;
@@ -458,7 +462,7 @@ p {
     position: absolute;
     top: 75px;
     left: 350px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 1;
@@ -468,7 +472,7 @@ p {
     position: absolute;
     top: 59px;
     left: 392px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 55px;
     font-weight: 900;
     opacity: 0.5;
@@ -478,7 +482,7 @@ p {
     position: absolute;
     top: 90px;
     left: 390px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -488,7 +492,7 @@ p {
     position: absolute;
     top: 113px;
     left: 441px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 85px;
     font-weight: 900;
     opacity: 0.6;
@@ -498,7 +502,7 @@ p {
     position: absolute;
     top: 110px;
     left: 650px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -508,7 +512,7 @@ p {
     position: absolute;
     top: 141px;
     left: 242px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 95px;
     font-weight: 900;
     opacity: 0.7;
@@ -518,7 +522,7 @@ p {
     position: absolute;
     top: 181px;
     left: 95px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -528,7 +532,7 @@ p {
     position: absolute;
     top: 106px;
     left: 231px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 30px;
     font-weight: 900;
     opacity: 0.9;
@@ -538,7 +542,7 @@ p {
     position: absolute;
     top: 140px;
     left: 145px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.7;
@@ -548,7 +552,7 @@ p {
     position: absolute;
     top: 130px;
     left: 175px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -558,7 +562,7 @@ p {
     position: absolute;
     top: 145px;
     left: 200px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -568,7 +572,7 @@ p {
     position: absolute;
     top: 150px;
     left: 225px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.6;
@@ -578,7 +582,7 @@ p {
     position: absolute;
     top: 194px;
     left: 243px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -588,7 +592,7 @@ p {
     position: absolute;
     top: 135px;
     left: 280px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 65px;
     font-weight: 900;
     opacity: 0.9;
@@ -598,7 +602,7 @@ p {
     position: absolute;
     top: 130px;
     left: 315px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -608,7 +612,7 @@ p {
     position: absolute;
     top: 108px;
     left: 338px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 85px;
     font-weight: 900;
     opacity: 0.9;
@@ -618,7 +622,7 @@ p {
     position: absolute;
     top: 130px;
     left: 385px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 65px;
     font-weight: 900;
     opacity: 0.7;
@@ -628,7 +632,7 @@ p {
     position: absolute;
     top: 147px;
     left: 468px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 70px;
     font-weight: 900;
     opacity: 0.9;
@@ -638,7 +642,7 @@ p {
     position: absolute;
     top: 145px;
     left: 640px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -648,7 +652,7 @@ p {
     position: absolute;
     top: 180px;
     left: 400px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 55px;
     font-weight: 900;
     opacity: 0.9;
@@ -658,7 +662,7 @@ p {
     position: absolute;
     top: 165px;
     left: 170px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -668,7 +672,7 @@ p {
     position: absolute;
     top: 175px;
     left: 310px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 65px;
     font-weight: 900;
     opacity: 0.7;
@@ -678,7 +682,7 @@ p {
     position: absolute;
     top: 36px;
     left: 440px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 120px;
     font-weight: 900;
     opacity: 0.6;
@@ -688,7 +692,7 @@ p {
     position: absolute;
     top: 184px;
     left: 41px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 40px;
     font-weight: 900;
     opacity: 0.6;
@@ -698,7 +702,7 @@ p {
     position: absolute;
     top: 78px;
     left: 311px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 83px;
     font-weight: 900;
     opacity: 0.4;
@@ -708,7 +712,7 @@ p {
     position: absolute;
     top: 104px;
     left: 95px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 100px;
     font-weight: 900;
     opacity: 0.4;
@@ -718,7 +722,7 @@ p {
     position: absolute;
     top: 164px;
     left: 515px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 1;
@@ -728,7 +732,7 @@ p {
     position: absolute;
     top: 180px;
     left: 185px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 55px;
     font-weight: 900;
     opacity: 0.5;
@@ -738,7 +742,7 @@ p {
     position: absolute;
     top: 199px;
     left: 658px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 30px;
     font-weight: 900;
     opacity: 0.7;
@@ -748,7 +752,7 @@ p {
     position: absolute;
     top: 88px;
     left: 499px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 100px;
     font-weight: 900;
     opacity: 0.4;
@@ -758,7 +762,7 @@ p {
     position: absolute;
     top: 180px;
     left: 150px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.8;
@@ -768,7 +772,7 @@ p {
     position: absolute;
     top: 152px;
     left: 431px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 75px;
     font-weight: 900;
     opacity: 0.7;
@@ -778,7 +782,7 @@ p {
     position: absolute;
     top: 170px;
     left: 17px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 26px;
     font-weight: 900;
     opacity: 0.9;
@@ -788,7 +792,7 @@ p {
     position: absolute;
     top: -7px;
     left: 496px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 75px;
     font-weight: 900;
     opacity: 0.6;
@@ -798,7 +802,7 @@ p {
     position: absolute;
     top: 166px;
     left: 551px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 30px;
     font-weight: 900;
     opacity: 0.7;
@@ -808,7 +812,7 @@ p {
     position: absolute;
     top: 54px;
     left: 427px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -818,7 +822,7 @@ p {
     position: absolute;
     top: 82px;
     left: 490px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -828,7 +832,7 @@ p {
     position: absolute;
     top: 207px;
     left: 482px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.6;
@@ -838,7 +842,7 @@ p {
     position: absolute;
     top: 109px;
     left: 557px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.7;
@@ -848,7 +852,7 @@ p {
     position: absolute;
     top: 92px;
     left: 589px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 65px;
     font-weight: 900;
     opacity: 0.7;
@@ -858,7 +862,7 @@ p {
     position: absolute;
     top: 113px;
     left: 361px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -868,7 +872,7 @@ p {
     position: absolute;
     top: 114px;
     left: 565px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 100px;
     font-weight: 900;
     opacity: 0.9;
@@ -878,7 +882,7 @@ p {
     position: absolute;
     top: 169px;
     left: 529px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 65px;
     font-weight: 900;
     opacity: 0.7;
@@ -888,7 +892,7 @@ p {
     position: absolute;
     top: 56px;
     left: 513px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 90px;
     font-weight: 900;
     opacity: 0.9;
@@ -898,7 +902,7 @@ p {
     position: absolute;
     top: 165px;
     left: 685px;
-    color: rgb(17, 180, 244);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
@@ -908,7 +912,7 @@ p {
     position: absolute;
     top: 152px;
     left: 498px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 30px;
     font-weight: 900;
     opacity: 0.7;
@@ -918,7 +922,7 @@ p {
     position: absolute;
     top: 100px;
     left: 414px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 45px;
     font-weight: 900;
     opacity: 0.8;
@@ -928,7 +932,7 @@ p {
     position: absolute;
     top: 28px;
     left: 594px;
-    color: rgb(168, 83, 247);
+    color: rgb(79, 78, 79);
     font-size: 65px;
     font-weight: 900;
     opacity: 0.6;
@@ -938,7 +942,7 @@ p {
     position: absolute;
     top: 19px;
     left: 464px;
-    color: rgb(17, 180, 244);
+    color: rgb(166, 166, 166);
     font-size: 80px;
     font-weight: 900;
     opacity: 0.7;

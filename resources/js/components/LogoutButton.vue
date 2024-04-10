@@ -13,10 +13,10 @@
 </script>
 
 <template>
-    <button
+    <p
       type="button"
       @click="logout"
     >Logout
-    </button>
+</p>
   </template>
   

@@ -1,11 +1,11 @@
 <script setup>
-import BlogHeroheader from '../components/BlogHeroheader.vue';
+import BlogHeader from '../components/BlogHeader.vue';  
+import BlogCard from "../components/BlogCard.vue";
 </script>
 
 <template>
-    <BlogHeroheader/>
+    <BlogHeader/>
     <div>
-        <h1>Startseite</h1>
-        <router-link to="/login">Link zur Login Seite</router-link>
+        <BlogCard />
     </div>
 </template>

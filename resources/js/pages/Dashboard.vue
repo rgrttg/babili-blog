@@ -1,11 +1,15 @@
 <script setup>
 import { useAuthStore } from "../stores/AuthStore";
 import LogoutButton from "@/components/LogoutButton.vue";
+import BlogHeader from '../components/BlogHeader.vue';  
+
+
 
 const store = useAuthStore();
 </script>
 
 <template>
+    <BlogHeader/>
     <header>
         <LogoutButton />
     </header>
