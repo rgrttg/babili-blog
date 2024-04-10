@@ -24,10 +24,11 @@ const blog = ref({
 
 const createBlog = async () => {
   try {
-    let response = await axios.post('/api/blogs', {
+    let response = await axios.post('/api/blogs/store', {
       title: blog.value.title,
       description: blog.value.description,
-      content: blog.value.content
+      content: [],
+      blog_image: '' // Initialisiere die Eigenschaft blog_image
     });
     
     // Erfolgsmeldung oder Weiterleitung zur Index-Seite
@@ -36,6 +37,17 @@ const createBlog = async () => {
   } catch (error) {
     console.error('Fehler beim Erstellen des Tweets:', error);
   }
+};
+
+const handleImageUpload = (event) => {
+  const file = event.target.files[0];
+  if (!file) return; // Wenn keine Datei ausgewählt wurde, breche ab
+
+  // Erstelle ein URL-Objekt für die hochgeladene Datei
+  const imageUrl = URL.createObjectURL(file);
+
+  // Setze das Bild-URL im Blog-Objekt
+  blog.value.blog_image = imageUrl;
 };
 // const loadBlog = async () => {
 //   try {
@@ -71,14 +83,17 @@ const createBlog = async () => {
   <div class="card">
 
       <div class="card-container">
-        <form @submit.prevent="createBlog"></form>
+        <form @submit.prevent="createBlog">
+          <div class="image">
+            <img v-if="blog && blog_image" :src="blog_image" class="blog.blog_picture" alt="Uploaded Image">
+            <input type="file" id="image" accept="image/*" @change="handleImageUpload">
+          </div>
           <div class="title" v-if="blog">
           
             <label for="title">Titel:</label>
-            <input v-model="blog.title" type="text" id="title" required>
-            <button @click="hideTitleInput">OK</button>
-            <h1 v-if="showInput" @click="showInput = true">{{ blog.title }}</h1>
-            <h1 v-else>{{ blog?.title }}</h1>
+            <input v-model="blog.title" type="text" id="title" required v-show="showInput">
+      
+            <h1>{{ blog?.title }}</h1>
             <!-- <h1>{{ blog?.title }}</h1> -->
       
           
@@ -86,7 +101,7 @@ const createBlog = async () => {
 
       <div class="description" v-if="blog">
         <label for="description">Description:</label>
-        <textarea v-model="blog.description" type="text" id="description"></textarea>
+        <textarea v-model="blog.description" type="text" id="description" rows="5"></textarea>
         <p>{{ blog?.description }}</p>
       </div>
 
@@ -103,10 +118,9 @@ const createBlog = async () => {
           SOCIAL ICONS
         </div>
       </div>
-          
-
         <creator :content="blog?.content" @saved="getJson"/>
-
+        <button type="submit">Blog erstellen</button>
+      </form>
     </div>
 
   
