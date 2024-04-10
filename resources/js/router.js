@@ -8,6 +8,12 @@ export const routes = [
     },
     
     {
+        path: "/blogs/detail/:id",
+        name: 'blogdetail',
+        component: () => import("./pages/SingleBlog.vue"),
+        // meta: { requiresAuth: true },
+    },
+    {
         path: "/login",
         component: () => import("./pages/Login.vue"),
     },
@@ -27,10 +33,6 @@ export const routes = [
         component: () => import("./pages/CreateBlog.vue"),
     },
 
-    {
-        path:"/single-blog",
-        component: () => import("./pages/SingleBlog.vue"),
-    },
     {
         path:"/edit-profile",
         component: () => import("./pages/EditProfile.vue"),
