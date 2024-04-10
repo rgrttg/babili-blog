@@ -49,8 +49,8 @@ const store = useAuthStore();
                             <div class="link" @click="navigate" role="link">
                                 Mein Profile
                             </div>
-                        </router-link>   <!-- <li v-if="store?.authUser?.name" id="logout"> -->
-                        
+                        </router-link> <!-- <li v-if="store?.authUser?.name" id="logout"> -->
+
                     </li>
                     <li v-if="store?.authUser?.name" id="createPost">
                         <router-link :to="{ name: 'createPost' }" customv-slot="{ navigate }">
@@ -59,9 +59,9 @@ const store = useAuthStore();
                             </div>
                         </router-link>
                     </li>
-   <!-- <li v-if="store?.authUser?.name" id="logout"> -->
-                        
-                    <li v-if=" ! store?.authUser?.name && route?.meta?.getStarted" id="getStarted">
+                    <!-- <li v-if="store?.authUser?.name" id="logout"> -->
+
+                    <li v-if="!store?.authUser?.name && route?.meta?.getStarted" id="getStarted">
                         <router-link :to="{ name: 'register' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
                                 <div class="link" id="getStartedButton">
@@ -85,10 +85,10 @@ const store = useAuthStore();
                         </router-link>
                     </li>
                     <li v-if="store?.authUser?.name" id="logout">
-                        
-                       <router-link :to="{ name: 'home' }" customv-slot="{ navigate }">
+
+                        <router-link :to="{ name: 'home' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
-                                <LogoutButton>Log Out</LogoutButton>   
+                                <LogoutButton>Log Out</LogoutButton>
                             </div>
                         </router-link>
                     </li>
