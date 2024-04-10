@@ -42,20 +42,26 @@ export const routes = [
         path:"/single-blog",
         name:"singleBlog",
         component: () => import("./pages/SingleBlog.vue"),
+        meta: { showLogo: true, allBlogs:false, getStarted: false}
     },
     {
         path:"/edit-profile",
+        name:"editProfile", 
         component: () => import("./pages/EditProfile.vue"),
+        meta: { showLogo: true, allBlogs:false, getStarted: false}
     },
     
     {
         path:"/alle-blogs",
+        name: "allBlogs", 
         component: () => import("./pages/AllBlog.vue"),
+        meta: { showLogo: true, allBlogs:false, getStarted: false}
     },
 
 
     {
         path:"/edit-blog",
+        name:"editBlog",
         component: () => import("./pages/EditBlog.vue"),
         meta: { showLogo: true, allBlogs:false, getStarted: false},
 

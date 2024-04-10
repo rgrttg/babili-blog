@@ -20,7 +20,7 @@ const store = useAuthStore();
             <div class="right">
                 <ul class="menu">
                     <li v-if="route?.meta?.allBlogs" id="blogs">
-                        <router-link :to="{name:'register'}"  customv-slot="{ navigate }">
+                        <router-link :to="{name:'allBlogs'}"  customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
                                 Alle Blogs
                             </div>
