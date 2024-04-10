@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
 
 
+
 Route::post('/sanctum/token', [TokenController::class]);
 
 Route::get('test', function () {
@@ -33,12 +34,18 @@ Route::get('blogs/least-interactions-all', [BlogController::class, 'leastInterac
 Route::get('blogs/by-tags', [BlogController::class, 'getBlogsByTags']);
 
 
-
 /**
  * AUTH ROUTES
  */
-Route::middleware(['auth:sanctum'])->group(function () {
+    Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/auth', [UserController::class, 'show']);
+    // Gibt nur Name, Profile-Picture & Socials
+    Route::get('/user/me', [UserController::class, 'me']);
+
+    //Alles vom User
+    Route::get('/user/profile/{id}', [UserController::class, 'getUserProfile']);
+
+    Route::put('user/store/{id}', [UserController::class, 'store']);
 
     // Diese Route ermöglicht das Erstellen oder Aktualisieren eines Blog-Beitrags.
     // Beispielanfrage: POST /api/blogs/store (für die Erstellung eines neuen Beitrags)
@@ -55,13 +62,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //     "tags": ["Tag1", "Tag2"] // Liste von Tags (optional)
     // }
     // Wenn die Anfrage mit PUT erfolgt, sollte die URL zusätzlich die ID des zu aktualisierenden Blogs enthalten.
-    Route::post('/api/blogs/store', [BlogController::class, 'store']);
-    Route::put('/api/blogs/store/{id}', [BlogController::class, 'store']);
+    Route::post('blogs/store', [BlogController::class, 'store']);
+    Route::put('blogs/store/{id}', [BlogController::class, 'store']);
 
     // Diese Route ermöglicht das Umschalten (Toggle) des Veröffentlichungsstatus eines Blogs.
     // Beispielanfrage: PUT /api/blogs/publish/{id}
     // Es wird kein Request-Body benötigt. Der Veröffentlichungsstatus wird automatisch umgeschaltet.
-    Route::put('/blogs/publish/{id}', [BlogController::class, 'publish']);
+    Route::put('blogs/publish/{id}', [BlogController::class, 'publish']);
 
     // Diese Route ermöglicht authentifizierten Benutzern das Bewerten eines Blogs mit einer positiven oder negativen Bewertung.
     // Beispielanfrage: POST /api/blogs/{BlogId}/rate
