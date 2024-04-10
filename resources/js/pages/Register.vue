@@ -3,6 +3,7 @@ import { useAuthStore } from '@/stores/AuthStore';
 import AuthService from "@/services/AuthService";
 import {ref} from 'vue';
 import {useRouter} from 'vue-router';
+import BlogHeader from '../components/BlogHeader.vue';  
 // import Navbar from '@/components/Navbar.vue';
 // import { createStore } from 'vuex';
 
@@ -27,7 +28,7 @@ function registerUser(){
 </script>
 
 <template>
-    <Navbar></Navbar>
+    <Navbar><BlogHeader/></Navbar>
     <!-- Form for registration -->
     <div class="form-container">
         <form @submit.prevent="registerUser" class="register-form">

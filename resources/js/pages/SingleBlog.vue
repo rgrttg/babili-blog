@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
+import BlogHeader from '../components/BlogHeader.vue';  
 import axios from 'axios';
 // import { convertToHtml } from '@/components/Creator.vue';
 
@@ -26,7 +27,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  
+<BlogHeader/>
      <!-- <div class="header"> -->
     <!-- //hier kommt der header -->
   <!-- </div> -->

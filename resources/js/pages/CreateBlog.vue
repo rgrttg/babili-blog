@@ -1,33 +1,52 @@
 <script setup>
-import { ref, onBeforeMount } from 'vue';
-import axios from 'axios';
+import BlogHeader from '../components/BlogHeader.vue';  
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios'; // HTTP-Client Biblio für die Kommunikation mit der API
 // import { convertToHtml } from '@/components/Creator.vue';
 // import Creator from '@/components/Creator.vue';
 
-const content = ref('');
-const blog = ref(null);
-const getJson =(json) => {
-    content.value = json;
+const showInput = ref(true); // Variable, um zu steuern, ob das Eingabefeld angezeigt werden soll
+
+function hideTitleInput  () {
+  showInput.value = false; // Setzen Sie showInput auf false, um das Eingabefeld zu verstecken
 };
+
+const router = useRouter();
+const content = ref('');
+// const blog = ref(null);
+
+const blog = ref({
+  title: '',
+  description:'',
+  content: []
+});
 // const blogId = this.$router.
-const loadBlog = async () => {
+const createBlog = async () => {
   try {
-    const response = await axios.get(`/api/blogs/detail/2`); // Beispiel: ID 2
-    blog.value = await response.data;
-    // console.log(response.data);
+    let response = await axios.post('/api/blogs', {
+      title: blog.value.title,
+      description: blog.value.description,
+      content: blog.value.content
+    });
+    
+    // Erfolgsmeldung oder Weiterleitung zur Index-Seite
+    router.push('/'); 
+    
   } catch (error) {
-    console.error('Fehler beim Laden des Blogs:', error);
+    console.error('Fehler beim Erstellen des Tweets:', error);
   }
 };
 
-// const someMethod = () => {
-//   const html = convertToHtml(blog.content.value);
-//   // Do something with the generated HTML
-// };
 
-onBeforeMount(() => {
-  loadBlog();
-});
+// // const someMethod = () => {
+// //   const html = convertToHtml(blog.content.value);
+// //   // Do something with the generated HTML
+// // };
+
+// onBeforeMount(() => {
+//   loadBlog();
+// });
 </script>
 
 <template>
@@ -39,11 +58,22 @@ onBeforeMount(() => {
 <div class="card">
 
   <div class="card-container">
-  <div class="title" v-if="blog">
-      <h1>{{ blog?.title }}</h1>
-  </div> 
+    <form @submit.prevent="createBlog"></form>
+      <div class="title" v-if="blog">
+      
+        <label for="title">Titel:</label>
+        <input v-model="blog.title" type="text" id="title" required>
+        <button @click="hideTitleInput">OK</button>
+        <h1 v-if="showInput" @click="showInput = true">{{ blog.title }}</h1>
+        <h1 v-else>{{ blog?.title }}</h1>
+        <!-- <h1>{{ blog?.title }}</h1> -->
+  
+       
+  </div>
 
   <div class="description" v-if="blog">
+    <label for="description">Description:</label>
+    <textarea v-model="blog.description" type="text" id="description"></textarea>
     <p>{{ blog?.description }}</p>
   </div>
 
@@ -62,7 +92,7 @@ onBeforeMount(() => {
   </div>
       
 
-    <creator v-if="blog?.content" :content="blog?.content" @saved="getJson"/>
+    <creator :content="blog?.content" @saved="getJson"/>
 
     
 
