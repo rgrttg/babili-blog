@@ -86,7 +86,7 @@ const store = useAuthStore();
                     </li>
                     <li v-if="store?.authUser?.name" id="logout">
                         
-                        <router-link :to="{ name: 'home' }" customv-slot="{ navigate }">
+                       <router-link :to="{ name: 'home' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
                                 <LogoutButton>Log Out</LogoutButton>   
                             </div>
