@@ -33,7 +33,7 @@ export const routes = [
 
     {
         path:"/create",
-        name:"create",
+        name:"createPost",
         component: () => import("./pages/CreateBlog.vue"),
         meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
     },
@@ -42,11 +42,11 @@ export const routes = [
         path:"/single-blog",
         name:"singleBlog",
         component: () => import("./pages/SingleBlog.vue"),
-        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
+        meta: { showLogo: true, allBlogs:true, getStarted: false, home: true}
     },
     {
         path:"/edit-profile",
-        name:"editProfile", 
+        name:"editProfile ", 
         component: () => import("./pages/EditProfile.vue"),
         meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
     },
