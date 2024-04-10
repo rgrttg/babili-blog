@@ -20,7 +20,7 @@ const store = useAuthStore();
             <div class="right">
                 <ul class="menu">
                     <li v-if="route?.meta?.allBlogs" id="blogs">
-                        <router-link :to="{name:'allBlogs'}"  customv-slot="{ navigate }">
+                        <router-link :to="{ name: 'allBlogs' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
                                 Alle Blogs
                             </div>
@@ -29,7 +29,7 @@ const store = useAuthStore();
 
                     <li v-if="!store?.authUser?.name" id="login">
 
-                        <router-link :to="{name:'register'}"  customv-slot="{ navigate }">
+                        <router-link :to="{ name: 'login' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
                                 Login
                             </div>
@@ -37,7 +37,7 @@ const store = useAuthStore();
                     </li>
 
                     <li v-if="!store?.authUser?.name && !route?.meta?.getStarted" id="sign">
-                        <router-link :to="{name:'register'}" customv-slot="{ navigate }">
+                        <router-link :to="{ name: 'register' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
                                 Sign in
                             </div>
@@ -45,7 +45,7 @@ const store = useAuthStore();
                     </li>
 
                     <li v-if="store?.authUser?.name" id="myProfile">
-                        <router-link :to="{name:'register'}"  customv-slot="{ navigate }">
+                        <router-link :to="{ name: 'dashboard' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
 
                                 My Profile
@@ -54,7 +54,7 @@ const store = useAuthStore();
                     </li>
 
                     <li v-if="route?.meta?.getStarted" id="getStart">
-                      <router-link :to="{name:'register'}"  customv-slot="{ navigate }">
+                        <router-link :to="{ name: 'register' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
                                 <div class="link" id="getStartedButton">
                                     Get started
@@ -62,10 +62,10 @@ const store = useAuthStore();
                             </div>
                         </router-link>
                     </li>
-                
 
 
                 </ul>
+
             </div>
         </div>
     </header>
