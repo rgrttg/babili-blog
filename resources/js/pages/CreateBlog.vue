@@ -1,6 +1,12 @@
 <script setup>
+<<<<<<< HEAD
 import { ref ,  onBeforeMount } from 'vue';
 import { useRouter} from 'vue-router';
+=======
+import BlogHeader from '../components/BlogHeader.vue';  
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+>>>>>>> develop
 import axios from 'axios'; // HTTP-Client Biblio für die Kommunikation mit der API
 // import { convertToHtml } from '@/components/Creator.vue';
 // import Creator from '@/components/Creator.vue';
