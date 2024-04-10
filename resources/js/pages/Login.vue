@@ -3,6 +3,7 @@ import { useAuthStore } from '@/stores/AuthStore';
 import AuthService from "@/services/AuthService";
 import {ref} from 'vue';
 import {useRouter} from 'vue-router';
+import BlogHeader from '../components/BlogHeader.vue';  
 // import Navbar from '@/components/Navbar.vue';
 // import { createStore } from 'vuex';
 
@@ -37,7 +38,7 @@ const login = async() => {
 </script>
 
 <template>
-    <Navbar></Navbar>
+    <Navbar><BlogHeader/></Navbar>
     <!-- Form for login -->
     <div class="form-container">
         <form @submit.prevent="login" class="login-form">
