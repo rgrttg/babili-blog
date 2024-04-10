@@ -1,7 +1,12 @@
 <script setup>
+<<<<<<< HEAD
+import { ref ,  onBeforeMount } from 'vue';
+import { useRouter} from 'vue-router';
+=======
 import BlogHeader from '../components/BlogHeader.vue';  
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+>>>>>>> develop
 import axios from 'axios'; // HTTP-Client Biblio für die Kommunikation mit der API
 // import { convertToHtml } from '@/components/Creator.vue';
 // import Creator from '@/components/Creator.vue';
@@ -12,6 +17,7 @@ function hideTitleInput  () {
   showInput.value = false; // Setzen Sie showInput auf false, um das Eingabefeld zu verstecken
 };
 
+
 const router = useRouter();
 const content = ref('');
 // const blog = ref(null);
@@ -21,13 +27,14 @@ const blog = ref({
   description:'',
   content: []
 });
-// const blogId = this.$router.
+
 const createBlog = async () => {
   try {
-    let response = await axios.post('/api/blogs', {
+    let response = await axios.post('/api/blogs/store', {
       title: blog.value.title,
       description: blog.value.description,
-      content: blog.value.content
+      content: [],
+      blog_image: '' // Initialisiere die Eigenschaft blog_image
     });
     
     // Erfolgsmeldung oder Weiterleitung zur Index-Seite
@@ -38,6 +45,29 @@ const createBlog = async () => {
   }
 };
 
+const handleImageUpload = (event) => {
+  const file = event.target.files[0];
+  if (!file) return; // Wenn keine Datei ausgewählt wurde, breche ab
+
+  // Erstelle ein URL-Objekt für die hochgeladene Datei
+  const imageUrl = URL.createObjectURL(file);
+
+  // Setze das Bild-URL im Blog-Objekt
+  blog.value.blog_image = imageUrl;
+};
+// const loadBlog = async () => {
+//   try {
+//     const response = await axios.get(`/api/blogs/detail/2`); //User_Picture+Name vom Dashboard API
+//     blog.value = await response.data.;
+//     // console.log(response.data);
+//   } catch (error) {
+//     console.error('Fehler beim Laden des Blogs:', error);
+//   }
+// };
+
+// onBeforeMount(() => {
+//   loadBlog();
+// });
 
 // // const someMethod = () => {
 // //   const html = convertToHtml(blog.content.value);
@@ -55,56 +85,53 @@ const createBlog = async () => {
     <!-- //hier kommt der header -->
   <!-- </div> -->
 <body>
-<div class="card">
 
-  <div class="card-container">
-    <form @submit.prevent="createBlog"></form>
-      <div class="title" v-if="blog">
+  <div class="card">
+
+      <div class="card-container">
+        <form @submit.prevent="createBlog">
+          <div class="image">
+            <img v-if="blog && blog_image" :src="blog_image" class="blog.blog_picture" alt="Uploaded Image">
+            <input type="file" id="image" accept="image/*" @change="handleImageUpload">
+          </div>
+          <div class="title" v-if="blog">
+          
+            <label for="title">Titel:</label>
+            <input v-model="blog.title" type="text" id="title" required v-show="showInput">
       
-        <label for="title">Titel:</label>
-        <input v-model="blog.title" type="text" id="title" required>
-        <button @click="hideTitleInput">OK</button>
-        <h1 v-if="showInput" @click="showInput = true">{{ blog.title }}</h1>
-        <h1 v-else>{{ blog?.title }}</h1>
-        <!-- <h1>{{ blog?.title }}</h1> -->
-  
-       
-  </div>
+            <h1>{{ blog?.title }}</h1>
+            <!-- <h1>{{ blog?.title }}</h1> -->
+      
+          
+      </div>
 
-  <div class="description" v-if="blog">
-    <label for="description">Description:</label>
-    <textarea v-model="blog.description" type="text" id="description"></textarea>
-    <p>{{ blog?.description }}</p>
-  </div>
+      <div class="description" v-if="blog">
+        <label for="description">Description:</label>
+        <textarea v-model="blog.description" type="text" id="description" rows="5"></textarea>
+        <p>{{ blog?.description }}</p>
+      </div>
 
-  <div class="user-details">
-    <div class="image">
-            <img v-if="blog?.profile_picture" :src="blog?.profile_picture" class="profile-picture"/>
-        <div class="author-info">
-            <span v-if="blog">{{ blog?.author_name }} </span>&nbsp;
-            <span v-if="blog">{{ blog?.published_at }}</span>
+      <div class="user-details">
+        <div class="image">
+                <img v-if="blog?.profile_picture" :src="blog?.profile_picture" class="profile-picture"/>
+            <div class="author-info">
+                <span v-if="blog">{{ blog?.author_name }} </span>&nbsp;
+                <span v-if="blog">{{ blog?.published_at }}</span>
+            </div>
         </div>
+        
+        <div class="socials">
+          SOCIAL ICONS
+        </div>
+      </div>
+        <creator :content="blog?.content" @saved="getJson"/>
+        <button type="submit">Blog erstellen</button>
+      </form>
     </div>
-    
-    <div class="socials">
-      SOCIAL ICONS
-    </div>
+
+  
   </div>
-      
-
-    <creator :content="blog?.content" @saved="getJson"/>
-
-    
-
   
- 
-
-</div>
-<!-- <div>
-    <creator @saved="getJson"/>
-</div> -->
-  
-</div>
 </body>
 </template>
  

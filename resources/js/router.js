@@ -6,13 +6,19 @@ export const routes = [
         path: "/",
         name:"home",
         component: () => import("./pages/Home.vue"),
-        meta: { showLogo: false, allBlogs: true, getStarted: true, home: true},
+        meta: { showLogo: false, allBlogs: true, getStarted: true, home: false},
     },
     
     {
+        path: "/blogs/detail/:id",
+        name: 'blogdetail',
+        component: () => import("./pages/SingleBlog.vue"),
+        // meta: { requiresAuth: true },
+    },
+    {
         path: "/login",
         name:"login",
-        component: () => import("./pages/Login.vue"),
+        component: () => import("./pages/Dashboard.vue"),
         meta: { showLogo: true, allBlogs: false, getStarted: false, home: true},
     },
 
@@ -67,11 +73,7 @@ export const routes = [
 
     },
 
-    {
-        path: "/mtest",
-        component: () => import("./pages/MatildaTest.vue"), // test page of matilda may no stay here
-        meta:{ showLogo: true, allBlogs:true, getStarted:false, home: true},
-    }
+  
 ];
 
 

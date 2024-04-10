@@ -19,6 +19,14 @@ const store = useAuthStore();
             </div>
             <div class="right">
                 <ul class="menu">
+                    <li v-if="route?.meta?.home" id="home">
+                        <router-link :to="{ name: 'home' }" customv-slot="{ navigate }">
+                            <div class="link" @click="navigate" role="link">
+                                Home
+                            </div>
+                        </router-link>
+                    </li>
+
                     <li v-if="route?.meta?.allBlogs" id="blogs">
                         <router-link :to="{ name: 'allBlogs' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
@@ -39,6 +47,7 @@ const store = useAuthStore();
                     <li v-if="! store?.authUser?.name && !route?.meta?.getStarted" id="sign">
                         <router-link :to="{ name: 'register' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
+                                Register
                                 Register
                             </div>
                         </router-link>
