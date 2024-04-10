@@ -19,20 +19,57 @@ const store = useAuthStore();
             </div>
             <div class="right">
                 <ul class="menu">
-                    <li v-if="route?.meta?.allBlogs" id="blogs">Alle Blogs</li>
-                    <li v-if=" ! store?.authUser?.name " id="login">Login</li>
-                    <li v-if="! store?.authUser?.name " id="sign">Sign</li>
-                    <li v-if="! store?.authUser?.name" id="myProfile">My Profile </li>
-                    <li v-if="! store?.authUser?.name" id="getStart">
-                        <div id="getStartedButton">Get started</div>
+                    <li v-if="route?.meta?.allBlogs" id="blogs">
+                        <router-link to="/posts" customv-slot="{ navigate }">
+                            <div class="link" @click="navigate" role="link">
+                                Alle Blogs
+                            </div>
+                        </router-link>
                     </li>
+
+                    <li v-if="!store?.authUser?.name" id="login">
+
+                        <router-link to="/login" customv-slot="{ navigate }">
+                            <div class="link" @click="navigate" role="link">
+                                Login
+                            </div>
+                        </router-link>
+                    </li>
+
+                    <li v-if="!store?.authUser?.name && !route?.meta?.getStarted" id="sign">
+                        <router-link :to="{name:'register'}" customv-slot="{ navigate }">
+                            <div class="link" @click="navigate" role="link">
+                                Sign in
+                            </div>
+                        </router-link>
+                    </li>
+
+                    <li v-if="store?.authUser?.name" id="myProfile">
+                        <router-link to="/dashboard" customv-slot="{ navigate }">
+                            <div class="link" @click="navigate" role="link">
+
+                                My Profile
+                            </div>
+                        </router-link>
+                    </li>
+
+                    <li v-if="route?.meta?.getStarted" id="getStart">
+                      <router-link to="/register" customv-slot="{ navigate }">
+                            <div class="link" @click="navigate" role="link">
+                                <div class="link" id="getStartedButton">
+                                    Get started
+                                </div>
+                            </div>
+                        </router-link>
+                    </li>
+                
 
 
                 </ul>
             </div>
         </div>
     </header>
-    <h1 class="hi">hiiii Girl</h1>
+
 </template>
 <style scoped>
 #header {
@@ -67,11 +104,19 @@ const store = useAuthStore();
     align-items: center;
     height: 100%;
     margin-bottom: 0px;
-
     margin-top: 0px;
     font-weight: bold;
 
 }
+
+.link {
+    text-decoration: none;
+    color: white;
+    font-family: Arial, sans-serif;
+
+
+}
+
 
 #getStartedButton {
     border: 2px solid white;

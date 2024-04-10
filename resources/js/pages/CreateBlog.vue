@@ -1,4 +1,5 @@
 <script setup>
+import BlogHeader from '../components/BlogHeader.vue';  
 
 
 </script>
@@ -27,6 +28,7 @@
     </div>
 
 </template>
+<BlogHeader/>
 
 <style scoped>
 
