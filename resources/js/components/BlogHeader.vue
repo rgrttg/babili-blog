@@ -79,14 +79,14 @@ const store = useAuthStore();
                         </router-link>
                     </li>
                     <li v-if="store?.authUser?.name" id="editProfile">
-                        <router-link :to="{ name: 'editProfile ' }" customv-slot="{ navigate }">
+                        <router-link :to="{ name: 'editProfile' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
                                 Edit Profile
                             </div>
                         </router-link>
                     </li>
                     <li v-if="store?.authUser?.name" id="editBlog">
-                        <router-link :to="{ name: 'editBlog ' }" customv-slot="{ navigate }">
+                        <router-link :to="{ name: 'editBlog' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
                                 Edit Article
                             </div>
