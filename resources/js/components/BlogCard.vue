@@ -59,7 +59,8 @@ const truncate = (text, maxLength) => {
                         {{ blog.updated_at }}
                     </p>
                 </div>
-                <a class="read-more" href="">Read More</a>
+               
+                <router-link class="details-link" :to="{ name: 'blogdetail', params: { id: blog.id } }">View Details</router-link>
                 <div class="buttons">
                     <a class="button" href=""> Edit</a>
                     <a class="button" href=""> Delete</a>

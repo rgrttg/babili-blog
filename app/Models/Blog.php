@@ -31,7 +31,7 @@ class Blog extends Model
         $blog->save();
     }
 
-    protected $fillable = ['title', 'description', 'content', 'user_id', 'image_url', 'published', 'published_at', 'interactions'];
+    protected $fillable = ['title', 'description', 'content', 'user_id', 'blog_img', 'published', 'published_at', 'interactions'];
 
     protected $casts = [
         'content' => 'json',
