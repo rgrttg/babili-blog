@@ -1,19 +1,14 @@
 <script setup>
-<<<<<<< HEAD
-import { ref ,  onBeforeMount } from 'vue';
-import { useRouter} from 'vue-router';
-=======
-import BlogHeader from '../components/BlogHeader.vue';  
+import BlogHeader from '../components/BlogHeader.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
->>>>>>> develop
 import axios from 'axios'; // HTTP-Client Biblio für die Kommunikation mit der API
 // import { convertToHtml } from '@/components/Creator.vue';
 // import Creator from '@/components/Creator.vue';
 
 const showInput = ref(true); // Variable, um zu steuern, ob das Eingabefeld angezeigt werden soll
 
-function hideTitleInput  () {
+function hideTitleInput() {
   showInput.value = false; // Setzen Sie showInput auf false, um das Eingabefeld zu verstecken
 };
 
@@ -24,7 +19,7 @@ const content = ref('');
 
 const blog = ref({
   title: '',
-  description:'',
+  description: '',
   content: []
 });
 
@@ -36,10 +31,10 @@ const createBlog = async () => {
       content: [],
       blog_image: '' // Initialisiere die Eigenschaft blog_image
     });
-    
+
     // Erfolgsmeldung oder Weiterleitung zur Index-Seite
-    router.push('/'); 
-    
+    router.push('/');
+
   } catch (error) {
     console.error('Fehler beim Erstellen des Tweets:', error);
   }
@@ -80,13 +75,15 @@ const handleImageUpload = (event) => {
 </script>
 
 <template>
-  
-     <!-- <div class="header"> -->
-    <!-- //hier kommt der header -->
-  <!-- </div> -->
-<body>
 
-  <div class="card">
+  <!-- <div class="header"> -->
+  <!-- //hier kommt der header -->
+  <!-- </div> -->
+
+  <body>
+    <BlogHeader />
+
+    <div class="card">
 
       <div class="card-container">
         <form @submit.prevent="createBlog">
@@ -95,59 +92,60 @@ const handleImageUpload = (event) => {
             <input type="file" id="image" accept="image/*" @change="handleImageUpload">
           </div>
           <div class="title" v-if="blog">
-          
+
             <label for="title">Titel:</label>
             <input v-model="blog.title" type="text" id="title" required v-show="showInput">
-      
+
             <h1>{{ blog?.title }}</h1>
             <!-- <h1>{{ blog?.title }}</h1> -->
-      
-          
-      </div>
 
-      <div class="description" v-if="blog">
-        <label for="description">Description:</label>
-        <textarea v-model="blog.description" type="text" id="description" rows="5"></textarea>
-        <p>{{ blog?.description }}</p>
-      </div>
 
-      <div class="user-details">
-        <div class="image">
-                <img v-if="blog?.profile_picture" :src="blog?.profile_picture" class="profile-picture"/>
-            <div class="author-info">
+          </div>
+
+          <div class="description" v-if="blog">
+            <label for="description">Description:</label>
+            <textarea v-model="blog.description" type="text" id="description" rows="5"></textarea>
+            <p>{{ blog?.description }}</p>
+          </div>
+
+          <div class="user-details">
+            <div class="image">
+              <img v-if="blog?.profile_picture" :src="blog?.profile_picture" class="profile-picture" />
+              <div class="author-info">
                 <span v-if="blog">{{ blog?.author_name }} </span>&nbsp;
                 <span v-if="blog">{{ blog?.published_at }}</span>
+              </div>
             </div>
-        </div>
-        
-        <div class="socials">
-          SOCIAL ICONS
-        </div>
+
+            <div class="socials">
+              SOCIAL ICONS
+            </div>
+          </div>
+          <creator :content="blog?.content" @saved="getJson" />
+          <button type="submit">Blog erstellen</button>
+        </form>
       </div>
-        <creator :content="blog?.content" @saved="getJson"/>
-        <button type="submit">Blog erstellen</button>
-      </form>
+
+
     </div>
 
-  
-  </div>
-  
-</body>
+  </body>
 </template>
- 
-<style scoped>
 
+<style scoped>
 body {
   height: 100%;
   background-color: gainsboro;
 }
 
-h1,h2, p {
-    color: black;
+h1,
+h2,
+p {
+  color: black;
 }
 
 p {
-    line-height: 1.3;
+  line-height: 1.3;
 }
 
 .card {
@@ -177,14 +175,16 @@ p {
 }
 
 .profile-picture {
-  width: 100px; /* Ändern Sie die Breite und Höhe nach Bedarf */
+  width: 100px;
+  /* Ändern Sie die Breite und Höhe nach Bedarf */
   height: 100px;
-  border-radius: 50%; /* Rundes Bild */
-  object-fit: cover; /* Das Bild wird in das festgelegte Rechteck gezoomt, um es zu füllen */
+  border-radius: 50%;
+  /* Rundes Bild */
+  object-fit: cover;
+  /* Das Bild wird in das festgelegte Rechteck gezoomt, um es zu füllen */
 }
 
 .author-info {
   margin-left: 10px;
 }
-
 </style>

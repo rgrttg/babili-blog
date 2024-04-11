@@ -4,6 +4,6 @@ import BlogHeader from '../components/BlogHeader.vue';
 <template>
     <BlogHeader />
 </template>
-<Styles scoped>
+<styles scoped>
 
-</Styles>
+</styles>
