@@ -35,7 +35,7 @@ const store = useAuthStore();
                         </router-link>
                     </li>
 
-                    <li v-if="! store?.authUser?.name" id="login">
+                    <li v-if="!store?.authUser?.name" id="login">
 
                         <router-link :to="{ name: 'login' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
@@ -44,10 +44,9 @@ const store = useAuthStore();
                         </router-link>
                     </li>
 
-                    <li v-if="! store?.authUser?.name && !route?.meta?.getStarted" id="sign">
+                    <li v-if="!store?.authUser?.name && !route?.meta?.getStarted" id="sign">
                         <router-link :to="{ name: 'register' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
-                                Register
                                 Register
                             </div>
                         </router-link>
@@ -93,18 +92,11 @@ const store = useAuthStore();
                         </router-link>
                     </li>
                     <li v-if="store?.authUser?.name" id="logout">
-                        <router-link :to="{ name: 'home' }" customv-slot="{ navigate }">
-                            <div class="link" @click="navigate" role="link">
-                                <LogoutButton>Log Out</LogoutButton>
-                            </div>
-                        </router-link>
-                    </li>
-                    <li>
-                        <p>
-                        {{store?.authUser?.name }}</p>
-                    </li>
+                        <div>
+                            <LogoutButton>Log Out</LogoutButton>
+                        </div>
 
-
+                    </li>
                 </ul>
 
             </div>

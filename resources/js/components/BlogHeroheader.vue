@@ -1,147 +1,179 @@
-<script setup> // workplace Andreas
+<script setup>// workplace Andreas
 import { onMounted } from 'vue';
 
-onMounted(()=>{
+onMounted(() => {
 
 
-const digits = document.querySelectorAll('.aa, .ca, .ab, .cb, .bc, .cc, .cd, .ae, .ce, .bf, .ag, .cg, .ah, .ch, .ai, .bi, .aj, .ak, .bk, .al, .bl, .am, .an, .bo, .cp, .aq, .cq, .cr, .as, .bs, .at, .au, .cv, .bw, .cx, .bx, .ay, .az, .bz');
+    const digits = document.querySelectorAll('.aa, .ca, .ab, .cb, .bc, .cc, .cd, .ae, .ce, .bf, .ag, .cg, .ah, .ch, .ai, .bi, .aj, .ak, .bk, .al, .bl, .am, .an, .bo, .cp, .aq, .cq, .cr, .as, .bs, .at, .au, .cv, .bw, .cx, .bx, .ay, .az, .bz');
 
-function getRandomDigits() {
-  const randomDigits = [];
-  for (let i = 0; i < digits.length * 0.2; i++) {
-    const index = Math.floor(Math.random() * digits.length);
-    randomDigits.push(digits[index]);
-  }
-  return randomDigits;
+    function getRandomDigits() {
+        const randomDigits = [];
+        for (let i = 0; i < digits.length * 0.2; i++) {
+            const index = Math.floor(Math.random() * digits.length);
+            randomDigits.push(digits[index]);
+        }
+        return randomDigits;
+    }
+    function toggleOpacity() {
+    const randomDigits = getRandomDigits();
+    randomDigits.forEach(digit => {
+        // Use setTimeout to toggle the 'hidden' class after a short delay
+        setTimeout(() => {
+            digit.classList.toggle('hidden');
+        }, Math.random() * 200); // Random delay up to 200ms for each digit
+    });
 }
+    // function toggleOpacity() {
+    //     const randomDigits = getRandomDigits();
+    //     randomDigits.forEach(digit => {
+    //         digit.classList.toggle('hidden');
+    //     });
+    // }
 
-function toggleOpacity() {
-  const randomDigits = getRandomDigits();
-  randomDigits.forEach(digit => {
-    digit.classList.toggle('hidden');
-  });
-}
-
-setInterval(toggleOpacity, 1000);
+    setInterval(toggleOpacity, 300);
 }) 
 </script>
 
 
 
 <template>
-<div class="container">
-    <div class="img-container">
-        <img src="/public/img/Logo-new.png" width="553" height="325" alt="tech-blog logo">
-    </div>
 
-        <div class="hero-text">
-            <h1>Blogbeiträge, News</h1>
-            <p>und Informationen</p>
+    <body>
+        <div class="heroContainer">
+            <div class="container">
+                <div class="img-container">
+                    <img src="/public/img/Logo-new.png" width="553" height="325" alt="tech-blog logo">
+                </div>
+
+                <div class="hero-text">
+                    <h1>Blogbeiträge, News</h1>
+                    <p>und Informationen</p>
+                </div>
+            </div>
+            <div class="containerOfMatrix">
+                <div class="matrix-container">
+                    <div class="aa digit">0</div>
+                    <div class="ab digit">0</div>
+                    <div class="ac digit">1</div>
+                    <div class="ad digit">0</div>
+                    <div class="ae digit">1</div>
+                    <div class="af digit">1</div>
+                    <div class="ag digit">0</div>
+                    <div class="ah digit">0</div>
+                    <div class="ai digit">0</div>
+                    <div class="aj digit">1</div>
+                    <div class="ak digit">0</div>
+                    <div class="al digit">1</div>
+                    <div class="am digit">0</div>
+                    <div class="an digit">1</div>
+                    <div class="ao digit">0</div>
+                    <div class="ap digit">1</div>
+                    <div class="aq digit">0</div>
+                    <div class="ar digit">1</div>
+                    <div class="as digit">0</div>
+                    <div class="at digit">1</div>
+                    <div class="au digit">1</div>
+                    <div class="av digit">0</div>
+                    <div class="aw digit">0</div>
+                    <div class="ax digit">1</div>
+                    <div class="ay digit">1</div>
+                    <div class="az digit">0</div>
+                    <div class="ba digit">1</div>
+                    <div class="bb digit">0</div>
+                    <div class="bc digit">1</div>
+                    <div class="bd digit">1</div>
+                    <div class="be digit">0</div>
+                    <div class="bf digit">0</div>
+                    <div class="bg digit">0</div>
+                    <div class="bh digit">0</div>
+                    <div class="bi digit">1</div>
+                    <div class="bj digit">1</div>
+                    <div class="bk digit">0</div>
+                    <div class="bl digit">1</div>
+                    <div class="bm digit">0</div>
+                    <div class="bn digit">0</div>
+                    <div class="bo digit">1</div>
+                    <div class="bp digit">1</div>
+                    <div class="bq digit">1</div>
+                    <div class="br digit">1</div>
+                    <div class="bs digit">1</div>
+                    <div class="bt digit">0</div>
+                    <div class="bu digit">1</div>
+                    <div class="bv digit">0</div>
+                    <div class="bw digit">1</div>
+                    <div class="bx digit">1</div>
+                    <div class="by digit">0</div>
+                    <div class="bz digit">0</div>
+                    <div class="ca digit">0</div>
+                    <div class="cb digit">0</div>
+                    <div class="cc digit">1</div>
+                    <div class="cd digit">1</div>
+                    <div class="ce digit">0</div>
+                    <div class="cf digit">1</div>
+                    <div class="cg digit">0</div>
+                    <div class="ch digit">0</div>
+                    <div class="ci digit">1</div>
+                    <div class="cj digit">1</div>
+                    <div class="ck digit">0</div>
+                    <div class="cl digit">1</div>
+                    <div class="cm digit">1</div>
+                    <div class="cn digit">0</div>
+                    <div class="co digit">0</div>
+                    <div class="cp digit">0</div>
+                    <div class="cq digit">1</div>
+                    <div class="cr digit">0</div>
+                    <div class="cs digit">1</div>
+                    <div class="ct digit">0</div>
+                    <div class="cu digit">1</div>
+                    <div class="cv digit">1</div>
+                    <div class="cw digit">0</div>
+                    <div class="cx digit">1</div>
+                    <div class="cy digit">0</div>
+                    <div class="cz digit">1</div>
+                </div>
+            </div>
         </div>
 
-        <div class="matrix-container">
-            <div class="aa">0</div>
-            <div class="ab">0</div>
-            <div class="ac">1</div>
-            <div class="ad">0</div>
-            <div class="ae">1</div>
-            <div class="af">1</div>
-            <div class="ag">0</div>
-            <div class="ah">0</div>
-            <div class="ai">0</div>
-            <div class="aj">1</div>
-            <div class="ak">0</div>
-            <div class="al">1</div>
-            <div class="am">0</div>
-            <div class="an">1</div>
-            <div class="ao">0</div>
-            <div class="ap">1</div>
-            <div class="aq">0</div>
-            <div class="ar">1</div>
-            <div class="as">0</div>
-            <div class="at">1</div>
-            <div class="au">1</div>
-            <div class="av">0</div>
-            <div class="aw">0</div>
-            <div class="ax">1</div>
-            <div class="ay">1</div>
-            <div class="az">0</div>
-            <div class="ba">1</div>
-            <div class="bb">0</div>
-            <div class="bc">1</div>
-            <div class="bd">1</div>
-            <div class="be">0</div>
-            <div class="bf">0</div>
-            <div class="bg">0</div>
-            <div class="bh">0</div>
-            <div class="bi">1</div>
-            <div class="bj">1</div>
-            <div class="bk">0</div>
-            <div class="bl">1</div>
-            <div class="bm">0</div>
-            <div class="bn">0</div>
-            <div class="bo">1</div>
-            <div class="bp">1</div>
-            <div class="bq">1</div>
-            <div class="br">1</div>
-            <div class="bs">1</div>
-            <div class="bt">0</div>
-            <div class="bu">1</div>
-            <div class="bv">0</div>
-            <div class="bw">1</div>
-            <div class="bx">1</div>
-            <div class="by">0</div>
-            <div class="bz">0</div>
-            <div class="ca">0</div>
-            <div class="cb">0</div>
-            <div class="cc">1</div>
-            <div class="cd">1</div>
-            <div class="ce">0</div>
-            <div class="cf">1</div>
-            <div class="cg">0</div>
-            <div class="ch">0</div>
-            <div class="ci">1</div>
-            <div class="cj">1</div>
-            <div class="ck">0</div>
-            <div class="cl">1</div>
-            <div class="cm">1</div>
-            <div class="cn">0</div>
-            <div class="co">0</div>
-            <div class="cp">0</div>
-            <div class="cq">1</div>
-            <div class="cr">0</div>
-            <div class="cs">1</div>
-            <div class="ct">0</div>
-            <div class="cu">1</div>
-            <div class="cv">1</div>
-            <div class="cw">0</div>
-            <div class="cx">1</div>
-            <div class="cy">0</div>
-            <div class="cz">1</div>
-        </div>
-</div>
+    </body>
 </template>
 
 
 <style scoped>
 * {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-fa.hidden {
+    display: none;
+}mily: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: aliceblue;
 }
 
-.container {
-    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(59,57,57,1) 86%, rgba(109,109,109,1) 100%);
+body {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(59, 57, 57, 1) 86%, rgba(109, 109, 109, 1) 100%);
     height: 577px;
+}
+
+.heroContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+}
+
+containerOfMatrix {
+    width: 50vw;
+
+}
+
+.container {
+    width: 50vw;
 }
 
 .img-container {
     margin: 0 0 0 100px;
-    
+
 }
 
 .hero-text {
     margin: 0 0 0 150px;
-    
+
 }
 
 h1 {
@@ -154,19 +186,31 @@ p {
     margin: 0;
 }
 
+.digit{
+    opacity: 0;
+    transition:opacity 0.5s, visibility 1s;
+     
+}
 .hidden {
+    display:none;
+    ; /* Define the transition effect */
+}
+/* .hidden {
     display: none;
-  }
+} */
 
 .matrix-container {
-    position: fixed;
+    position: abulte;
     right: 20px;
     top: 20%;
     transform: translateY(-50%);
-    width: 750px;
-    height: 250px;
+    width: 37vw;
+    height: 26px;
     background-color: transparent;
-} 
+
+
+    ;
+}
 
 .aa {
     position: absolute;
@@ -176,6 +220,7 @@ p {
     font-size: 80px;
     font-weight: 900;
     opacity: 0.7;
+
 }
 
 .ab {
@@ -186,6 +231,7 @@ p {
     font-size: 45px;
     font-weight: 900;
     opacity: 0.7;
+
 }
 
 .ac {
@@ -196,6 +242,7 @@ p {
     font-size: 35px;
     font-weight: 900;
     opacity: 0.7;
+
 }
 
 .ad {
@@ -206,6 +253,7 @@ p {
     font-size: 60px;
     font-weight: 900;
     opacity: 0.9;
+
 }
 
 .ae {
@@ -216,6 +264,7 @@ p {
     font-size: 100px;
     font-weight: 900;
     opacity: 0.7;
+
 }
 
 .af {
@@ -226,6 +275,7 @@ p {
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
+
 }
 
 .ag {
@@ -246,6 +296,7 @@ p {
     font-size: 45px;
     font-weight: 900;
     opacity: 0.9;
+
 }
 
 .ai {
@@ -256,6 +307,7 @@ p {
     font-size: 80px;
     font-weight: 900;
     opacity: 0.9;
+
 }
 
 .aj {
@@ -296,6 +348,7 @@ p {
     font-size: 100px;
     font-weight: 900;
     opacity: 0.7;
+
 }
 
 .an {
@@ -326,6 +379,7 @@ p {
     font-size: 35px;
     font-weight: 900;
     opacity: 0.7;
+
 }
 
 .aq {
@@ -336,6 +390,7 @@ p {
     font-size: 45px;
     font-weight: 900;
     opacity: 0.7;
+
 }
 
 .ar {
@@ -343,7 +398,7 @@ p {
     top: 16px;
     left: 646px;
     color: rgb(79, 78, 79);
-    font-size:85px;
+    font-size: 85px;
     font-weight: 900;
     opacity: 0.9;
 }
@@ -366,6 +421,7 @@ p {
     font-size: 68px;
     font-weight: 900;
     opacity: 0.7;
+
 }
 
 .au {
@@ -952,18 +1008,18 @@ p {
 @media screen and (max-width: 1419px) {
 
     .matrix-container {
-    position: fixed;
-    right: 20px;
-    top: 20%;
-    transform: translateY(-50%);
-    width: 550px;
-    height: 250px;
-    background-color: transparent;
+        position: fixed;
+        right: 20px;
+        top: 20%;
+        transform: translateY(-50%);
+        width: 550px;
+        height: 250px;
+        background-color: transparent;
     }
 
 
     .an {
-        display: none;        
+        display: none;
     }
 
     .ao {
@@ -994,7 +1050,7 @@ p {
         display: none;
     }
 
-    .bv {  
+    .bv {
         display: none;
     }
 
@@ -1052,7 +1108,7 @@ p {
 }
 
 
-@media screen and (max-width: 1210px){
+@media screen and (max-width: 1210px) {
 
     img {
         width: 276px;
@@ -1068,18 +1124,17 @@ p {
     }
 
     .matrix-container {
-    display: none;
+        display: none;
     }
 
     .img-container {
-    margin: 0 0 0 50px;
-    
+        margin: 0 0 0 50px;
+
     }
 
     .hero-text {
-    margin: 0 0 0 75px;
-    
+        margin: 0 0 0 75px;
+
     }
 }
-
 </style>
