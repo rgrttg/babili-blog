@@ -1,18 +1,9 @@
 <script setup>
-
-import { useAuthStore } from '@/stores/AuthStore';
-import AuthService from "@/services/AuthService";
-
-const test = useAuthStore();
-
-
-
-console.log("All pages")
+import BlogHeader from '../components/BlogHeader.vue'; 
 </script>
-
 <template>
-
+    <BlogHeader />
 </template>
+<Styles scoped>
 
-
-<style scoped></style>
+</Styles>
