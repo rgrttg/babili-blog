@@ -87,7 +87,7 @@ class BlogController extends Controller
                         'author_id' => optional($comment->user)->id,
                         'author_name' => optional($comment->user)->name,
                         'profile_picture' => optional($comment->user)->profile_picture
-                            ? asset('profile_images/' . $comment->user->profile_picture)
+                            ? asset('stotage/profile_images/' . $comment->user->profile_picture)
                             : asset('storage/profile_images/default.jpg'),
                         'content' => $comment->content,
                         'created_at' => $comment->created_at->format($dateFormatComment),
@@ -102,7 +102,7 @@ class BlogController extends Controller
                                 'author_id' => optional($subComment->user)->id,
                                 'author_name' => optional($subComment->user)->name,
                                 'profile_picture' => optional($subComment->user)->profile_picture
-                                    ? asset('profile_images/' . $subComment->user->profile_picture)
+                                    ? asset('storage/profile_images/' . $subComment->user->profile_picture)
                                     : asset('storage/profile_images/default.jpg'),
                                 'content' => $subComment->content,
                                 'created_at' => $subComment->created_at->format($dateFormatComment),
@@ -121,12 +121,12 @@ class BlogController extends Controller
             'author_id' => optional($blog->user)->id,
             'author_name' => optional($blog->user)->name,
             'profile_picture' => optional($blog->user)->profile_picture
-                ? asset('profile_images/' . $blog->user->profile_picture)
+                ? asset('storage/profile_images/' . $blog->user->profile_picture)
                 : asset('storage/profile_images/default.jpg'),
             'title' => $blog->title,
             'blog_image' => $blog->blog_image
-                ? asset('blog_images/' . $blog->blog_image)
-                : asset('blog_images/default.png'),
+                ? asset('storage/blog_images/' . $blog->blog_image)
+                : asset('storage/blog_images/default.png'),
             'description' => $blog->description,
             'content' => $blog->content,
             'published_at' => optional($blog->published_at)->format($dateFormatBlog),
