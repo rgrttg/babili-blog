@@ -31,6 +31,11 @@ export const routes = [
         path:"/single-blog",
         component: () => import("./pages/SingleBlog.vue"),
     }
+    ,
+    {
+        path:"/all-blogs",
+        component: () => import("./pages/AllBlog.vue"),
+    }
 ];
 
 
