@@ -77,6 +77,6 @@ Route::get('/blogs/by-tags', [BlogController::class, 'getBlogsByTags']);
 
     // Diese Route ermöglicht authentifizierten Benutzern 
     // einen Kommentar zu einem Blog (id) zu schreiben /ro
-    Route::post('/comment/blog/{id}', [CommentController::class, 'writeComment']);
+    Route::post('/comment/create/{id}', [CommentController::class, 'writeComment']);
     
 });
