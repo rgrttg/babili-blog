@@ -1,12 +1,8 @@
 <script setup>
-<<<<<<< HEAD
-import { ref ,  onBeforeMount } from 'vue';
-import { useRouter} from 'vue-router';
-=======
+
 import BlogHeader from '../components/BlogHeader.vue';  
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
->>>>>>> develop
 import axios from 'axios'; // HTTP-Client Biblio für die Kommunikation mit der API
 // import { convertToHtml } from '@/components/Creator.vue';
 // import Creator from '@/components/Creator.vue';
@@ -25,23 +21,26 @@ const content = ref('');
 const blog = ref({
   title: '',
   description:'',
-  content: []
+  content: [],
+  image: ""
 });
 
 const createBlog = async () => {
   try {
+
+    // Senden der Blog-Daten zusammen mit den Tags über den POST-Request
     let response = await axios.post('/api/blogs/store', {
       title: blog.value.title,
       description: blog.value.description,
-      content: [],
-      blog_image: '' // Initialisiere die Eigenschaft blog_image
+      content:blog.value.content, // JSON.stringify für das Array content
+      // tags: tags, // Hinzufügen der Tags zum Blog-Objekt
+      image: '' // Initialisiere die Eigenschaft blog_image
     });
     
     // Erfolgsmeldung oder Weiterleitung zur Index-Seite
-    router.push('/'); 
-    
+    router.push('/');
   } catch (error) {
-    console.error('Fehler beim Erstellen des Tweets:', error);
+    console.error('Fehler beim Erstellen des Blogs:', error);
   }
 };
 
@@ -91,7 +90,7 @@ const handleImageUpload = (event) => {
       <div class="card-container">
         <form @submit.prevent="createBlog">
           <div class="image">
-            <img v-if="blog && blog_image" :src="blog_image" class="blog.blog_picture" alt="Uploaded Image">
+            <img v-if="blog && blog.blog_image" :src="blog.blog_image" class="blog.blog_picture" alt="Uploaded Image">
             <input type="file" id="image" accept="image/*" @change="handleImageUpload">
           </div>
           <div class="title" v-if="blog">
@@ -124,8 +123,10 @@ const handleImageUpload = (event) => {
           SOCIAL ICONS
         </div>
       </div>
+      <div class="buttons">
         <creator :content="blog?.content" @saved="getJson"/>
         <button type="submit">Blog erstellen</button>
+      </div>
       </form>
     </div>
 
@@ -159,8 +160,14 @@ p {
 }
 
 .card-container {
-  max-width: 750px;
+  max-width: 80%%;
   padding: 5%;
+}
+
+.title, .description {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .user-details {
@@ -187,4 +194,8 @@ p {
   margin-left: 10px;
 }
 
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
 </style>
