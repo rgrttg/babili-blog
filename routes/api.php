@@ -33,19 +33,34 @@ Route::get('/blogs/least-interactions-all', [BlogController::class, 'leastIntera
 // Beispiel mit einem Array von Tags: /api/blogs/by-tags?tags[]=ipsum&tags[]=lorem
 Route::get('/blogs/by-tags', [BlogController::class, 'getBlogsByTags']);
 
-
+Route::get('/user/profile/{id}', [UserController::class, 'getUserProfile']);
 /**
  * AUTH ROUTES
  */
-    Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/auth', [UserController::class, 'show']);
+
     // Gibt nur Name, Profile-Picture & Socials
     Route::get('/user/me', [UserController::class, 'me']);
 
     //Alles vom User
-    Route::get('/user/profile/{id}', [UserController::class, 'getUserProfile']);
+    
 
+    // Diese Route ermöglicht das Aktualisieren der Benutzerinformationen.
+    // Beispielanfrage: PUT /api/user/store/{id}
+    // Der Anfrage-Body sollte die zu aktualisierenden Felder enthalten:
+    // {
+    //     "profile_picture": "Bild des Benutzers (optional, Dateiupload)",
+    //     "about_me": "Informationen über den Benutzer (maximal 500 Zeichen, optional)",
+    //     "interests": "Interessen des Benutzers (maximal 500 Zeichen, optional)"
+    // }
     Route::put('user/store/{id}', [UserController::class, 'store']);
+
+    // Diese Route ermöglicht das Löschen eines Benutzers.
+    // Beispielanfrage: POST /api/user/delete
+    // Der Anfrage-Body sollte die ID des zu löschenden Benutzers enthalten:
+    // { "user_id": 123 }
+    Route::post('user/delete', [UserController::class, 'deleteUser']);
 
     // Diese Route ermöglicht das Erstellen oder Aktualisieren eines Blog-Beitrags.
     // Beispielanfrage: POST /api/blogs/store (für die Erstellung eines neuen Beitrags)
@@ -79,4 +94,18 @@ Route::get('/blogs/by-tags', [BlogController::class, 'getBlogsByTags']);
     // einen Kommentar zu einem Blog (id) zu schreiben /ro
     Route::post('/comment/create/{id}', [CommentController::class, 'writeComment']);
     
+    // Diese Route ermöglicht authentifizierten Benutzern einen Kommentar zu schreiben /ro
+    Route::post('blogs/write-comment/{id}', [BlogController::class, 'writeComment']);
+
+    // Diese Route ermöglicht das Löschen eines Blogs.
+    // Beispielanfrage: POST /api/blogs/delete-blog
+    // Der Anfrage-Body sollte die ID des zu löschenden Blogs enthalten:
+    // { "blog_id": 123 }
+    Route::post('blogs/delete-blog', [BlogController::class, 'deleteBlog']);
+
+    // Diese Route ermöglicht das Löschen eines Kommentars.
+    // Beispielanfrage: POST /api/blogs/delete-comment
+    // Der Anfrage-Body sollte die ID des zu löschenden Kommentars enthalten:
+    // { "comment_id": 123 }
+    Route::post('blogs/delete-comment', [BlogController::class, 'deleteComment']);
 });

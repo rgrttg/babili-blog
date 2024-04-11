@@ -8,6 +8,7 @@ use App\Models\Rating;
 use App\Models\Tag;
 use App\Http\Resources\BlogResource;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Comment;
 
 class BlogController extends Controller
 {
@@ -232,5 +233,29 @@ class BlogController extends Controller
         $blog->save();
 
         return response()->json(['message' => 'Blog published/unpublished successfully'], 200);
+    }
+
+    public function deleteBlog(Request $request)
+    {
+        $request->validate([
+            'blog_id' => 'required|exists:blogs,id',
+        ]);
+
+        $blog = Blog::findOrFail($request->blog_id);
+        $blog->delete();
+
+        return response()->json(['message' => 'Blog deleted successfully'], 200);
+    }
+
+    public function deleteComment(Request $request)
+    {
+        $request->validate([
+            'comment_id' => 'required|exists:comments,id',
+        ]);
+
+        $comment = Comment::findOrFail($request->comment_id);
+        $comment->delete();
+
+        return response()->json(['message' => 'Comment deleted successfully'], 200);
     }
 }
