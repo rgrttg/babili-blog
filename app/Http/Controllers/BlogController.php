@@ -7,6 +7,8 @@ use App\Models\Blog;
 use App\Models\Rating;
 use App\Models\Tag;
 use App\Http\Resources\BlogResource;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Comment;
 
 class BlogController extends Controller
 {
@@ -86,7 +88,7 @@ class BlogController extends Controller
                         'author_name' => optional($comment->user)->name,
                         'profile_picture' => optional($comment->user)->profile_picture
                             ? asset('profile_images/' . $comment->user->profile_picture)
-                            : asset('profile_images/default.jpg'),
+                            : asset('storage/profile_images/default.jpg'),
                         'content' => $comment->content,
                         'created_at' => $comment->created_at->format($dateFormatComment),
                         'updated_at' => $comment->updated_at->format($dateFormatComment),
@@ -101,7 +103,7 @@ class BlogController extends Controller
                                 'author_name' => optional($subComment->user)->name,
                                 'profile_picture' => optional($subComment->user)->profile_picture
                                     ? asset('profile_images/' . $subComment->user->profile_picture)
-                                    : asset('profile_images/default.jpg'),
+                                    : asset('storage/profile_images/default.jpg'),
                                 'content' => $subComment->content,
                                 'created_at' => $subComment->created_at->format($dateFormatComment),
                                 'updated_at' => $subComment->updated_at->format($dateFormatComment),
@@ -120,10 +122,10 @@ class BlogController extends Controller
             'author_name' => optional($blog->user)->name,
             'profile_picture' => optional($blog->user)->profile_picture
                 ? asset('profile_images/' . $blog->user->profile_picture)
-                : asset('profile_images/default.jpg'),
+                : asset('storage/profile_images/default.jpg'),
             'title' => $blog->title,
-            'blog_image' => $blog->image_url
-                ? asset('blog_images/' . $blog->image_url)
+            'blog_image' => $blog->blog_image
+                ? asset('blog_images/' . $blog->blog_image)
                 : asset('blog_images/default.png'),
             'description' => $blog->description,
             'content' => $blog->content,
@@ -174,7 +176,7 @@ class BlogController extends Controller
             'title' => 'required|string',
             'description' => 'required|string|max:500',
             'content' => 'required|array',
-            'image_url' => 'nullable|string',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:300',
             'tags' => 'nullable|array',
             'tags.*' => 'string',
         ]);
@@ -185,23 +187,25 @@ class BlogController extends Controller
             $blog->user_id = auth()->id();
         }
 
-        $oldImageUrl = $blog->image_url;
+        $oldImage = $blog->blog_image;
+
+
 
         $blog->title = $request->title;
         $blog->description = $request->description;
         $blog->content = $request->content;
 
         if ($request->hasFile('image')) {
-            if ($oldImageUrl) {
-                $oldImagePath = public_path($oldImageUrl);
+            if ($oldImage) {
+                $oldImagePath = public_path($oldImage);
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }
             }
             $image = $request->file('image');
             $imageName = 'blog_' . $blog->id . '_' . date('YmdHis') . '.' . $image->extension();
-            $image->storeAs('public/blog_images', $imageName);
-            $blog->image_url = 'storage/blog_images/' . $imageName;
+            Storage::disk('public')->put('/blog_images' . $imageName, file_get_contents($image));
+            $blog->blog_image = 'storage/blog_images/' . $imageName;
         }
 
         $blog->save();
@@ -215,6 +219,7 @@ class BlogController extends Controller
 
         return response()->json(['message' => 'Blog post created successfully'], 201);
     }
+
     public function publish($id)
     {
         $blog = Blog::findOrFail($id);
@@ -229,9 +234,28 @@ class BlogController extends Controller
 
         return response()->json(['message' => 'Blog published/unpublished successfully'], 200);
     }
-    
-    public function writeComment(Request $request, $blogId)
+
+    public function deleteBlog(Request $request)
     {
-    
+        $request->validate([
+            'blog_id' => 'required|exists:blogs,id',
+        ]);
+
+        $blog = Blog::findOrFail($request->blog_id);
+        $blog->delete();
+
+        return response()->json(['message' => 'Blog deleted successfully'], 200);
+    }
+
+    public function deleteComment(Request $request)
+    {
+        $request->validate([
+            'comment_id' => 'required|exists:comments,id',
+        ]);
+
+        $comment = Comment::findOrFail($request->comment_id);
+        $comment->delete();
+
+        return response()->json(['message' => 'Comment deleted successfully'], 200);
     }
 }
