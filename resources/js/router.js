@@ -56,11 +56,19 @@ export const routes = [
         component: () => import("./pages/SingleBlog.vue"),
         meta: { showLogo: true, allBlogs:true, getStarted: false, home: true}
     },
+
+    {
+        path:"/profile",
+        name:"profile", 
+        component: () => import("./pages/UserProfile.vue"),
+        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
+    },
+
     {
         path:"/edit-profile",
         name:"editProfile", 
         component: () => import("./pages/EditProfile.vue"),
-        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
+        meta: { showLogo: true, allBlogs:true, getStarted: false, home: true}
     },
     
     {
