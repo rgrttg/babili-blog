@@ -7,7 +7,7 @@ use App\Models\User;
 
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Storage;
-
+use App\Http\Resources\BlogResource;
 class UserController extends Controller
 {
 
@@ -34,11 +34,34 @@ class UserController extends Controller
         }
     }
 
+    public function getUserProfile($id)
+    {
+        $user = User::with('blogs')->findOrFail($id);
+
+        $user->load('socials');
+
+        $blogs = BlogResource::collection($user->blogs);
+
+        $userData = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'profile_picture' => optional($user)->profile_picture
+                    ? asset('profile_images/' . $user->profile_picture)
+                    : asset('storage/profile_images/default.jpg'),
+            'about_me' => $user->about_me,
+            'description' => $user->description,
+            'blogs' => $blogs,
+        ];
+
+        if ($user->socials) {
+            $userData['socials'] = $user->socials;
+        }
+
+        return response()->json($userData);
+    }
+
     public function store(Request $request, $id)
     {
-
-
-
 
         $request->validate([
             'profile_picture' => 'nullable|mimes:jpeg,png,jpg,gif|max:300',
@@ -65,9 +88,21 @@ class UserController extends Controller
             Storage::disk('public')->put('/profile_images' . $pictureName, file_get_contents($picture));
             $user->profile_picture = 'storage/profile_images/' . $pictureName;
         }
-        
+
         $user->save();
 
         return response()->json(['message' => 'User updated successfully'], 201);
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $user = User::findOrFail($request->user_id);
+        $user->delete();
+
+        return response()->json(['message' => 'User deleted successfully'], 200);
     }
 }

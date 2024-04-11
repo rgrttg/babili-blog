@@ -26,7 +26,7 @@ export const routes = [
         path: "/dashboard",
         name:"dashboard",
         component: () => import("./pages/Dashboard.vue"),
-        meta: { requiresAuth: true, 
+        meta: { requiresAuth: false, 
         showLogo: true, allBlogs:true , getStarted: false, home: true},
     
     },
@@ -35,6 +35,12 @@ export const routes = [
         name:"register",
         component: () => import("./pages/Register.vue"),
         meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
+    },
+    {
+        path: "/blogs/detail/:id",
+        name: 'blogdetail',
+        component: () => import("./pages/BlogDetails.vue"),
+        // meta: { requiresAuth: true },
     },
 
     {
