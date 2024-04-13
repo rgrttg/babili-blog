@@ -115,7 +115,9 @@ class BlogController extends Controller
                 }
             }
         }
-
+        if ($blog->user->socials) {
+            $socials = $blog->user->socials;
+        }
         $responseData = [
             'id' => $blog->id,
             'author_id' => optional($blog->user)->id,
@@ -123,6 +125,7 @@ class BlogController extends Controller
             'profile_picture' => optional($blog->user)->profile_picture
                 ? asset('storage/profile_images/' . $blog->user->profile_picture)
                 : asset('storage/profile_images/default.jpg'),
+            'socials' => $socials,
             'title' => $blog->title,
             'blog_image' => $blog->blog_image
                 ? asset('storage/blog_images/' . $blog->blog_image)
@@ -139,6 +142,7 @@ class BlogController extends Controller
             'updated_at' => optional($blog->updated_at)->format($dateFormatBlog),
             'comments' => $mainComments,
         ];
+        
 
         return response()->json($responseData);
     }
