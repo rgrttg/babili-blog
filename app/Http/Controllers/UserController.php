@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Social;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Storage;
@@ -43,10 +44,13 @@ class UserController extends Controller
         $user->load('socials');
 
         $blogs = BlogResource::collection($user->blogs);
-
+        $email = null;
+        if (Auth::check()) {
+            $email = $user->email;
+        }
         $userData = [
             'name' => $user->name,
-            'email' => $user->email,
+            'email' => $email,
             'profile_picture' => optional($user)->profile_picture
                 ? asset('profile_images/' . $user->profile_picture)
                 : asset('storage/profile_images/default.jpg'),
@@ -54,7 +58,7 @@ class UserController extends Controller
             'description' => $user->description,
             'blogs' => $blogs,
         ];
-
+        
         if ($user->socials) {
             $userData['socials'] = $user->socials;
         }

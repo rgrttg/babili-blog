@@ -32,6 +32,7 @@ Route::get('/blogs/least-interactions-all', [BlogController::class, 'leastIntera
 // Beispiel mit einem Array von Tags: /api/blogs/by-tags?tags[]=Tag1&tags[]=Tag2
 Route::get('/blogs/by-tags', [BlogController::class, 'getBlogsByTags']);
 
+//Alle Userdaten und Blogs by UserId. Gibt E-mail nur an Authetizierte User.
 Route::get('/user/profile/{id}', [UserController::class, 'getUserProfile']);
 /**
  * AUTH ROUTES
