@@ -1,7 +1,7 @@
 <script setup>
 import BlogHeader from '../components/BlogHeader.vue';  
 
-import { ref, onMounted } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import axios from "axios";
 import {useRoute} from 'vue-router';
 
@@ -20,16 +20,18 @@ const user = ref({
 let profilePictureFile = null;
 
 const loadUser = async () => {
+    const userId = useRoute();
     try {
-        const response = await axios.get(`/api/user/profile/${route.params.id}`); // or 1
-        user.value = response.data;
+        // console.log(route.params.id);
+        const response = await axios.get(`api/user/profile`); // or 1
+        user.value = await response.data;
         console.log(response.data);
     } catch (error) {
         console.error("Error loading blogs:", error);
     }
 };
 
-onMounted(() => {
+onBeforeMount(() => {
     loadUser();
 });
 
@@ -64,8 +66,8 @@ const saveChanges = () => {
     <div class="profile-picture-container">
       <input type="file" id="profile-picture" accept="image/*" @change="handleProfilePictureChange">
       <div class="profile-picture">
-        <img v-if="user.profilePicture" :src="user.profilePicture" alt="Profile Picture">
-        <img v-else src="" alt="Default Profile Picture">
+        <img v-if="user.profilePicture" :src="user.profile_picture" alt="Profile Picture">
+        <img v-else src="../assets/Platzhalter-Bild.png" alt="Default Profile Picture">
       </div>
     </div>
     <div class="form-group">

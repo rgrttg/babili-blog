@@ -1,4 +1,5 @@
 <template>
+    <BlogHeader></BlogHeader>
     <!-- blog details container -->
     <!-- Use Vue's 'v-if' directive to render this container only if 'blog' is truthy -->
     <div v-if="blog" class="blog-details">
@@ -15,6 +16,8 @@
     import axios from 'axios'; // Import the axios instance
     import { onBeforeMount, ref } from 'vue';
     import {useRoute} from 'vue-router';
+
+    import BlogHeader from '../components/BlogHeader.vue';
 
     const blog = ref(null);
     const route = useRoute();

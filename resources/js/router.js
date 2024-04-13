@@ -26,7 +26,7 @@ export const routes = [
         path: "/dashboard",
         name:"dashboard",
         component: () => import("./pages/Dashboard.vue"),
-        meta: { requiresAuth: false, 
+        meta: { requiresAuth: false, login: false, myProfile: true, editProfile: true,
         showLogo: true, allBlogs:true , getStarted: false, home: true},
     
     },
@@ -58,8 +58,8 @@ export const routes = [
     },
 
     {
-        path:"/profile",
-        name:"profile", 
+        path:"/my-profile",
+        name:"myProfile", 
         component: () => import("./pages/UserProfile.vue"),
         meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
     },

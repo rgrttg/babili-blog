@@ -14,7 +14,8 @@ class BlogResource extends JsonResource
         return [
             'id' => $this->id,
             'author_id' => optional($this->user)->id,
-            'author_name' => optional($this->user)->name,
+            'author_firstName' => optional($this->user)->firstName,
+            'author_lastName' => optional($this->user)->lastName,
             'profile_picture' => optional($this->user)->profile_picture
                 ? asset(optional($this->user)->profile_picture)
                 : asset('profile_images/default.jpg'),

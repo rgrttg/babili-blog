@@ -53,7 +53,8 @@ const truncate = (text, maxLength) => {
                         />
                     </div>
                     <p v-if="blog" class="user-name description">
-                        {{ blog.author_name }}
+                        {{ blog.author_firstName }}
+                        {{ blog.author_lastName }} 
                     </p>
                     <p v-if="blog" class="published-on description">
                         {{ blog.updated_at }}
