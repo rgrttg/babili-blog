@@ -34,6 +34,9 @@ Route::get('/blogs/least-interactions-all', [BlogController::class, 'leastIntera
 Route::get('/blogs/by-tags', [BlogController::class, 'getBlogsByTags']);
 
 Route::get('/user/profile/{id}', [UserController::class, 'getUserProfile']);
+
+Route::get('/user/profile', [UserController::class, 'profile']);
+
 /**
  * AUTH ROUTES
  */

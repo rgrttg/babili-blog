@@ -11,7 +11,11 @@ use App\Http\Resources\BlogResource;
 class UserController extends Controller
 {
 
-
+    public function profile(Request $request)
+    {
+        $user = $request->user(); // Retrieve the authenticated user
+        return response()->json($user);
+    }
 
     public function show()
     {
