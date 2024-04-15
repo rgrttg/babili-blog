@@ -4,10 +4,11 @@ export const routes = [
         name: "home",
         component: () => import("./pages/Home.vue"),
         meta: {
-            showLogo: false,
+            showLogo: true,
             allBlogs: true,
             getStarted: true,
             home: false,
+            login: true,
         },
     },
     {
@@ -28,8 +29,9 @@ export const routes = [
         component: () => import("./pages/Login.vue"),
         meta: {
             showLogo: true,
+            login: false,
             allBlogs: false,
-            getStarted: false,
+            getStarted: true,
             home: true,
         },
     },
@@ -51,6 +53,7 @@ export const routes = [
         name: "register",
         component: () => import("./pages/Register.vue"),
         meta: {
+            login: true,
             showLogo: true,
             allBlogs: false,
             getStarted: false,
@@ -101,8 +104,9 @@ export const routes = [
         meta: {
             showLogo: true,
             allBlogs: false,
-            getStarted: false,
+            getStarted: true,
             home: true,
+            login: true,
         },
     },
 

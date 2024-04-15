@@ -1,55 +1,72 @@
 <script setup>
-import { useAuthStore } from '@/stores/AuthStore';
+import { useAuthStore } from "@/stores/AuthStore";
 import AuthService from "@/services/AuthService";
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import BlogHeader from '../components/BlogHeader.vue';
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import BlogHeader from "../components/BlogHeader.vue";
 // import Navbar from '@/components/Navbar.vue';
 // import { createStore } from 'vuex';
 
-import { Axios } from 'axios';
+import { Axios } from "axios";
 
 const router = useRouter();
 const store = useAuthStore();
 
 const user = ref({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: ''
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
 });
-function registerUser() {
+function register() {
     AuthService.registerUser(user.value)
         .then(() => router.push("/dashboard"))
-        .catch((error) => (console.log(error)));
+        .catch((error) => console.log(error));
 }
-
-
 </script>
 
 <template>
     <BlogHeader />
     <!-- Form for registration -->
     <div class="form-container">
-        <form @submit.prevent="registerUser" class="register-form">
+        <form @submit.prevent="register" class="register-form">
             <!-- Name, email, and password inputs -->
-            <input name="name" type="text" v-model="user.name" placeholder="Name" required />
-            <input name="email" type="email" v-model="user.email" placeholder="Email" required />
-            <input name="password" type="password" v-model="user.password" placeholder="Password" required />
-            <input name="password_confirmation" type="password" v-model="user.password_confirmation"
-                placeholder="Password" required />
-
+            <input
+                name="name"
+                type="text"
+                v-model="user.name"
+                placeholder="Name"
+                required
+            />
+            <input
+                name="email"
+                type="email"
+                v-model="user.email"
+                placeholder="Email"
+                required
+            />
+            <input
+                name="password"
+                type="password"
+                v-model="user.password"
+                placeholder="Password"
+                required
+            />
+            <input
+                name="password_confirmation"
+                type="password"
+                v-model="user.password_confirmation"
+                placeholder="Password"
+                required
+            />
 
             <button type="submit">Register</button>
-
 
             <div>
                 <router-link to="/">Link zur Homepage</router-link>
             </div>
-
         </form>
     </div>
-
 </template>
 
 <style scoped>
@@ -58,7 +75,6 @@ function registerUser() {
     justify-content: center;
     align-items: center;
 }
-
 
 .register-form {
     display: flex;
@@ -70,7 +86,6 @@ function registerUser() {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-
 .register-form input,
 .register-form button {
     padding: 10px;
@@ -79,9 +94,8 @@ function registerUser() {
     font-size: 16px;
 }
 
-
 .register-form button {
-    background-color: #007BFF;
+    background-color: #007bff;
     color: white;
     cursor: pointer;
 }

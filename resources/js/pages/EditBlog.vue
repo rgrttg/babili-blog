@@ -12,7 +12,7 @@ const getJson = (json) => {
     console.log(content);
 };
 
-function editInput(i, value) {
+function editInput(value) {
     const subtype = blogContent.value[i].type;
     blogContent.value[i] = {
         type: "input",
@@ -52,6 +52,7 @@ onMounted(() => {
 
             <div class="description" v-if="blog">
                 <p>{{ blog?.description }}</p>
+                <img v-if="blog?.blog_image" :src="blog?.blog_image" />
             </div>
 
             <div class="user-details">
