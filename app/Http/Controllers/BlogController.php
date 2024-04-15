@@ -12,6 +12,7 @@ use App\Models\Comment;
 
 class BlogController extends Controller
 {
+    const paginate = 5;
     public function latestThreeBlogs()
     {
         $blogs = Blog::latest()->take(3)->get();
@@ -20,13 +21,13 @@ class BlogController extends Controller
 
     public function allBlogsByLatest()
     {
-        $blogs = Blog::latest()->get();
+        $blogs = Blog::latest()->get()->paginate(BlogController::paginate);
         return BlogResource::collection($blogs);
     }
 
     public function allBlogsByOldest()
     {
-        $blogs = Blog::oldest()->get();
+        $blogs = Blog::oldest()->get()->paginate(BlogController::paginate);
         return BlogResource::collection($blogs);
     }
 
@@ -38,13 +39,13 @@ class BlogController extends Controller
 
     public function mostInteractionsAllBlogs()
     {
-        $blogs = Blog::orderBy('interactions', 'desc')->get();
+        $blogs = Blog::orderBy('interactions', 'desc')->get()->paginate(BlogController::paginate);
         return BlogResource::collection($blogs);
     }
 
     public function leastInteractionsAllBlogs()
     {
-        $blogs = Blog::orderBy('interactions')->get();
+        $blogs = Blog::orderBy('interactions')->get()->paginate(BlogController::paginate);
         return BlogResource::collection($blogs);
     }
 
@@ -62,7 +63,7 @@ class BlogController extends Controller
 
         $blogs = Blog::whereHas('tags', function ($query) use ($tags) {
             $query->whereIn('tag', $tags);
-        })->get();
+        })->get()->paginate(BlogController::paginate);
 
         return BlogResource::collection($blogs);
     }

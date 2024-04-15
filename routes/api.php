@@ -5,7 +5,7 @@ use App\Http\Controllers\TokenController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
-
+use App\Http\Controllers\SearchController;
 
 Route::post('/sanctum/token', [TokenController::class]);
 
@@ -34,6 +34,12 @@ Route::get('/blogs/by-tags', [BlogController::class, 'getBlogsByTags']);
 
 //Alle Userdaten und Blogs by UserId. Gibt E-mail nur an Authetizierte User.
 Route::get('/user/profile/{id}', [UserController::class, 'getUserProfile']);
+
+// API-Route für die Suche
+// Diese Route akzeptiert eine Suchanfrage und gibt die entsprechenden Ergebnisse zurück.
+// Beispielaufruf: /api/search?input=SuchText
+Route::get('/search', [SearchController::class, 'search']);
+
 /**
  * AUTH ROUTES
  */
