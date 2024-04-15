@@ -1,14 +1,14 @@
 <script setup>
 import { ref, defineProps, computed } from "vue";
 const props = defineProps({
-    content: {},
+    content: Object,
 });
 
 const blogContent = ref([]);
 const inputType = ref("");
 
 const hasOpenInputFields = computed(() => {
-    blogContent.value = props.content ? props.content : blog.content;
+    blogContent.value = props.content;
     return blogContent.value.some((item) => item.visible);
 });
 
@@ -25,7 +25,7 @@ function hideInputField(i) {
     const type = blogContent.value[i].subtype;
     blogContent.value[i] = {
         type: type,
-        value: blogContent.value[i],
+        value: blogContent.value[i].value,
     };
     inputType.value = "";
 }
@@ -61,6 +61,7 @@ function moveDown(i) {
 <template>
     <div>
         <template v-for="(item, i) in blogContent" :key="i">
+            <h1></h1>
             <h2
                 v-if="item.type === 'subheader'"
                 @click="editInput(i, item.value)"

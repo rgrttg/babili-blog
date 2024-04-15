@@ -9,9 +9,18 @@ const blog = ref();
 const getJson = (json) => {
     content.value = json;
     console.log("hallo");
-    console.log(content.value);
+    console.log(content);
 };
 
+function editInput(i, value) {
+    const subtype = blogContent.value[i].type;
+    blogContent.value[i] = {
+        type: "input",
+        subtype: subtype,
+        value: value,
+        visible: true,
+    };
+}
 // const blogId = this.$router.
 const loadBlog = async () => {
     try {
@@ -23,11 +32,6 @@ const loadBlog = async () => {
         console.error("Fehler beim Laden des Blogs:", error);
     }
 };
-
-// const someMethod = () => {
-//   const html = convertToHtml(blog.content.value);
-//   // Do something with the generated HTML
-// };
 
 onMounted(() => {
     loadBlog();
@@ -66,9 +70,9 @@ onMounted(() => {
                 <div class="socials">SOCIAL ICONS</div>
             </div>
 
-            <creator
+            <Creator
                 v-if="blog?.content"
-                :content="blog?.content"
+                :content="blog.content"
                 v-on:save="getJson"
             />
         </div>
