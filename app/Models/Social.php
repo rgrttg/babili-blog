@@ -9,7 +9,7 @@ class Social extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['platform', 'profile_url', 'username'];
+    protected $fillable = ['user_id', 'platform', 'link'];
 
     public function user()
     {
