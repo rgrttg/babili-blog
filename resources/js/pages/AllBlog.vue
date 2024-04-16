@@ -3,7 +3,7 @@ import BlogHeader from "../components/BlogHeader.vue";
 import Card from "../components/Card.vue";
 import SearchBar from "../components/SearchBar.vue";
 import { ref, onMounted, defineProps } from "vue";
-import axios from "axios";
+import { axios } from "axios";
 
 const blogs = ref([]);
 
