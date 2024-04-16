@@ -1,3 +1,44 @@
+<script setup>
+import BlogHeader from '../components/BlogHeader.vue';  
+import BlogCard from '../components/BlogCard.vue';
+import LogoutButton from "@/components/LogoutButton.vue";
+import { useAuthStore } from "../stores/AuthStore";
+
+import { ref, onMounted } from "vue";
+import axios from 'axios';
+import { useRoute } from 'vue-router';
+
+const store = useAuthStore();
+
+const user = ref({
+    profilePicture: 'https://example.com/profile.jpg',
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john@example.com',
+    skills: 'Vue.js, JavaScript, HTML, CSS',
+    bio: 'Software developer passionate about web technologies.',
+    socialMediaLinks: ['https://github.com/Ari-Ario?tab=repositories', 'https://www.youtube.com/@khusrawz/videos']
+});
+
+    let route = useRoute();
+    const userId = store?.authUser?.id;
+    const loadUser = async () => {
+    try {
+
+        const response = await axios.get(`api/user/profile`); // or 1
+        user.value = await response.data;
+        console.log(response.data);
+    } catch (error) {
+        console.error("Error loading blogs:", error);
+    }
+};
+
+onMounted(() => {
+    loadUser();
+});
+
+</script>
+
 <template>
     <BlogHeader/>
     <section class="profile-section">
@@ -49,47 +90,6 @@
         </div>
     </section>
 </template>
-  
-<script setup>
-import BlogHeader from '../components/BlogHeader.vue';  
-import BlogCard from '../components/BlogCard.vue';
-import LogoutButton from "@/components/LogoutButton.vue";
-import { useAuthStore } from "../stores/AuthStore";
-
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import {useRoute} from 'vue-router';
-
-const store = useAuthStore();
-
-const user = ref({
-    profilePicture: 'https://example.com/profile.jpg',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john@example.com',
-    skills: 'Vue.js, JavaScript, HTML, CSS',
-    bio: 'Software developer passionate about web technologies.',
-    socialMediaLinks: ['https://github.com/Ari-Ario?tab=repositories', 'https://www.youtube.com/@khusrawz/videos']
-});
-
-    const route = useRoute();
-    const loadUser = async () => {
-    const userId = useRoute();
-    try {
-        console.log(route.params.id);
-        const response = await axios.get(`api/user/profile`); // or 1
-        user.value = await response.data;
-        console.log(response.data);
-    } catch (error) {
-        console.error("Error loading blogs:", error);
-    }
-};
-
-onMounted(() => {
-    loadUser();
-});
-
-</script>
   
 <style scoped>
   .profile-section {

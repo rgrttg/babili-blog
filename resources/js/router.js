@@ -26,7 +26,7 @@ export const routes = [
         path: "/dashboard",
         name:"dashboard",
         component: () => import("./pages/Dashboard.vue"),
-        meta: { requiresAuth: false, login: false, myProfile: true, editProfile: true,
+        meta: { requiresAuth: true, 
         showLogo: true, allBlogs:true , getStarted: false, home: true},
     
     },
@@ -35,6 +35,12 @@ export const routes = [
         name:"register",
         component: () => import("./pages/Register.vue"),
         meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
+    },
+    {
+        path: "/blogs/detail/:id",
+        name: 'blogdetail',
+        component: () => import("./pages/BlogDetails.vue"),
+        meta: { requiresAuth: true },
     },
 
     {
@@ -50,19 +56,11 @@ export const routes = [
         component: () => import("./pages/SingleBlog.vue"),
         meta: { showLogo: true, allBlogs:true, getStarted: false, home: true}
     },
-
-    {
-        path:"/my-profile",
-        name:"myProfile", 
-        component: () => import("./pages/UserProfile.vue"),
-        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
-    },
-
     {
         path:"/edit-profile",
         name:"editProfile", 
         component: () => import("./pages/EditProfile.vue"),
-        meta: { showLogo: true, allBlogs:true, getStarted: false, home: true}
+        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
     },
     
     {
@@ -77,13 +75,12 @@ export const routes = [
         path:"/edit-blog",
         name:"editBlog",
         component: () => import("./pages/EditBlog.vue"),
-        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true},
+        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
 
     },
 
   
 ];
-
 
 
 

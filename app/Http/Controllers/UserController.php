@@ -47,7 +47,8 @@ class UserController extends Controller
         $blogs = BlogResource::collection($user->blogs);
 
         $userData = [
-            'name' => $user->name,
+            'firstName' => $user->firstName,
+            'lastName' => $user->lastName,
             'email' => $user->email,
             'profile_picture' => optional($user)->profile_picture
                     ? asset('profile_images/' . $user->profile_picture)

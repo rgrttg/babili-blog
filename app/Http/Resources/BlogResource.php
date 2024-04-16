@@ -22,7 +22,7 @@ class BlogResource extends JsonResource
             'title' => $this->title,
             'blog_image' => $this->blog_image
                 ? asset('blog_images/' . $this->blog_image)
-                : asset('blog_images/default.png'),
+                : asset('storage/blog_images/default.png'),
             'description' => $this->description,
             'content' => $this->content,
             'published_at' => optional($this->published_at)->format($dateFormat),
