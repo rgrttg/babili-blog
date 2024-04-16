@@ -98,4 +98,11 @@ textarea{
     justify-content: space-between;
 }
 
+button {
+    font-size: 20px;
+    color: white;
+    background-color: black;
+    border-radius: 15px;
+}
+
 </style>
