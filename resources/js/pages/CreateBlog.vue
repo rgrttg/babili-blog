@@ -22,7 +22,8 @@ const createBlog = async () => {
       title: blog.value.title,
       description: blog.value.description,
       content: blog.value.content,
-      tags: blog.value.tags
+      image: blog.value.blog_image
+      // tags: blog.value.tags  mach ich seperat
     });
     
     router.push('/');
@@ -42,7 +43,7 @@ const handleImageUpload = (event) => {
 <template>
   <div class="card">
     <div class="card-container">
-      <form @submit.prevent="createBlog">
+      <form @submit.prevent="createBlog" enctype="multipart/form-data">
         <!-- Image-Upload -->
         <div class="image">
           <img v-if="blog && blog.blog_image" :src="blog.blog_image" class="blog_picture" alt="Uploaded Image">
