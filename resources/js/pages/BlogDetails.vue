@@ -26,7 +26,7 @@
     try {
         const response = await axios.get(`/api/blogs/detail/${route.params.id}`); // Beispiel: ID 2
         blog.value = await response.data;
-        console.log(response.data);
+        // console.log(response.data);
     } catch (error) {
         console.error('Fehler beim Laden des Blogs:', error);
     }

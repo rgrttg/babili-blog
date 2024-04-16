@@ -1,10 +1,12 @@
 <script setup>
 import BlogHeader from '../components/BlogHeader.vue';  
-
+import LogoutButton from "@/components/LogoutButton.vue";
+import { useAuthStore } from "../stores/AuthStore";
 import { ref, onBeforeMount } from 'vue';
 import axios from "axios";
 import {useRoute} from 'vue-router';
 
+const store = useAuthStore();
 const route = useRoute();
 
 const user = ref({

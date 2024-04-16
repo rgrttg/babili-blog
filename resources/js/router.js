@@ -36,12 +36,6 @@ export const routes = [
         component: () => import("./pages/Register.vue"),
         meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
     },
-    {
-        path: "/blogs/detail/:id",
-        name: 'blogdetail',
-        component: () => import("./pages/BlogDetails.vue"),
-        // meta: { requiresAuth: true },
-    },
 
     {
         path:"/create",
