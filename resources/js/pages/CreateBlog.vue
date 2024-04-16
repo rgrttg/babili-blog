@@ -22,8 +22,7 @@ const createBlog = async () => {
       title: blog.value.title,
       description: blog.value.description,
       content: blog.value.content,
-      image: blog.value.blog_image
-      // tags: blog.value.tags  mach ich seperat
+      blog_image: blog.value.blog_image
     });
     
     router.push('/');
