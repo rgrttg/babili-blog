@@ -2,20 +2,10 @@
 import { ref, onMounted, defineProps } from "vue";
 import axios from "axios";
 
-const blogs = ref([]);
-
-const loadBlogs = async () => {
-    try {
-        const response = await axios.get("/api/blogs/latest-three");
-        blogs.value = response.data;
-        // console.log(response.data);
-    } catch (error) {
-        console.error("Error loading blogs:", error);
-    }
-};
-
-onMounted(() => {
-    loadBlogs();
+defineProps({
+    cardContent: {
+        type: Object,
+    },
 });
 
 const truncate = (text, maxLength) => {
@@ -29,7 +19,7 @@ const truncate = (text, maxLength) => {
 
 <template>
     <div>
-        <div class="card" v-for="blog in blogs.data" :key="blog.id">
+        <div class="card" v-for="blog in cardContent.data" :key="blog.id">
             <div class="Photo">
                 <img
                     class="Photo"
