@@ -14,8 +14,8 @@
             </div>
         </template>
         <div class="button-funktion">
-            <button @click="addInput('subheader')">Zwischentitel einfügen</button>
-            <button @click="addInput('paragraph')">Paragraph einfügen</button>
+            <button type="button" @click="addInput('subheader')">Zwischentitel einfügen</button>
+            <button type="button" @click="addInput('paragraph')">Paragraph einfügen</button>
             <button v-if="!hasOpenInputFields && blogContent.length > 0" @click="saveBlogContent">Speichern</button>
         </div>
     </div>

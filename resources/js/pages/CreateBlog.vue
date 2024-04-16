@@ -3,6 +3,9 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 
+const getJson =(json) => {
+    content.value = json;
+};
 const showInput = ref(true);
 const router = useRouter();
 const content = ref('');
@@ -22,7 +25,8 @@ const createBlog = async () => {
       title: blog.value.title,
       description: blog.value.description,
       content: blog.value.content,
-      blog_image: blog.value.blog_image
+      tags: blog.value.tag,
+      image: blog.value.blog_image
     });
     
     router.push('/');
@@ -43,6 +47,7 @@ const handleImageUpload = (event) => {
   <div class="card">
     <div class="card-container">
       <form @submit.prevent="createBlog" enctype="multipart/form-data">
+
         <!-- Image-Upload -->
         <div class="image">
           <img v-if="blog && blog.blog_image" :src="blog.blog_image" class="blog_picture" alt="Uploaded Image">
@@ -65,10 +70,10 @@ const handleImageUpload = (event) => {
 
         <!-- Dropdown-Menü für die Topics -->
         <div class="tags">
-          <label for="tags">Tag:</label>
-          <select v-model="selectedTag" id="topics">
-            <option v-for="(tag, index) in tag" :key="index" :value="tags">{{ tag }}</option>
-          </select>
+          <label  v-for="(tag, index) in tag" :key="index" :for="tag"> {{tag}}
+         
+            <input type="checkbox" :value="tag">
+          </label>
         </div>
 
         <!-- Benutzerdetails -->

@@ -178,10 +178,10 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string|max:500',
-            'content' => 'required|array',
-            'blog_image' => 'nullable|mimes:jpeg,png,jpg,gif|max:300',
+            // 'title' => 'required|string',
+            // 'description' => 'required|string|max:500',
+            // 'content' => 'required|array',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
             'tags' => 'nullable|array',
             'tags.*' => 'string',
         ]);
@@ -200,7 +200,7 @@ class BlogController extends Controller
         $blog->description = $request->description;
         $blog->content = $request->content;
 
-        if ($request->hasFile('blog_image')) {
+        if ($request->hasFile('image')) {
             if ($oldImage) {
                 $oldImagePath = public_path($oldImage);
                 if (file_exists($oldImagePath)) {
@@ -209,7 +209,7 @@ class BlogController extends Controller
             }
             $image = $request->file('blog_image');
             $imageName = 'blog_' . $blog->id . '_' . date('YmdHis') . '.' . $image->extension();
-            Storage::disk('public')->put('/blog_images' . $imageName, file_get_contents($image));
+            Storage::disk('public')->put('/blog_images/' . $imageName, file_get_contents($image));
             $blog->blog_image = 'storage/blog_images/' . $imageName;
         }
 
