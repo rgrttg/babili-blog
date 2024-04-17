@@ -42,7 +42,7 @@ onMounted(() => {
         <div class="heroContainer">
             <div class="container">
                 <div class="img-container">
-                    <img src="/public/img/Logo-new.png" width="553" height="325" alt="tech-blog logo">
+                    <img src="../assets/logo.svg" width="553" height="325" alt="tech-blog logo">
                 </div>
 
                 <div class="hero-text">
@@ -51,7 +51,7 @@ onMounted(() => {
                 </div>
             </div>
             <div class="containerOfMatrix">
-                <div class="matrix-container">
+                <div class="matrix-container" style="color: RGB(80,80,80);">
                     <div class="aa digit">0</div>
                     <div class="ab digit">0</div>
                     <div class="ac digit">1</div>
@@ -141,36 +141,40 @@ onMounted(() => {
 <style scoped>
 
 :root{
-    --number-tipe-one:  rgb(166, 166, 166); 
-    --number-tipe-two:rgb(79, 78, 79); 
+    --number-tipe-one:  pink; 
+    --number-tipe-two:purple;
+
+    /* --number-tipe-one:  rgb(166, 166, 166); 
+    --number-tipe-two:rgb(79, 78, 79);  */
 }
 
 * {
-    font-fa.hidden {
-        display: none;
-    }
-
-    mily: 'Trebuchet MS',
+    font-family: 'Trebuchet MS',
     'Lucida Sans Unicode',
     'Lucida Grande',
     'Lucida Sans',
-    Arial,
-    sans-serif;
+    'Arial','sans-serif';
     color: aliceblue;
-}
+    }
+    
+    
+    
+    
 
 body {
     background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(59, 57, 57, 1) 86%, rgba(109, 109, 109, 1) 100%);
     height: 577px;
+   
 }
 
 .heroContainer {
     display: flex;
     flex-direction: row;
     align-items: start;
+   
 }
 
-containerOfMatrix {
+.containerOfMatrix {
     width: 50vw;
 
 }
@@ -186,6 +190,7 @@ containerOfMatrix {
 
 .hero-text {
     margin: 0 0 0 150px;
+    color: aliceblue;
 
 }
 
@@ -199,11 +204,7 @@ p {
     margin: 0;
 }
 
-.digit {
-    opacity: 0;
-    transition: opacity 0.5s, visibility 1s;
 
-}
 
 .hidden {
     display: none;
@@ -216,7 +217,7 @@ p {
 } */
 
 .matrix-container {
-    position: abulte;
+    position: relative;
     right: 20px;
     top: 20%;
     transform: translateY(-50%);
@@ -224,9 +225,6 @@ p {
     height: 26px;
     background-color: transparent;
     font-weight: 700;
-
-
-    ;
 }
 
 .aa {
@@ -235,7 +233,6 @@ p {
     left: 3px;
     color: var(--number-tipe-two);
     font-size: 80px;
-
     opacity: 0.7;
 
 }

@@ -14,7 +14,7 @@ const store = useAuthStore();
     <header>
         <div id="header">
             <div class="left">
-                <img v-if="route?.meta?.showLogo" src="/public/img/Logo-new.svg" alt="Tech Blog Logo" id="logo">
+                <img v-if="route?.meta?.showLogo" src="../assets/logo.svg" alt="Tech Blog Logo" id="logo">
 
             </div>
             <div class="right">
@@ -160,7 +160,9 @@ const store = useAuthStore();
 }
 
 #logo {
-    height: 70px;
+    
+    height: 50px; /* by desiding the logo hight */
+   
 }
 
 @media only screen and (max-width: 600px) {
