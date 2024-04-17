@@ -13,7 +13,7 @@ export const routes = [
         path: "/blogs/detail/:id",
         name: 'blogdetail',
         component: () => import("./pages/SingleBlog.vue"),
-        // meta: { requiresAuth: true },
+         meta: { requiresAuth: true },
     },
     {
         path: "/login",
