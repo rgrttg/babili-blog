@@ -46,13 +46,13 @@ docker run --rm \
 Nimm das **.env.example** File und benenne es um in **.env**. Wenn Du es öffnest, siehst Du, dass der **APP_KEY noch leer** ist. Mit folgendem Befehl kannst Du dir einen Key generieren, damit alles funktioniert.
 
 ```bash
-php artisan key:generateutton>
+php artisan key:generate
 ```
 
-## Startenutton>
+## Starten
 
 ### 1. Docker Container hochfahren
-utton>
+
 Wenn Du in Laravel mit Docker arbeitest, kannst du statt dem Befehl docker compose den Befehl './vendor/bin/sail up' verwenden. Evtl. ist auf Deinem Computer bereits ein alias hinzugefügt worden, deshalb kannst Du die Kurzform davon verwenden:
 
 ```bash
