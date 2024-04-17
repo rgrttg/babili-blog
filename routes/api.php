@@ -5,13 +5,10 @@ use App\Http\Controllers\TokenController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
-
+use App\Http\Controllers\SearchController;
 
 Route::post('/sanctum/token', [TokenController::class]);
 
-Route::get('test', function () {
-    return "test";
-});
 // Blog per Id
 Route::get('/blogs/detail/{id}', [BlogController::class, 'mitOhneAllesScharf']);
 // drei neuste
@@ -29,11 +26,20 @@ Route::get('/blogs/least-interactions-all', [BlogController::class, 'leastIntera
 
 // Route zum Abrufen von Blogs anhand von Tags.
 // Diese Route akzeptiert entweder einen einzelnen Tag oder ein Array von Tags.
-// Beispiel mit einem einzelnen Tag: /api/blogs/by-tags?tags=ipsum
-// Beispiel mit einem Array von Tags: /api/blogs/by-tags?tags[]=ipsum&tags[]=lorem
+// Beispiel mit einem einzelnen Tag: params: { tags: 'Lorem' }
+// Beispiel mit einem einzelnen Tag: /api/blogs/by-tags?tags=Lorem
+// Beispiel mit einem Array von Tags: params: { tags: ['Lorem', 'Ipsum'] }
+// Beispiel mit einem Array von Tags: /api/blogs/by-tags?tags[]=Tag1&tags[]=Tag2
 Route::get('/blogs/by-tags', [BlogController::class, 'getBlogsByTags']);
 
+//Alle Userdaten und Blogs by UserId. Gibt E-mail nur an Authetizierte User.
 Route::get('/user/profile/{id}', [UserController::class, 'getUserProfile']);
+
+// API-Route für die Suche
+// Diese Route akzeptiert eine Suchanfrage und gibt die entsprechenden Ergebnisse zurück.
+// Beispielaufruf: /api/search?input=SuchText
+Route::get('/search', [SearchController::class, 'search']);
+
 /**
  * AUTH ROUTES
  */
@@ -43,16 +49,20 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Gibt nur Name, Profile-Picture & Socials
     Route::get('/user/me', [UserController::class, 'me']);
 
-    //Alles vom User
-    
-
     // Diese Route ermöglicht das Aktualisieren der Benutzerinformationen.
     // Beispielanfrage: PUT /api/user/store/{id}
     // Der Anfrage-Body sollte die zu aktualisierenden Felder enthalten:
     // {
     //     "profile_picture": "Bild des Benutzers (optional, Dateiupload)",
     //     "about_me": "Informationen über den Benutzer (maximal 500 Zeichen, optional)",
-    //     "interests": "Interessen des Benutzers (maximal 500 Zeichen, optional)"
+    //     "interests": "Interessen des Benutzers (maximal 500 Zeichen, optional)",
+    //     "socials": [
+    //         {
+    //             "platform": "facebook",
+    //             "user_input": "username oder Profil-Link"
+    //         },
+    //         // Weitere soziale Profile können hinzugefügt werden
+    //     ]
     // }
     Route::put('user/store/{id}', [UserController::class, 'store']);
 
@@ -93,7 +103,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Diese Route ermöglicht authentifizierten Benutzern 
     // einen Kommentar zu einem Blog (id) zu schreiben /ro
     Route::post('/comment/create/{id}', [CommentController::class, 'writeComment']);
-    
+
     // Diese Route ermöglicht authentifizierten Benutzern einen Kommentar zu schreiben /ro
     Route::post('blogs/write-comment/{id}', [BlogController::class, 'writeComment']);
 

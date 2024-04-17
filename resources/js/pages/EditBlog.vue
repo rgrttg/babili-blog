@@ -12,7 +12,7 @@ const getJson =(json) => {
 // const blogId = this.$router.
 const loadBlog = async () => {
   try {
-    const response = await axios.get(`/api/blogs/detail/2`); // Beispiel: ID 2
+    const response = await axios.get(`/api/blogs/detail/${route.params.id}`); // Beispiel: ID 2
     blog.value = await response.data;
     // console.log(response.data);
   } catch (error) {

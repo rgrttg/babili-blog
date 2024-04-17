@@ -13,7 +13,7 @@ export const routes = [
         path: "/blogs/detail/:id",
         name: 'blogdetail',
         component: () => import("./pages/SingleBlog.vue"),
-        // meta: { requiresAuth: true },
+         meta: { requiresAuth: true },
     },
     {
         path: "/login",
@@ -36,12 +36,12 @@ export const routes = [
         component: () => import("./pages/Register.vue"),
         meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
     },
-    {
-        path: "/blogs/detail/:id",
-        name: 'blogdetail',
-        component: () => import("./pages/BlogDetails.vue"),
-        // meta: { requiresAuth: true },
-    },
+    // {
+    //     path: "/blogs/detail/:id",
+    //     name: 'blogdetail',
+    //     component: () => import("./pages/BlogDetails.vue"),
+    //     // meta: { requiresAuth: true },
+    // },
 
     {
         path:"/create",
