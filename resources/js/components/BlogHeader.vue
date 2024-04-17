@@ -52,7 +52,7 @@ const store = useAuthStore();
                         </router-link>
                     </li>
                     <li v-if="store?.authUser?.name" id="myProfile">
-                        <router-link :to="{ name: 'dashboard' }" customv-slot="{ navigate }">
+                        <router-link :to="{ name: 'profile' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
                                 Mein Profile
                             </div>

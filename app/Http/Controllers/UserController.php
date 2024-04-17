@@ -14,7 +14,11 @@ use App\Http\Resources\BlogResource;
 class UserController extends Controller
 {
 
-
+    public function profile(Request $request)
+    {
+        $user = $request->user(); // Retrieve the authenticated user
+        return response()->json($user);
+    }
 
     public function show()
     {
@@ -49,8 +53,9 @@ class UserController extends Controller
             $email = $user->email;
         }
         $userData = [
-            'name' => $user->name,
-            'email' => $email,
+            'firstName' => $user->firstName,
+            'lastName' => $user->lastName,
+            'email' => $user->email,
             'profile_picture' => optional($user)->profile_picture
                 ? asset('profile_images/' . $user->profile_picture)
                 : asset('storage/profile_images/default.jpg'),

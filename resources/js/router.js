@@ -26,7 +26,7 @@ export const routes = [
         path: "/dashboard",
         name:"dashboard",
         component: () => import("./pages/Dashboard.vue"),
-        meta: { requiresAuth: false, 
+        meta: { requiresAuth: true, 
         showLogo: true, allBlogs:true , getStarted: false, home: true},
     
     },
@@ -75,13 +75,12 @@ export const routes = [
         path:"/edit-blog",
         name:"editBlog",
         component: () => import("./pages/EditBlog.vue"),
-        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true},
+        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
 
     },
 
   
 ];
-
 
 
 
