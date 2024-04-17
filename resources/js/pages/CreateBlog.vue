@@ -13,6 +13,7 @@ const blog = ref({
   title: '',
   description: '',
   content: [],
+  image:'',
   tags: ''
 });
 
@@ -20,15 +21,21 @@ const selectedTag = ref('');
 const tag = ref(['Tech', 'Wissen', 'Hilfe', 'Events','Jobs','Projekte','Stories']); // Hier kannst du deine vordefinierten Topics einfügen
 
 const createBlog = async () => {
-  try {
-    let response = await axios.post('/api/blogs/store', {
-      title: blog.value.title,
-      description: blog.value.description,
-      content: blog.value.content,
-      tags: blog.value.tag,
-      image: blog.value.blog_image
-    });
-    
+  try {      const formData = new FormData();
+    formData.append('title', blog.value.title);
+    formData.append('description', blog.value.description);
+    formData.append('image', blog.value.image); // 'file' ist die ausgewählte Bilddatei
+    formData.append('content', blog.value.content); 
+    // Weitere Formulardaten hinzufügen, falls vorhanden
+    let response = await axios.post('/api/blogs/store',formData,{
+    headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+  );
+
+
+    console.log(response);
     router.push('/');
   } catch (error) {
     console.error('Fehler beim Erstellen des Blogs:', error);
@@ -41,6 +48,7 @@ const handleImageUpload = (event) => {
 
   const imageUrl = URL.createObjectURL(file);
   blog.value.blog_image = imageUrl;
+  blog.value.image = event.target.files[0]
 };
 </script>
 <template>
