@@ -1,11 +1,16 @@
 <script setup>
+import BlogHeader from '../components/BlogHeader.vue';  
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import axios from 'axios';
+import axios from 'axios'; // HTTP-Client Biblio für die Kommunikation mit der API
+// import { convertToHtml } from '@/components/Creator.vue';
+// import Creator from '@/components/Creator.vue';
 
 const getJson =(json) => {
     content.value = json;
 };
+
+
 const showInput = ref(true);
 const router = useRouter();
 const content = ref('');

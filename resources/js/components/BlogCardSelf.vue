@@ -1,105 +1,196 @@
+<script setup>
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import {useRoute} from 'vue-router';
+
+const blogs = ref([]);
+const route = useRoute();
+
+const loadBlogs = async () => {
+    try {
+        const response = await axios.get("/api/blogs/all-latest");
+        blogs.value = response.data;
+        console.log(response.data);
+    } catch (error) {
+        console.error("Error loading blogs:", error);
+    }
+};
+
+onMounted(() => {
+    loadBlogs();
+});
+
+const truncate = (text, maxLength) => {
+    if (text.length > maxLength) {
+        return text.substring(0, maxLength) + "...";
+    } else {
+        return text;
+    }
+};
+</script>
+
 <template>
-    <!-- post list container -->
-    <div class="post-list">
-        <ul>
-        <!-- post list item -->
-        <!-- Use Vue's 'v-for' directive to loop through the posts array -->
-            <li class="post-item" v-for="post in posts" :key="post.id">
-            <!-- Display the post title -->
-            <span class="post-title">{{ post.image_url }}</span>
-            <h1 class="post-title">{{ post.title }}</h1>
-            <p class="post-description"> {{ post.description }}</p>
-            
-            <!-- Container for action links -->
-            <div class="action-links">
-            <!-- Link to edit the post -->
-            <router-link class="edit-link" :to="{ path: 'Editpost', params: { id: post.id } }">Edit</router-link>
-            
-            <!-- Link to view post details -->
-            <router-link class="details-link" :to="{ name: 'blogdetail', params: { id: post.id } }">View Details {{ post.id }}</router-link>
-            
-            <!-- Button to delete the post -->
-            <!-- Use Vue's 'v-on' directive (shorthand '@') to bind the click event with the 'deletepost' method -->
-            <button class="delete-button" @click="deletepost(post.id)">Delete</button>
+    <div>
+        <div class="card" v-for="blog in blogs.data" :key="blog.id">
+            <div class="Photo">
+                <img
+                    class="Photo"
+                    :src="blog.blog_image || '../assets/Platzhalter-Bild.png'"
+                    alt=""
+                />
             </div>
-            </li>
-        </ul>
+            <div class="details">
+                <div class="title" v-if="blog">
+                    {{ blog.title }}
+                </div>
+                <p v-if="blog" class="description">
+                    {{ truncate(blog.description, 200) }}
+                </p>
+                <div class="user-details">
+                    <div class="user-photo">
+                        <img
+                            class="user-photo"
+                            v-if="blog.profile_picture"
+                            :src="blog.profile_picture"
+                        />
+                    </div>
+                    <p v-if="blog" class="user-name description">
+                        {{ blog.author_name }}
+                    </p>
+                    <p v-if="blog" class="published-on description">
+                        {{ blog.updated_at }}
+                    </p>
+                </div>
+               
+                <router-link class="details-link" :to="{ name: 'blogdetail', params: { id: blog.id } }">View Details</router-link>
+                <div class="buttons">
+                    <a class="button" href=""> Edit</a>
+                    <a class="button" href=""> Delete</a>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
-    
-<script setup>
 
-import { onBeforeMount, ref } from 'vue';
-import axios from 'axios';
-
-const posts = ref([])
-
-
-async function allPosts(){
-    let res = await axios.get('api/blogs/all-latest');
-    posts.value = res.data.data;
-}
-allPosts();
-/* onBeforeMount(() => {
-    allPosts();
-}); */
-
-</script>
-    
 <style scoped>
-    .post-list {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    margin-top: 2vh;
-    }
-    
-    .post-item {
+/* Existing styles */
+.card {
+    margin: 20px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
+    background-color: #ffffff;
+    max-width: 1200px;
+    min-height: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.523);
+}
+
+.Photo {
+    margin-left: 10px;
+    width: 80%;
+    height: 100%;
+}
+
+.details {
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    color: white;
     justify-content: space-between;
-    padding: 10px;
-    margin: 8px 0;
-    border-bottom: 1px solid #ddd;
-    }
-    
-    .post-title {
-    font-weight: bold;
-    /* font-size: 1.1em; */
-    color: black;
-    }
-    .post-description{
-        font-size: 1.1em;
-        color: black;
-    }
-    
-    .action-links {
+}
+
+.user-photo {
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.user-photo img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.user-details {
+    width: 350px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    }
-    
-    .edit-link, .details-link, .delete-button {
-    margin: 0 8px;
-    font-size: 0.9em;
-    }
-    
-    .edit-link, .details-link {
+}
+
+.read-more {
     text-decoration: none;
-    color: #337ab7;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 400;
+    color: #000000;
+}
+
+.description {
+    font-size: 16px;
+    font-weight: 200;
+    color: #000000;
+}
+
+p {
+    margin: 0;
+}
+
+.button {
+    width: 100%;
+    height: 30px;
+    background: black;
+    border-radius: 50px;
+    padding: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+    margin-left: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 600px) {
+    .card {
+        flex-direction: column; /* Change flex direction to column */
+        align-items: center;
+        width: 90%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-left: 20px;
+        margin: 10px;
     }
-    
-    .delete-button {
-    padding: 5px 10px;
-    background-color: #f44336;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
+
+    .Photo {
+        display: none; /* Hide the Photo class */
     }
-    
-    .delete-button:hover {
-    background-color: #d32f2f;
-    cursor: pointer;
+
+    .details {
+        width: 100%;
+        text-align: left;
     }
+
+    .user-details {
+        width: 90%;
+        align-items: center;
+    }
+
+    .button {
+        margin-top: 30px;
+        width: 50%; /* Adjust button width */
+    }
+    .read-more {
+        font-size: 15px;
+        text-align: right;
+        padding-right: 10px;
+    }
+}
 </style>

@@ -13,12 +13,14 @@ const router = useRouter();
 const store = useAuthStore();
 
 const user = ref({
-    name : '',
+    firstName : '',
+    lastName : '',
     email : '',
     password : '',
     password_confirmation : ''
 });
 function registerUser(){
+    // console.log(user.value)
     AuthService.registerUser(user.value)
         .then(() => router.push("/dashboard"))
         .catch((error) => (console.log(error)));
@@ -33,10 +35,11 @@ function registerUser(){
     <div class="form-container">
         <form @submit.prevent="registerUser" class="register-form">
         <!-- Name, email, and password inputs -->
-        <input name="name" type="text" v-model="user.name" placeholder="Name" required />
+        <input name="name" type="text" v-model="user.firstName" placeholder="Vorname" required />
+        <input name="name" type="text" v-model="user.lastName" placeholder="Nachname" required />
         <input name="email" type="email" v-model="user.email" placeholder="Email" required />
-        <input name="password" type="password" v-model="user.password" placeholder="Password" required />
-        <input name="password_confirmation"  type="password"  v-model="user.password_confirmation" placeholder="Password" required />
+        <input name="password" type="password" v-model="user.password" placeholder="Passwort" required />
+        <input name="password_confirmation"  type="password"  v-model="user.password_confirmation" placeholder="Passwort wiederholen" required />
 
 
         <button type="submit">Register</button>
