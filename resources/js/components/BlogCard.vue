@@ -63,7 +63,9 @@ const truncate = (text, maxLength) => {
                
                 <router-link class="details-link" :to="{ name: 'blogdetail', params: { id: blog.id } }">View Details</router-link>
                 <div class="buttons">
-                    <a class="button" href=""> Edit</a>
+                    <a class="button" href="">
+                        <router-link class="details-link" :to="{ name: 'editBlog', params: { id: blog.id } }">Edit</router-link>
+                    </a>
                     <a class="button" href=""> Delete</a>
                 </div>
             </div>
