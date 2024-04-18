@@ -1,31 +1,51 @@
 <script setup>
-const stringArray = ref(["Apple", "Banana", "Cherry", "Date"]);
+    import axios from 'axios'; // Import the axios instance
+    import { ref , onMounted, onBeforeMount } from 'vue';
+    import {useRoute} from 'vue-router';
+    import {authClient} from '@/services/AuthService';
+
+    const bubbles = ref(null);
+    // const route = useRoute();
+
+    const loadBobles = async () => {
+    try {
+        const response = await authClient.get('/tags'); 
+        bubbles.value = await response.data;
+        console.log(response.data);
+    } catch (error) {
+        console.error('Fehler beim Laden des Blogs:', error);
+    }
+}
+    onBeforeMount(() => {
+        loadBobles();
+        });
+    
+    
 </script>
 
 <template>
     <div class="bubble-container">
-        <a href="">
-            <button v-for="item in stringArray" :key="item" class="bubble">{{ item }}</button>
-        </a>
+        
+            <button v-for="item in bubbles" :key="item" class="bubble">{{ item.tag }}</button>
+    
         </div>
 </template>
 
 <style scoped>
-.bubble-container {
-    margin: 15px 0 0 150px;
-}
+
 
 .bubble {
+    margin: 10px 10px 0 0;
     font-size: 18px;
     font-weight: 600;
-    color: red;
-    border: 2px solid rgb(231, 231, 231);
+    border: 2px solid rgb(231, 231, 231); 
     border-radius: 1.2rem;
     background-color: transparent;
     color: rgb(231, 231, 231);
     padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    gap: 10px;
 }
 
 .bubble:hover{
