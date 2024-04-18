@@ -76,6 +76,7 @@ onBeforeMount(() => {
         <p v-if="entry.type=='paragraph'">{{ entry.value }}</p>
     
   </div>
+  
 </div>
   
 </div>

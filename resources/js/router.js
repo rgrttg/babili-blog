@@ -47,7 +47,7 @@ export const routes = [
         path:"/create",
         name:"createPost",
         component: () => import("./pages/CreateBlog.vue"),
-        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
+        meta: {requiresAuth: true , showLogo: true, allBlogs:false, getStarted: false, home: true}
     },
 
     {

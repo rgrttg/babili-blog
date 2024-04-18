@@ -13,35 +13,33 @@ const getJson =(json) => {
 
 const showInput = ref(true);
 const router = useRouter();
-const content = ref('');
+const content = ref([]);
 const blog = ref({
   title: '',
   description: '',
   content: [],
   image:'',
-  tags: ''
+  tags: []
 });
 
 const selectedTag = ref('');
-const tag = ref(['Tech', 'Wissen', 'Hilfe', 'Events','Jobs','Projekte','Stories']); // Hier kannst du deine vordefinierten Topics einfügen
-
+const tags = ref(['Tech', 'Wissen', 'Hilfe', 'Events','Jobs','Projekte','Stories']);
+console.log(blog);
 const createBlog = async () => {
   try {      const formData = new FormData();
     formData.append('title', blog.value.title);
     formData.append('description', blog.value.description);
     formData.append('image', blog.value.image); // 'file' ist die ausgewählte Bilddatei
-    formData.append('content', blog.value.content); 
+    formData.append('content',blog.value.content);
+    formData.append('tags', JSON.stringify(blog.value.tags));
     // Weitere Formulardaten hinzufügen, falls vorhanden
-    let response = await axios.post('/api/blogs/store',formData,{
-    headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-              }
-  );
+
+
+    let response = await axios.post('/api/blogs/store',formData);
 
 
     console.log(response);
-    router.push('/');
+    // router.push('/');
   } catch (error) {
     console.error('Fehler beim Erstellen des Blogs:', error);
   }
@@ -57,6 +55,9 @@ const handleImageUpload = (event) => {
 };
 </script>
 <template>
+
+<BlogHeader/>
+
   <div class="card">
     <div class="card-container">
       <form @submit.prevent="createBlog" enctype="multipart/form-data">
@@ -64,7 +65,7 @@ const handleImageUpload = (event) => {
         <!-- Image-Upload -->
         <div class="image">
           <img v-if="blog && blog.blog_image" :src="blog.blog_image" class="blog_picture" alt="Uploaded Image">
-          <input type="file" id="image" accept="image/*" @change="handleImageUpload">
+          <input type="file" id="blog_image" accept="image/*" @change="handleImageUpload">
         </div>
         
         <!-- Titel -->
@@ -81,11 +82,11 @@ const handleImageUpload = (event) => {
           <p>{{ blog?.description }}</p>
         </div>
 
-        <!-- Dropdown-Menü für die Topics -->
+        
         <div class="tags">
-          <label  v-for="(tag, index) in tag" :key="index" :for="tag"> {{tag}}
-         
-            <input type="checkbox" :value="tag">
+          <label  v-for="(tag, index) in tags" :key="index"> 
+            <input type="checkbox" :value="index+1" v-model="blog.tags">
+            {{tag}}
           </label>
         </div>
 
@@ -96,12 +97,16 @@ const handleImageUpload = (event) => {
         </div>
 
         <!-- Editor für den Inhalt des Blogs -->
-        
+        <div class="content" v-if="blog">
+          <label for="content">Beschreibung:</label>
+          <textarea v-model="blog.content" type="text" id="content" rows="10"></textarea>
+          <p>{{ blog?.content }}</p>
+        </div>
         
         <!-- Button zum Blog erstellen -->
         <div class="buttons">
           
-              <creator :content="blog?.content" @saved="getJson"/>
+              <!-- <creator :content="blog?.content" @saved="getJson"/> -->
           <div class="submit">
               <button type="submit">Blog erstellen</button>
           </div>
@@ -140,10 +145,14 @@ p {
   padding: 5%;
 }
 
-.title, .description {
+.title, .description, .content {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.content {
+  margin-top: 15%;
 }
 
 .user-details {
@@ -173,10 +182,6 @@ p {
 select {
   width: 100%;
   font-size: 20px;
-}
-
-.tags {
-  padding-bottom: 35%;
 }
 
 button {
