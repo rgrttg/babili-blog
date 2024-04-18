@@ -5,7 +5,7 @@ import {ref} from 'vue';
 import {useRouter} from 'vue-router';
 import Navbar from '@/components/Navbar.vue';
 
-import { createStore } from 'vuex';
+// import { createStore } from 'vuex';
 import { Axios } from 'axios';
 
 const router = useRouter();
