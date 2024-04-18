@@ -178,9 +178,9 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            // 'title' => 'required|string',
-            // 'description' => 'required|string|max:500',
-            // 'content' => 'required|array',
+            'title' => 'required|string',
+            'description' => 'required|string|max:500',
+            'content' => 'required|array',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
             'tags' => 'nullable|array',
             'tags.*' => 'string',
