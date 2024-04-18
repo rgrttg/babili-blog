@@ -51,7 +51,7 @@ export const routes = [
     },
 
     {
-        path:"/single-blog",
+        path:"/single-blog/:id",
         name:"singleBlog",
         component: () => import("./pages/SingleBlog.vue"),
         meta: { showLogo: true, allBlogs:true, getStarted: false, home: true}
@@ -72,7 +72,7 @@ export const routes = [
 
 
     {
-        path:"/edit-blog",
+        path:"/edit-blog/:id",
         name:"editBlog",
         component: () => import("./pages/EditBlog.vue"),
         meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}

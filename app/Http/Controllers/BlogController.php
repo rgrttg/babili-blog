@@ -70,17 +70,21 @@ class BlogController extends Controller
 
     public function mitOhneAllesScharf($id)
     {
-        $blog = Blog::with('comments')->findOrFail($id);
 
-        $positiveCount = Rating::where('blog_id', $blog->id)->where('rating_value', 1)->count();
-        $negativeCount = Rating::where('blog_id', $blog->id)->where('rating_value', 0)->count();
+        // return Blog::findOrFail($id);
 
-        $totalRating = $positiveCount - $negativeCount;
+
+        $blog = Blog::with(['comments', 'user'])->findOrFail($id);
+
+        // $positiveCount = Rating::where('blog_id', $blog->id)->where('rating_value', 1)->count();
+        // $negativeCount = Rating::where('blog_id', $blog->id)->where('rating_value', 0)->count();
+
+        // $totalRating = $positiveCount - $negativeCount;
 
         $mainComments = [];
         $dateFormatBlog = 'd. M Y';
         $dateFormatComment = 'd m y H:i';
-        if ($blog->comments !== null) {
+        if ($blog->comments->isNotEmpty()) {
             foreach ($blog->comments as $comment) {
                 if ($comment->parent_id === null) {
                     $mainComment = [
@@ -116,9 +120,10 @@ class BlogController extends Controller
                 }
             }
         }
-        if ($blog->user->socials) {
-            $socials = $blog->user->socials;
-        }
+        // if ($blog->user->socials) {
+        //     $socials = $blog->user->socials;
+        // }
+
         $responseData = [
             'id' => $blog->id,
             'author_id' => optional($blog->user)->id,
@@ -126,7 +131,7 @@ class BlogController extends Controller
             'profile_picture' => optional($blog->user)->profile_picture
                 ? asset('storage/profile_images/' . $blog->user->profile_picture)
                 : asset('storage/profile_images/default.jpg'),
-            'socials' => $socials,
+            // 'socials' => $socials,
             'title' => $blog->title,
             'blog_image' => $blog->blog_image
                 ? asset('storage/blog_images/' . $blog->blog_image)
@@ -134,14 +139,14 @@ class BlogController extends Controller
             'description' => $blog->description,
             'content' => $blog->content,
             'published_at' => optional($blog->published_at)->format($dateFormatBlog),
-            'tags' => $blog->tags->pluck('tag'),
+            // 'tags' => $blog->tags->pluck('tag'),
             'interactions' => $blog->interactions,
-            'rating' => $totalRating,
-            'positiv_rating' => $positiveCount,
-            'negativ_rating' => $negativeCount,
-            'created_at' => optional($blog->created_at)->format($dateFormatBlog),
-            'updated_at' => optional($blog->updated_at)->format($dateFormatBlog),
-            'comments' => $mainComments,
+            // 'rating' => $totalRating,
+            // 'positiv_rating' => $positiveCount,
+            // 'negativ_rating' => $negativeCount,
+            'created_at' => $blog->created_at->format($dateFormatBlog),
+            'updated_at' => $blog->updated_at->format($dateFormatBlog),
+            'comments' => $mainComments ?? null,
         ];
         
 
@@ -177,14 +182,15 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+
+         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string|max:500',
-            'content' => 'required|array',
+            'content' => 'required',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
-            'tags' => 'nullable|array',
-            'tags.*' => 'string',
+            'tags' => 'nullable',
         ]);
+
         if ($request->has('id')) {
             $blog = Blog::findOrFail($request->id);
         } else {

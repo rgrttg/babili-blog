@@ -34,7 +34,7 @@ class Blog extends Model
     protected $fillable = ['title', 'description', 'content', 'user_id', 'blog_image', 'published', 'published_at', 'interactions'];
 
     protected $casts = [
-        'content' => 'json',
+        // 'content' => 'json',
         'published_at' => 'datetime',
     ];
 }
