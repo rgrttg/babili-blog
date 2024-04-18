@@ -6,10 +6,8 @@ import axios from 'axios'; // HTTP-Client Biblio für die Kommunikation mit der 
 // import { convertToHtml } from '@/components/Creator.vue';
 // import Creator from '@/components/Creator.vue';
 
-const showInput = ref(true); // Variable, um zu steuern, ob das Eingabefeld angezeigt werden soll
-
-function hideTitleInput  () {
-  showInput.value = false; // Setzen Sie showInput auf false, um das Eingabefeld zu verstecken
+const getJson =(json) => {
+    content.value = json;
 };
 
 
@@ -20,6 +18,7 @@ const blog = ref({
   title: '',
   description: '',
   content: [],
+  image:'',
   tags: ''
 });
 
@@ -27,14 +26,21 @@ const selectedTag = ref('');
 const tag = ref(['Tech', 'Wissen', 'Hilfe', 'Events','Jobs','Projekte','Stories']); // Hier kannst du deine vordefinierten Topics einfügen
 
 const createBlog = async () => {
-  try {
-    let response = await axios.post('/api/blogs/store', {
-      title: blog.value.title,
-      description: blog.value.description,
-      content: blog.value.content,
-      blog_image: blog.value.blog_image
-    });
-    
+  try {      const formData = new FormData();
+    formData.append('title', blog.value.title);
+    formData.append('description', blog.value.description);
+    formData.append('image', blog.value.image); // 'file' ist die ausgewählte Bilddatei
+    formData.append('content', blog.value.content); 
+    // Weitere Formulardaten hinzufügen, falls vorhanden
+    let response = await axios.post('/api/blogs/store',formData,{
+    headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+  );
+
+
+    console.log(response);
     router.push('/');
   } catch (error) {
     console.error('Fehler beim Erstellen des Blogs:', error);
@@ -47,12 +53,14 @@ const handleImageUpload = (event) => {
 
   const imageUrl = URL.createObjectURL(file);
   blog.value.blog_image = imageUrl;
+  blog.value.image = event.target.files[0]
 };
 </script>
 <template>
   <div class="card">
     <div class="card-container">
       <form @submit.prevent="createBlog" enctype="multipart/form-data">
+
         <!-- Image-Upload -->
         <div class="image">
           <img v-if="blog && blog.blog_image" :src="blog.blog_image" class="blog_picture" alt="Uploaded Image">
@@ -75,10 +83,10 @@ const handleImageUpload = (event) => {
 
         <!-- Dropdown-Menü für die Topics -->
         <div class="tags">
-          <label for="tags">Tag:</label>
-          <select v-model="selectedTag" id="topics">
-            <option v-for="(tag, index) in tag" :key="index" :value="tags">{{ tag }}</option>
-          </select>
+          <label  v-for="(tag, index) in tag" :key="index" :for="tag"> {{tag}}
+         
+            <input type="checkbox" :value="tag">
+          </label>
         </div>
 
         <!-- Benutzerdetails -->
