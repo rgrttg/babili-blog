@@ -6,6 +6,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\TagController;
+
+
+// created from Andreas
+Route::get('/tags', [TagController::class, 'index']);
 
 Route::post('/sanctum/token', [TokenController::class]);
 
@@ -39,6 +44,8 @@ Route::get('/user/profile/{id}', [UserController::class, 'getUserProfile']);
 // Diese Route akzeptiert eine Suchanfrage und gibt die entsprechenden Ergebnisse zurück.
 // Beispielaufruf: /api/search?input=SuchText
 Route::get('/search', [SearchController::class, 'search']);
+
+
 
 /**
  * AUTH ROUTES
