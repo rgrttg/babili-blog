@@ -64,13 +64,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //         // Weitere soziale Profile können hinzugefügt werden
     //     ]
     // }
-    Route::put('user/store/{id}', [UserController::class, 'store']);
+    Route::put('/user/store/{id}', [UserController::class, 'store']);
 
     // Diese Route ermöglicht das Löschen eines Benutzers.
     // Beispielanfrage: POST /api/user/delete
     // Der Anfrage-Body sollte die ID des zu löschenden Benutzers enthalten:
     // { "user_id": 123 }
-    Route::post('user/delete', [UserController::class, 'deleteUser']);
+    Route::post('/user/delete', [UserController::class, 'deleteUser']);
 
     // Diese Route ermöglicht das Erstellen oder Aktualisieren eines Blog-Beitrags.
     // Beispielanfrage: POST /api/blogs/store (für die Erstellung eines neuen Beitrags)
@@ -87,13 +87,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //     "tags": ["Tag1", "Tag2"] // Liste von Tags (optional)
     // }
     // Wenn die Anfrage mit PUT erfolgt, sollte die URL zusätzlich die ID des zu aktualisierenden Blogs enthalten.
-    Route::post('blogs/store', [BlogController::class, 'store']);
-    Route::put('blogs/store/{id}', [BlogController::class, 'store']);
+    Route::post('/blogs/store', [BlogController::class, 'store']);
+    Route::put('/blogs/store/{id}', [BlogController::class, 'store']);
 
     // Diese Route ermöglicht das Umschalten (Toggle) des Veröffentlichungsstatus eines Blogs.
     // Beispielanfrage: PUT /api/blogs/publish/{id}
     // Es wird kein Request-Body benötigt. Der Veröffentlichungsstatus wird automatisch umgeschaltet.
-    Route::put('blogs/publish/{id}', [BlogController::class, 'publish']);
+    Route::put('/blogs/publish/{id}', [BlogController::class, 'publish']);
 
     // Diese Route ermöglicht authentifizierten Benutzern das Bewerten eines Blogs mit einer positiven oder negativen Bewertung.
     // Beispielanfrage: POST /api/blogs/{BlogId}/rate
@@ -104,18 +104,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // einen Kommentar zu einem Blog (id) zu schreiben /ro
     Route::post('/comment/create/{id}', [CommentController::class, 'writeComment']);
 
-    // Diese Route ermöglicht authentifizierten Benutzern einen Kommentar zu schreiben /ro
-    Route::post('blogs/write-comment/{id}', [BlogController::class, 'writeComment']);
-
     // Diese Route ermöglicht das Löschen eines Blogs.
     // Beispielanfrage: POST /api/blogs/delete-blog
     // Der Anfrage-Body sollte die ID des zu löschenden Blogs enthalten:
     // { "blog_id": 123 }
-    Route::post('blogs/delete-blog', [BlogController::class, 'deleteBlog']);
+    Route::post('/blogs/delete-blog', [BlogController::class, 'deleteBlog']);
 
     // Diese Route ermöglicht das Löschen eines Kommentars.
     // Beispielanfrage: POST /api/blogs/delete-comment
     // Der Anfrage-Body sollte die ID des zu löschenden Kommentars enthalten:
     // { "comment_id": 123 }
-    Route::post('blogs/delete-comment', [BlogController::class, 'deleteComment']);
+    Route::post('/blogs/delete-comment', [BlogController::class, 'deleteComment']);
 });
