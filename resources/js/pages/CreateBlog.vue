@@ -39,7 +39,7 @@ const createBlog = async () => {
 
 
     console.log(response);
-    // router.push('/');
+    router.push('/');
   } catch (error) {
     console.error('Fehler beim Erstellen des Blogs:', error);
   }
