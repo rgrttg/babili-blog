@@ -13,7 +13,7 @@ export const routes = [
         path: "/blogs/detail/:id",
         name: 'blogdetail',
         component: () => import("./pages/SingleBlog.vue"),
-        // meta: { requiresAuth: true },
+         meta: { requiresAuth: true },
     },
     {
         path: "/login",
@@ -26,7 +26,7 @@ export const routes = [
         path: "/dashboard",
         name:"dashboard",
         component: () => import("./pages/Dashboard.vue"),
-        meta: { requiresAuth: false, 
+        meta: { requiresAuth: true, 
         showLogo: true, allBlogs:true , getStarted: false, home: true},
     
     },
@@ -36,12 +36,12 @@ export const routes = [
         component: () => import("./pages/Register.vue"),
         meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
     },
-    {
-        path: "/blogs/detail/:id",
-        name: 'blogdetail',
-        component: () => import("./pages/BlogDetails.vue"),
-        // meta: { requiresAuth: true },
-    },
+    // {
+    //     path: "/blogs/detail/:id",
+    //     name: 'blogdetail',
+    //     component: () => import("./pages/BlogDetails.vue"),
+    //     // meta: { requiresAuth: true },
+    // },
 
     {
         path:"/create",
@@ -75,13 +75,12 @@ export const routes = [
         path:"/edit-blog",
         name:"editBlog",
         component: () => import("./pages/EditBlog.vue"),
-        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true},
+        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
 
     },
 
   
 ];
-
 
 
 

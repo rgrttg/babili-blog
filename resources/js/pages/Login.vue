@@ -38,7 +38,7 @@ const login = async() => {
 </script>
 
 <template>
-    <Navbar><BlogHeader/></Navbar>
+    <BlogHeader/>
     <!-- Form for login -->
     <div class="form-container">
         <form @submit.prevent="login" class="login-form">

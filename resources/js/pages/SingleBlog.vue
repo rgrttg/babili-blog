@@ -2,13 +2,18 @@
 import { ref, onBeforeMount } from 'vue';
 import BlogHeader from '../components/BlogHeader.vue';  
 import axios from 'axios';
-// import { convertToHtml } from '@/components/Creator.vue';
+import {useRouter} from 'vue-router';
 
+const router = useRouter();
+// import { convertToHtml } from '@/components/Creator.vue';
+const tweetId = router.currentRoute.value.params.id;
+console.log(tweetId);
 const blog = ref(null);
 // const blogId = this.$router.
 const loadBlog = async () => {
   try {
-    const response = await axios.get(`/api/blogs/detail/2`); // Beispiel: ID 2
+    const response = await axios.get(`/api/blogs/detail/${tweetId}`); // Beispiel: ID 2
+    console.log(response.data);
     blog.value = await response.data;
     // console.log(response.data);
   } catch (error) {
@@ -32,9 +37,16 @@ onBeforeMount(() => {
     <!-- //hier kommt der header -->
   <!-- </div> -->
 <body>
+
 <div class="card">
 
   <div class="card-container">
+
+    <div class="blog_image">
+        <!-- Überprüfen Sie, ob das blog?.blog_image existiert, bevor Sie es anzeigen -->
+        <img v-if="blog && blog.blog_image" :src="blog.blog_image" alt="blog_image">
+      </div>
+
   <div class="title" v-if="blog">
       <h1>{{ blog?.title }}</h1>
   </div> 

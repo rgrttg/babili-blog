@@ -181,7 +181,7 @@ class BlogController extends Controller
             'title' => 'required|string',
             'description' => 'required|string|max:500',
             'content' => 'required|array',
-            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:300',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
             'tags' => 'nullable|array',
             'tags.*' => 'string',
         ]);
@@ -207,9 +207,9 @@ class BlogController extends Controller
                     unlink($oldImagePath);
                 }
             }
-            $image = $request->file('image');
+            $image = $request->file('blog_image');
             $imageName = 'blog_' . $blog->id . '_' . date('YmdHis') . '.' . $image->extension();
-            Storage::disk('public')->put('/blog_images' . $imageName, file_get_contents($image));
+            Storage::disk('public')->put('/blog_images/' . $imageName, file_get_contents($image));
             $blog->blog_image = 'storage/blog_images/' . $imageName;
         }
 

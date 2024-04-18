@@ -1,4 +1,5 @@
 <template>
+    <BlogHeader></BlogHeader>
     <!-- blog details container -->
     <!-- Use Vue's 'v-if' directive to render this container only if 'blog' is truthy -->
     <div v-if="blog" class="blog-details">
@@ -16,6 +17,8 @@
     import { onBeforeMount, ref } from 'vue';
     import {useRoute} from 'vue-router';
 
+    import BlogHeader from '../components/BlogHeader.vue';
+
     const blog = ref(null);
     const route = useRoute();
 
@@ -23,7 +26,7 @@
     try {
         const response = await axios.get(`/api/blogs/detail/${route.params.id}`); // Beispiel: ID 2
         blog.value = await response.data;
-        console.log(response.data);
+        // console.log(response.data);
     } catch (error) {
         console.error('Fehler beim Laden des Blogs:', error);
     }

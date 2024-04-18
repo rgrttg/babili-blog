@@ -14,8 +14,8 @@
             </div>
         </template>
         <div class="button-funktion">
-            <button @click="addInput('subheader')">Zwischentitel einfügen</button>
-            <button @click="addInput('paragraph')">Paragraph einfügen</button>
+            <button type="button" @click="addInput('subheader')">Zwischentitel einfügen</button>
+            <button type="button" @click="addInput('paragraph')">Paragraph einfügen</button>
             <button v-if="!hasOpenInputFields && blogContent.length > 0" @click="saveBlogContent">Speichern</button>
         </div>
     </div>
@@ -96,6 +96,13 @@ textarea{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+button {
+    font-size: 20px;
+    color: white;
+    background-color: black;
+    border-radius: 15px;
 }
 
 </style>
