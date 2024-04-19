@@ -1,18 +1,19 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
+import BlogHeader from '../components/BlogHeader.vue';  
 import axios from 'axios';
-// import { convertToHtml } from '@/components/Creator.vue';
-// import Creator from '@/components/Creator.vue';
+import {useRouter} from 'vue-router';
 
-const content = ref('');
+const router = useRouter();
+// import { convertToHtml } from '@/components/Creator.vue';
+const tweetId = router.currentRoute.value.params.id;
+console.log(tweetId);
 const blog = ref(null);
-const getJson =(json) => {
-    content.value = json;
-};
 // const blogId = this.$router.
 const loadBlog = async () => {
   try {
-    const response = await axios.get(`/api/blogs/detail/${route.params.id}`); // Beispiel: ID 2
+    const response = await axios.get(`/api/blogs/detail/${tweetId}`); // Beispiel: ID 2
+    console.log(response.data);
     blog.value = await response.data;
     // console.log(response.data);
   } catch (error) {
@@ -73,6 +74,8 @@ onBeforeMount(() => {
   <div>
       <creator v-if="blog?.content" :content="blog?.content" @saved="getJson"/>
   </div>
+<!--   
+    <creator :content="blog?.content" @saved="getJson"/> -->
 </div>
 
 <!-- <div>
