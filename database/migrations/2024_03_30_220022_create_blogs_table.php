@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('blog_image')->nullable();
             $table->string('description', 500);
-            $table->json('content');
+            $table->mediumText('content');
             $table->boolean('published')->default(false);
             $table->timestamp('published_at')->nullable();
             $table->integer('interactions')->default(0);

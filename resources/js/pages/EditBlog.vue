@@ -1,18 +1,19 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
+import BlogHeader from '../components/BlogHeader.vue';  
 import axios from 'axios';
-// import { convertToHtml } from '@/components/Creator.vue';
-// import Creator from '@/components/Creator.vue';
+import {useRouter} from 'vue-router';
 
-const content = ref('');
+const router = useRouter();
+// import { convertToHtml } from '@/components/Creator.vue';
+const tweetId = router.currentRoute.value.params.id;
+console.log(tweetId);
 const blog = ref(null);
-const getJson =(json) => {
-    content.value = json;
-};
 // const blogId = this.$router.
 const loadBlog = async () => {
   try {
-    const response = await axios.get(`/api/blogs/detail/${route.params.id}`); // Beispiel: ID 2
+    const response = await axios.get(`/api/blogs/detail/${tweetId}`); // Beispiel: ID 2
+    console.log(response.data);
     blog.value = await response.data;
     // console.log(response.data);
   } catch (error) {
@@ -36,45 +37,52 @@ onBeforeMount(() => {
     <!-- //hier kommt der header -->
   <!-- </div> -->
 <body>
+  
 <div class="card">
 
   <div class="card-container">
-  <div class="title" v-if="blog">
-      <h1>{{ blog?.title }}</h1>
-  </div> 
+    <div class="title" v-if="blog">
+        <h1>{{ blog?.title }}</h1>
+    </div> 
 
-  <div class="description" v-if="blog">
-    <p>{{ blog?.description }}</p>
-  </div>
-
-  <div class="user-details">
-    <div class="image">
-            <img v-if="blog?.profile_picture" :src="blog?.profile_picture" class="profile-picture"/>
-        <div class="author-info">
-            <span v-if="blog">{{ blog?.author_name }} </span>&nbsp;
-            <span v-if="blog">{{ blog?.published_at }}</span>
-        </div>
+    <div class="description" v-if="blog">
+      <p>{{ blog?.description }}</p>
     </div>
+
+    <div class="user-details">
+      <div class="image">
+              <img v-if="blog?.profile_picture" :src="blog?.profile_picture" class="profile-picture"/>
+          <div class="author-info">
+              <span v-if="blog">{{ blog?.author_name }} </span>&nbsp;
+              <span v-if="blog">{{ blog?.published_at }}</span>
+          </div>
+      </div>
     
-    <div class="socials">
-      SOCIAL ICONS
-    </div>
+      <div class="socials">
+        SOCIAL ICONS
+      </div>
+  </div>
   </div>
       
-
-    <creator v-if="blog?.content" :content="blog?.content" @saved="getJson"/>
-
-    
-
-  
- 
-
+    <div v-if="blog?.content" v-for="(entry,index) in blog.content" :key="index">
+      
+          <h2 v-if="entry.type=='subheader'">{{ entry.value }}</h2> 
+      
+          <p v-if="entry.type=='paragraph'">{{ entry.value }}</p>
+      
+    </div>
+  <div>
+      <creator v-if="blog?.content" :content="blog?.content" @saved="getJson"/>
+  </div>
+<!--   
+    <creator :content="blog?.content" @saved="getJson"/> -->
 </div>
+
 <!-- <div>
     <creator @saved="getJson"/>
 </div> -->
   
-</div>
+
 </body>
 </template>
  

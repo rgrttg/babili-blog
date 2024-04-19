@@ -53,7 +53,8 @@ const truncate = (text, maxLength) => {
                         />
                     </div>
                     <p v-if="blog" class="user-name description">
-                        {{ blog.author_name }}
+                        {{ blog.author_firstName }}
+                        {{ blog.author_lastName }} 
                     </p>
                     <p v-if="blog" class="published-on description">
                         {{ blog.updated_at }}
@@ -62,7 +63,9 @@ const truncate = (text, maxLength) => {
                
                 <router-link class="details-link" :to="{ name: 'blogdetail', params: { id: blog.id } }">View Details</router-link>
                 <div class="buttons">
-                    <a class="button" href=""> Edit</a>
+                    <a class="button" href="">
+                        <router-link class="details-link" :to="{ name: 'editBlog', params: { id: blog.id } }">Edit</router-link>
+                    </a>
                     <a class="button" href=""> Delete</a>
                 </div>
             </div>

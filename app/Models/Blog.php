@@ -16,7 +16,8 @@ class Blog extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'tag_blog');
+        // return $this->belongsToMany(Tag::class, 'tag_blog');
+        return $this->belongsToMany(Tag::class, 'tag_blog', 'blog_id', 'tag_id');
     }
 
     public function comments()
@@ -31,10 +32,9 @@ class Blog extends Model
         $blog->save();
     }
 
-    protected $fillable = ['title', 'description', 'content', 'user_id', 'blog_img', 'published', 'published_at', 'interactions'];
+    protected $fillable = ['title', 'description', 'content', 'user_id', 'blog_image', 'published', 'published_at', 'interactions'];
 
     protected $casts = [
-        'content' => 'json',
         'published_at' => 'datetime',
     ];
 }

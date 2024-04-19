@@ -14,13 +14,14 @@ class BlogResource extends JsonResource
         return [
             'id' => $this->id,
             'author_id' => optional($this->user)->id,
-            'author_name' => optional($this->user)->name,
+            'author_firstName' => optional($this->user)->firstName,
+            'author_lastName' => optional($this->user)->lastName,
             'profile_picture' => optional($this->user)->profile_picture
                 ? asset(optional($this->user)->profile_picture)
                 : asset('storage/profile_images/default.jpg'),
             'title' => $this->title,
             'blog_image' => $this->blog_image
-                ? asset('storage/blog_images/' . $this->blog_image)
+                ? asset('storage/' . $this->blog_image)
                 : asset('storage/blog_images/default.png'),
             'description' => $this->description,
             'content' => $this->content,

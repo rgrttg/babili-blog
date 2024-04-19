@@ -6,35 +6,39 @@ import axios from 'axios'; // HTTP-Client Biblio für die Kommunikation mit der 
 // import { convertToHtml } from '@/components/Creator.vue';
 // import Creator from '@/components/Creator.vue';
 
-const showInput = ref(true); // Variable, um zu steuern, ob das Eingabefeld angezeigt werden soll
-
-function hideTitleInput  () {
-  showInput.value = false; // Setzen Sie showInput auf false, um das Eingabefeld zu verstecken
+const getJson =(json) => {
+    content.value = json;
 };
 
 
 const showInput = ref(true);
 const router = useRouter();
-const content = ref('');
+const content = ref([]);
 const blog = ref({
   title: '',
   description: '',
   content: [],
-  tags: ''
+  image:'',
+  tags: []
 });
 
 const selectedTag = ref('');
-const tag = ref(['Tech', 'Wissen', 'Hilfe', 'Events','Jobs','Projekte','Stories']); // Hier kannst du deine vordefinierten Topics einfügen
-
+const tags = ref(['Tech', 'Wissen', 'Hilfe', 'Events','Jobs','Projekte','Stories']);
+console.log(blog);
 const createBlog = async () => {
-  try {
-    let response = await axios.post('/api/blogs/store', {
-      title: blog.value.title,
-      description: blog.value.description,
-      content: blog.value.content,
-      blog_image: blog.value.blog_image
-    });
-    
+  try {      const formData = new FormData();
+    formData.append('title', blog.value.title);
+    formData.append('description', blog.value.description);
+    formData.append('image', blog.value.image); // 'file' ist die ausgewählte Bilddatei
+    formData.append('content',blog.value.content);
+    formData.append('tags', JSON.stringify(blog.value.tags));
+    // Weitere Formulardaten hinzufügen, falls vorhanden
+
+
+    let response = await axios.post('/api/blogs/store',formData);
+
+
+    console.log(response);
     router.push('/');
   } catch (error) {
     console.error('Fehler beim Erstellen des Blogs:', error);
@@ -47,16 +51,21 @@ const handleImageUpload = (event) => {
 
   const imageUrl = URL.createObjectURL(file);
   blog.value.blog_image = imageUrl;
+  blog.value.image = event.target.files[0]
 };
 </script>
 <template>
+
+<BlogHeader/>
+
   <div class="card">
     <div class="card-container">
       <form @submit.prevent="createBlog" enctype="multipart/form-data">
+
         <!-- Image-Upload -->
         <div class="image">
           <img v-if="blog && blog.blog_image" :src="blog.blog_image" class="blog_picture" alt="Uploaded Image">
-          <input type="file" id="image" accept="image/*" @change="handleImageUpload">
+          <input type="file" id="blog_image" accept="image/*" @change="handleImageUpload">
         </div>
         
         <!-- Titel -->
@@ -73,12 +82,12 @@ const handleImageUpload = (event) => {
           <p>{{ blog?.description }}</p>
         </div>
 
-        <!-- Dropdown-Menü für die Topics -->
+        
         <div class="tags">
-          <label for="tags">Tag:</label>
-          <select v-model="selectedTag" id="topics">
-            <option v-for="(tag, index) in tag" :key="index" :value="tags">{{ tag }}</option>
-          </select>
+          <label  v-for="(tag, index) in tags" :key="index"> 
+            <input type="checkbox" :value="index+1" v-model="blog.tags">
+            {{tag}}
+          </label>
         </div>
 
         <!-- Benutzerdetails -->
@@ -88,12 +97,16 @@ const handleImageUpload = (event) => {
         </div>
 
         <!-- Editor für den Inhalt des Blogs -->
-        
+        <div class="content" v-if="blog">
+          <label for="content">Beschreibung:</label>
+          <textarea v-model="blog.content" type="text" id="content" rows="10"></textarea>
+          <p>{{ blog?.content }}</p>
+        </div>
         
         <!-- Button zum Blog erstellen -->
         <div class="buttons">
           
-              <creator :content="blog?.content" @saved="getJson"/>
+              <!-- <creator :content="blog?.content" @saved="getJson"/> -->
           <div class="submit">
               <button type="submit">Blog erstellen</button>
           </div>
@@ -132,10 +145,14 @@ p {
   padding: 5%;
 }
 
-.title, .description {
+.title, .description, .content {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.content {
+  margin-top: 15%;
 }
 
 .user-details {
@@ -165,10 +182,6 @@ p {
 select {
   width: 100%;
   font-size: 20px;
-}
-
-.tags {
-  padding-bottom: 35%;
 }
 
 button {

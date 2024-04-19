@@ -8,4 +8,4 @@ import BlogHeader from '../components/BlogHeader.vue';
 </template>
 
 <style scoped>
-</style>
+</style>lobortis

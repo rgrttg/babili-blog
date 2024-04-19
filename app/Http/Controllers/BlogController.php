@@ -177,14 +177,17 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
+
+
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string|max:500',
-            'content' => 'required|array',
-            'blog_image' => 'nullable|mimes:jpeg,png,jpg,gif|max:300',
-            'tags' => 'nullable|array',
-            'tags.*' => 'string',
+            'content' => 'required|string',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
+            'tags' => 'nullable',
         ]);
+
+       
         if ($request->has('id')) {
             $blog = Blog::findOrFail($request->id);
         } else {
@@ -193,32 +196,30 @@ class BlogController extends Controller
         }
 
         $oldImage = $blog->blog_image;
-
-
-
         $blog->title = $request->title;
         $blog->description = $request->description;
         $blog->content = $request->content;
 
-        if ($request->hasFile('blog_image')) {
+        if ($request->hasFile('image')) {
+
             if ($oldImage) {
                 $oldImagePath = public_path($oldImage);
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }
             }
-            $image = $request->file('blog_image');
-            $imageName = 'blog_' . $blog->id . '_' . date('YmdHis') . '.' . $image->extension();
-            Storage::disk('public')->put('/blog_images' . $imageName, file_get_contents($image));
-            $blog->blog_image = 'storage/blog_images/' . $imageName;
+
+
+            $path = Storage::disk('public')->putFile('/blog_images', $request->file('image'));
+            $blog->blog_image = $path;
         }
 
         $blog->save();
 
+
         if ($request->has('tags')) {
-            foreach ($request->tags as $tagName) {
-                $tag = Tag::firstOrCreate(['tag' => $tagName]);
-                $blog->tags()->attach($tag->id);
+            foreach (json_decode($request->tags) as $tagId) {
+                $blog->tags()->attach($tagId);
             }
         }
 
