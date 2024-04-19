@@ -77,7 +77,7 @@ onMounted(() => {
             <div class="profile-btn">
                 <button class="edit-profile-btn">
                     <div class="link" @click="navigate" role="link">
-                        <LogoutButton>Log Out</LogoutButton>   
+                        <LogoutButton>Abmelden</LogoutButton>   
                     </div>
                 </button>
             </div>

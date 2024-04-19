@@ -35,7 +35,7 @@ const truncate = (text, maxLength) => {
             <div class="Photo">
                 <img
                     class="Photo"
-                    :src="blog.blog_image || '../assets/Platzhalter-Bild.png'"
+                    :src="blog.blog_image"
                     alt=""
                 />
             </div>
