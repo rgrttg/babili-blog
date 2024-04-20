@@ -9,15 +9,17 @@ import {useRoute} from 'vue-router';
 const store = useAuthStore();
 const route = useRoute();
 
-const user = ref({
+let user = ref({
   profilePicture: null,
   firstName: 'John',
   lastName: 'Doe',
   email: 'john@example.com',
-  skills: '',
-  bio: '',
+  interests: '',
+  about_me: '',
   socialMediaLinks: ['']
 });
+
+const userId = store.authUser.id;
 
 let profilePictureFile = null;
 
@@ -41,8 +43,11 @@ onBeforeMount(() => {
 const handleProfilePictureChange = (event) => {
   const file = event.target.files[0];
   if (file) {
+    // const imageUrl = URL.createObjectURL(file);
     profilePictureFile = file;
-    user.value.profilePicture = URL.createObjectURL(file);
+    user.value.profile_picture = URL.createObjectURL(file);
+    user.value.image = event.target.files[0]
+
   }
 };
 
@@ -56,7 +61,13 @@ const removeSocialMediaLink = (index) => {
 
 const saveChanges = () => {
   // Logic to update user profile (send data and image to backend)
-  console.log('Changes saved');
+  try {
+    const response = axios.put(`/api/user/store/1`, user.value);
+    // Optionally, show a success message to the user
+    console.log('Profile updated successfully:', response.data);
+  } catch (error) {
+    console.error("Error loading blogs:", error);
+    }
 };
 </script>
 
@@ -68,7 +79,7 @@ const saveChanges = () => {
     <div class="profile-picture-container">
       <input type="file" id="profile-picture" accept="image/*" @change="handleProfilePictureChange">
       <div class="profile-picture">
-        <img v-if="user.profilePicture" :src="user.profile_picture" alt="Profile Picture">
+        <img v-if="user.profile_picture" :src="user.profile_picture" alt="Profile Picture">
         <img v-else src="../assets/Platzhalter-Bild.png" alt="Default Profile Picture">
       </div>
     </div>
@@ -85,12 +96,12 @@ const saveChanges = () => {
       <input type="email" id="email" v-model="user.email" disabled>
     </div>
     <div class="form-group">
-      <label for="skills">Skills</label>
-      <input type="text" id="skills" v-model="user.skills">
+      <label for="interests">interests</label>
+      <input type="text" id="interests" v-model="user.interests">
     </div>
     <div class="form-group">
-      <label for="bio">Bio</label>
-      <textarea id="bio" v-model="user.bio"></textarea>
+      <label for="about_me">about_me</label>
+      <textarea id="about_me" v-model="user.about_me"></textarea>
     </div>
     <div class="form-group">
       <label for="social-media">Social Media Links</label>

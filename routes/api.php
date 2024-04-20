@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TagController;
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 // created from Andreas
 Route::get('/tags', [TagController::class, 'index']);
@@ -39,6 +40,10 @@ Route::get('/blogs/by-tags', [BlogController::class, 'getBlogsByTags']);
 
 //Alle Userdaten und Blogs by UserId. Gibt E-mail nur an Authetizierte User.
 Route::get('/user/profile/{id}', [UserController::class, 'getUserProfile']);
+Route::get('/user/profile', [UserController::class, 'profile']);
+
+Route::post('/register', [RegisteredUserController::class, 'store']);
+
 
 // API-Route für die Suche
 // Diese Route akzeptiert eine Suchanfrage und gibt die entsprechenden Ergebnisse zurück.
@@ -72,6 +77,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //     ]
     // }
     Route::put('/user/store/{id}', [UserController::class, 'store']);
+    
 
     // Diese Route ermöglicht das Löschen eines Benutzers.
     // Beispielanfrage: POST /api/user/delete

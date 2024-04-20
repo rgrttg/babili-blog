@@ -65,7 +65,7 @@ onMounted(() => {
                     </ul>
                 </div>
             </div>
-            <div class="profile-btn">
+            <div class="profile-btn" v-if="store?.authUser">
                 <button class="edit-profile-btn">
                     <router-link :to="{ name: 'editProfile' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
@@ -74,7 +74,7 @@ onMounted(() => {
                         </router-link>
                 </button>
             </div>
-            <div class="profile-btn">
+            <div class="profile-btn" v-if="store?.authUser">
                 <button class="edit-profile-btn">
                     <div class="link" @click="navigate" role="link">
                         <LogoutButton>Abmelden</LogoutButton>   

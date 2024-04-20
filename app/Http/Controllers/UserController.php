@@ -75,7 +75,9 @@ class UserController extends Controller
     {
 
         $request->validate([
-            'profile_picture' => 'nullable|mimes:jpeg,png,jpg,gif|max:300',
+            'firstName' => 'nullable|string|max:200',
+            'lastName' => 'nullable|string|max:200',
+            'profile_picture' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
             'about_me' => 'nullable|string|max:500',
             'interests' => 'nullable|string|max:500',
             'socials' => 'nullable|array',
@@ -91,6 +93,13 @@ class UserController extends Controller
         $user->interests = $request->interests;
 
         //It ain't stupid if it works...(untested)
+        if ($request->has('firstName')) {
+            $user->firstName = $request->input('firstName');
+        }
+        if ($request->has('lastName')) {
+            $user->lastName = $request->input('lastName');
+        }
+        
         if ($request->has('socials')) {
             $socialPlatforms = [
                 'portfolio' => '',
@@ -132,10 +141,14 @@ class UserController extends Controller
                     unlink($oldImgPath);
                 }
             }
+            $path = Storage::disk('public')->putFile('/blog_images', $request->file('image'));
+            $blog->blog_image = $path;
+
             $picture = $request->file('profile_picture');
             $pictureName = 'user_' . $user->id . '_' . date('YmdHis') . '.' . $picture->extension();
-            Storage::disk('public')->put('/profile_images' . $pictureName, file_get_contents($picture));
+            $path = Storage::disk('public')->put('/profile_images' . $pictureName, file_get_contents($picture));
             $user->profile_picture = 'storage/profile_images/' . $pictureName;
+            // $user->profile_picture = $path;
         }
 
         $user->save();
