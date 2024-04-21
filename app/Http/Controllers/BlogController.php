@@ -79,14 +79,15 @@ class BlogController extends Controller
 
         $mainComments = [];
         $dateFormatBlog = 'd. M Y';
-        $dateFormatComment = 'd m y H:i';
+        $dateFormatComment = 'd.m.y H:i';
         if ($blog->comments !== null) {
             foreach ($blog->comments as $comment) {
                 if ($comment->parent_id === null) {
                     $mainComment = [
                         'id' => $comment->id,
                         'author_id' => optional($comment->user)->id,
-                        'author_name' => optional($comment->user)->name,
+                        'firstName' => optional($comment->user)->firstName,
+                        'lastName' => optional($comment->user)->lastName,
                         'profile_picture' => optional($comment->user)->profile_picture
                             ? asset('stotage/profile_images/' . $comment->user->profile_picture)
                             : asset('storage/profile_images/default.jpg'),
@@ -101,7 +102,8 @@ class BlogController extends Controller
                             $mainComment['sub_comments'][] = [
                                 'id' => $subComment->id,
                                 'author_id' => optional($subComment->user)->id,
-                                'author_name' => optional($subComment->user)->name,
+                                'firstName' => optional($subComment->user)->firstName,
+                                'lastName' => optional($subComment->user)->lastName,
                                 'profile_picture' => optional($subComment->user)->profile_picture
                                     ? asset('storage/profile_images/' . $subComment->user->profile_picture)
                                     : asset('storage/profile_images/default.jpg'),
@@ -122,7 +124,8 @@ class BlogController extends Controller
         $responseData = [
             'id' => $blog->id,
             'author_id' => optional($blog->user)->id,
-            'author_name' => optional($blog->user)->name,
+            'firstName' => optional($blog->user)->firstName,
+            'lastName' => optional($blog->user)->lastName,
             'profile_picture' => optional($blog->user)->profile_picture
                 ? asset('storage/profile_images/' . $blog->user->profile_picture)
                 : asset('storage/profile_images/default.jpg'),
@@ -143,7 +146,7 @@ class BlogController extends Controller
             'updated_at' => optional($blog->updated_at)->format($dateFormatBlog),
             'comments' => $mainComments,
         ];
-        
+
 
         return response()->json($responseData);
     }
@@ -176,53 +179,53 @@ class BlogController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required|string',
-        'description' => 'required|string|max:500',
-        'content' => 'required|json',
-        'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
-        'tags' => 'nullable|array',
-        'tags.*' => 'string',
-    ]);
+    {
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string|max:500',
+            'content' => 'required|json',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
+            'tags' => 'nullable|array',
+            'tags.*' => 'string',
+        ]);
 
-    if ($request->has('id')) {
-        $blog = Blog::findOrFail($request->id);
-    } else {
-        $blog = new Blog();
-        $blog->user_id = auth()->id();
-    }
+        if ($request->has('id')) {
+            $blog = Blog::findOrFail($request->id);
+        } else {
+            $blog = new Blog();
+            $blog->user_id = auth()->id();
+        }
 
-    $oldImage = $blog->blog_image;
+        $oldImage = $blog->blog_image;
 
-    $blog->title = $request->input('title');
-    $blog->description = $request->input('description');
-    $blog->content = json_decode($request->input('content'), true);
+        $blog->title = $request->input('title');
+        $blog->description = $request->input('description');
+        $blog->content = json_decode($request->input('content'), true);
 
-    if ($request->hasFile('image')) {
-        if ($oldImage) {
-            $oldImagePath = public_path($oldImage);
-            if (file_exists($oldImagePath)) {
-                unlink($oldImagePath);
+        if ($request->hasFile('image')) {
+            if ($oldImage) {
+                $oldImagePath = public_path($oldImage);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+            $image = $request->file('image');
+            $imageName = 'blog_' . $blog->id . '_' . date('YmdHis') . '.' . $image->extension();
+            Storage::disk('public')->put('/blog_images/' . $imageName, file_get_contents($image));
+            $blog->blog_image = $imageName;
+        }
+
+        $blog->save();
+
+        if ($request->has('tags')) {
+            foreach ($request->input('tags') as $tagName) {
+                $tag = Tag::firstOrCreate(['tag' => $tagName]);
+                $blog->tags()->attach($tag->id);
             }
         }
-        $image = $request->file('image');
-        $imageName = 'blog_' . $blog->id . '_' . date('YmdHis') . '.' . $image->extension();
-        Storage::disk('public')->put('/blog_images/' . $imageName, file_get_contents($image));
-        $blog->blog_image = $imageName;
+
+        return response()->json(['message' => 'Blog post created successfully'], 201);
     }
-
-    $blog->save();
-
-    if ($request->has('tags')) {
-        foreach ($request->input('tags') as $tagName) {
-            $tag = Tag::firstOrCreate(['tag' => $tagName]);
-            $blog->tags()->attach($tag->id);
-        }
-    }
-
-    return response()->json(['message' => 'Blog post created successfully'], 201);
-}
 
 
     public function publish($id)

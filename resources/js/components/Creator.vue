@@ -98,9 +98,13 @@ export default {
 
 <style scoped>
 textarea {
-    max-width: 800px;
     width: 100%;
-    font-size: 20px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .input {
@@ -115,10 +119,5 @@ textarea {
     justify-content: space-between;
 }
 
-button {
-    font-size: 20px;
-    color: white;
-    background-color: black;
-    border-radius: 15px;
-}
+
 </style>
