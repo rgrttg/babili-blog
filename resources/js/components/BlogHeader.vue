@@ -19,7 +19,7 @@ const store = useAuthStore();
             </div>
             <div class="right">
                 <ul class="menu">
-                    <li v-if="route?.meta?.home" id="home">
+                    <li >
                         <router-link :to="{ name: 'home' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
                                 Home
@@ -27,7 +27,7 @@ const store = useAuthStore();
                         </router-link>
                     </li>
 
-                    <li v-if="route?.meta?.allBlogs" id="blogs">
+                    <li id="blogs">
                         <router-link :to="{ name: 'allBlogs' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
                                 Alle Blogs
@@ -35,65 +35,61 @@ const store = useAuthStore();
                         </router-link>
                     </li>
 
-                    <li v-if="!store?.authUser?.name" id="login">
+                    <li v-if="!store?.authUser" id="login">
 
                         <router-link :to="{ name: 'login' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
-                                Login
+                                Anmelden
                             </div>
                         </router-link>
                     </li>
 
-                    <li v-if="!store?.authUser?.name && !route?.meta?.getStarted" id="sign">
-                        <router-link :to="{ name: 'register' }" customv-slot="{ navigate }">
-                            <div class="link" @click="navigate" role="link">
-                                Register
-                            </div>
-                        </router-link>
-                    </li>
+                    
                     <li v-if="store?.authUser?.name" id="myProfile">
                         <router-link :to="{ name: 'profile' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
-                                Mein Profile
+                                Mein Profil
                             </div>
                         </router-link> <!-- <li v-if="store?.authUser?.name" id="logout"> -->
 
                     </li>
-                    <li v-if="store?.authUser?.name" id="createPost">
+                    <li v-if="store?.authUser" id="createPost">
                         <router-link :to="{ name: 'createPost' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
-                                Create Post
+                                Blog erstellen
                             </div>
                         </router-link>
                     </li>
                     <!-- <li v-if="store?.authUser?.name" id="logout"> -->
 
-                    <li v-if="!store?.authUser?.name && route?.meta?.getStarted" id="getStarted">
+                    <li v-if="!store?.authUser" id="getStarted">
                         <router-link :to="{ name: 'register' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
                                 <div class="link" id="getStartedButton">
-                                    Get started
+                                    los legen
                                 </div>
                             </div>
                         </router-link>
                     </li>
-                    <li v-if="store?.authUser?.name" id="editProfile">
+                    <li v-if="store?.authUser" id="editProfile">
                         <router-link :to="{ name: 'editProfile' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
-                                Edit Profile
+                                Edit Profil
                             </div>
                         </router-link>
                     </li>
-                    <li v-if="store?.authUser?.name" id="editBlog">
-                        <router-link :to="{ name: 'editBlog' }" customv-slot="{ navigate }">
+
+                    <li v-if="store?.authUser" id="dashboard">
+                        <router-link :to="{ name: 'dashboard' }" customv-slot="{ navigate }">
                             <div class="link" @click="navigate" role="link">
-                                Edit Article
+                                Dashboard
                             </div>
                         </router-link>
                     </li>
-                    <li v-if="store?.authUser?.name" id="logout">
+                    
+                    <li v-if="store?.authUser" id="logout">
                         <div>
-                            <LogoutButton>Log Out</LogoutButton>
+                            <LogoutButton>Abmelden</LogoutButton>
                         </div>
 
                     </li>
@@ -114,6 +110,7 @@ const store = useAuthStore();
     width: 100vw;
     /* background-image: linear-gradient(135DEG , rgb(222,7,241), rgb(5,5,5)); */
     background-color: black;
+    color: white;
 
 }
 
