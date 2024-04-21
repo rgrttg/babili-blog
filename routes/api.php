@@ -88,7 +88,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // }
     // Wenn die Anfrage mit PUT erfolgt, sollte die URL zusätzlich die ID des zu aktualisierenden Blogs enthalten.
     Route::post('/blogs/store', [BlogController::class, 'store']);
-    Route::put('/blogs/store/{id}', [BlogController::class, 'store']);
+    Route::post('/blogs/store/{id}', [BlogController::class, 'store']);
 
     // Diese Route ermöglicht das Umschalten (Toggle) des Veröffentlichungsstatus eines Blogs.
     // Beispielanfrage: PUT /api/blogs/publish/{id}

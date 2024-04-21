@@ -1,16 +1,23 @@
 <template>
-    <div>
+    <div v-if="state === 'show'">
+        <template v-for="item in content">
+            <h2 v-if="item.type === 'subheader'">{{ item.value }}</h2>
+            <p v-else-if="item.type === 'paragraph'">{{ item.value }}</p>
+        </template>
+    </div>
+    <div v-if="state !== 'show'">
         <template v-for="(item, i) in blogContent" :key="i">
             <h2 v-if="item.type === 'subheader'" @click="editInput(i, item.value)">{{ item.value }}</h2>
             <p v-else-if="item.type === 'paragraph'" @click="editInput(i, item.value)">{{ item.value }}</p>
             <div v-else-if="item.type === 'input'">
-                <textarea v-model="item.value" type="textarea" :placeholder="'Dein Text...'" :rows="5" v-if="item.visible"></textarea>
+                <textarea v-model="item.value" type="textarea" :placeholder="'Dein Text...'" :rows="5"
+                    v-if="item.visible"></textarea>
                 <div class="input">
-                <button v-if="item.visible" @click="hideInputField(i)">OK</button>
-                <button v-if="item.visible" @click="deleteInputField(i)">Löschen</button>
-                <button v-if="i > 0 && item.visible" @click="moveUp(i)">Nach oben</button>
-                <button v-if="i < blogContent.length - 1 && item.visible" @click="moveDown(i)">Nach unten</button>
-            </div>
+                    <button v-if="item.visible" @click="hideInputField(i)">OK</button>
+                    <button v-if="item.visible" @click="deleteInputField(i)">Löschen</button>
+                    <button v-if="i > 0 && item.visible" @click="moveUp(i)">Nach oben</button>
+                    <button v-if="i < blogContent.length - 1 && item.visible" @click="moveDown(i)">Nach unten</button>
+                </div>
             </div>
         </template>
         <div class="button-funktion">
@@ -19,28 +26,39 @@
             <button v-if="!hasOpenInputFields && blogContent.length > 0" @click="saveBlogContent">Speichern</button>
         </div>
     </div>
+
 </template>
 
-<script >
+<script>
 
 
 export default {
     props: {
-        content: {}
+        content: {},
+        state: {
+            type: String,
+            required: true
+        }
     },
     data() {
         return {
             blogContent: [],
-            inputType: '',    
+            inputType: '',
         };
     },
     computed: {
         hasOpenInputFields() {
-            this.blogContent= this.content?this.content:this.blog.content;
+            if (this.content) {
+                this.blogContent = this.content;
+            } else if (this.blog && this.blog.content) {
+                this.blogContent = this.blog.content;
+            } else {
+                this.blogContent = [];
+            }
             return this.blogContent.some(item => item.visible);
         }
     },
-    
+
     methods: {
         addInput(type) {
             this.blogContent.push({ type: 'input', subtype: type, value: '', visible: true });
@@ -72,15 +90,14 @@ export default {
             this.blogContent[i] = this.blogContent[i + 1];
             this.blogContent[i + 1] = temp;
         },
-        
+
     }
 };
 
 </script>
 
 <style scoped>
-
-textarea{
+textarea {
     max-width: 800px;
     width: 100%;
     font-size: 20px;
@@ -104,5 +121,4 @@ button {
     background-color: black;
     border-radius: 15px;
 }
-
 </style>

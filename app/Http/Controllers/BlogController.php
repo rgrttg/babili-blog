@@ -176,54 +176,54 @@ class BlogController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string|max:500',
-            'content' => 'required|array',
-            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
-            'tags' => 'nullable|array',
-            'tags.*' => 'string',
-        ]);
-        if ($request->has('id')) {
-            $blog = Blog::findOrFail($request->id);
-        } else {
-            $blog = new Blog();
-            $blog->user_id = auth()->id();
-        }
+{
+    $request->validate([
+        'title' => 'required|string',
+        'description' => 'required|string|max:500',
+        'content' => 'required|json',
+        'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
+        'tags' => 'nullable|array',
+        'tags.*' => 'string',
+    ]);
 
-        $oldImage = $blog->blog_image;
-
-
-
-        $blog->title = $request->title;
-        $blog->description = $request->description;
-        $blog->content = $request->content;
-
-        if ($request->hasFile('image')) {
-            if ($oldImage) {
-                $oldImagePath = public_path($oldImage);
-                if (file_exists($oldImagePath)) {
-                    unlink($oldImagePath);
-                }
-            }
-            $image = $request->file('blog_image');
-            $imageName = 'blog_' . $blog->id . '_' . date('YmdHis') . '.' . $image->extension();
-            Storage::disk('public')->put('/blog_images/' . $imageName, file_get_contents($image));
-            $blog->blog_image = 'storage/blog_images/' . $imageName;
-        }
-
-        $blog->save();
-
-        if ($request->has('tags')) {
-            foreach ($request->tags as $tagName) {
-                $tag = Tag::firstOrCreate(['tag' => $tagName]);
-                $blog->tags()->attach($tag->id);
-            }
-        }
-
-        return response()->json(['message' => 'Blog post created successfully'], 201);
+    if ($request->has('id')) {
+        $blog = Blog::findOrFail($request->id);
+    } else {
+        $blog = new Blog();
+        $blog->user_id = auth()->id();
     }
+
+    $oldImage = $blog->blog_image;
+
+    $blog->title = $request->input('title');
+    $blog->description = $request->input('description');
+    $blog->content = json_decode($request->input('content'), true);
+
+    if ($request->hasFile('image')) {
+        if ($oldImage) {
+            $oldImagePath = public_path($oldImage);
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+        }
+        $image = $request->file('image');
+        $imageName = 'blog_' . $blog->id . '_' . date('YmdHis') . '.' . $image->extension();
+        Storage::disk('public')->put('/blog_images/' . $imageName, file_get_contents($image));
+        $blog->blog_image = $imageName;
+    }
+
+    $blog->save();
+
+    if ($request->has('tags')) {
+        foreach ($request->input('tags') as $tagName) {
+            $tag = Tag::firstOrCreate(['tag' => $tagName]);
+            $blog->tags()->attach($tag->id);
+        }
+    }
+
+    return response()->json(['message' => 'Blog post created successfully'], 201);
+}
+
 
     public function publish($id)
     {

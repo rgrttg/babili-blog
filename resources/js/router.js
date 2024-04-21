@@ -43,20 +43,29 @@ export const routes = [
     {
         path: "/blogs/detail/:id",
         name: 'blogdetail',
-        component: () => import("./pages/SingleBlog.vue"),
+        component: () => import("./pages/CreateEditShowBlog.vue"),
         //  meta: { requiresAuth: true },
+        props: route => ({
+            state: 'show'
+        })
     },
     {
         path:"/create",
         name:"createPost",
-        component: () => import("./pages/CreateBlog.vue"),
-        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
+        component: () => import("./pages/CreateEditShowBlog.vue"),
+        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true},
+        props: route => ({
+            state: 'create'
+        })
     },
     {
-        path:"/edit-blog/:id",
-        name:"editBlog",
-        component: () => import("./pages/EditBlog.vue"),
-        meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
+        path: "/edit-blog/:id",
+        name: "editBlog",
+        component: () => import("./pages/CreateEditShowBlog.vue"),
+        meta: { showLogo: true, allBlogs: false, getStarted: false, home: true },
+        props: route => ({
+            state: 'edit'
+        })
     }
 ];
 
