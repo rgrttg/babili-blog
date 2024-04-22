@@ -24,7 +24,9 @@ onMounted(() => {
 
 <template>
     <div class="hero">
-        <BlogHeader />
+        <div class="blogHeader">
+            <BlogHeader />
+        </div>
         <BlogHeroheader class="heroHeader" />
     </div>
     <div class="BlogCardContainer">
@@ -32,6 +34,10 @@ onMounted(() => {
     </div>
 </template>
 <style scoped>
+
+.blogHeader {
+    z-index: 3;
+}
 .hero {
     display: flex;
     flex-direction: column;
