@@ -11,7 +11,7 @@ const route = useRoute();
 
 const loadBlogs = async () => {
     try {
-        const response = await axios.get("/api/blogs/latest-three");
+        const response = await axios.get("/api/blogs/all-latest");
         blogs.value = response.data.data;
         console.log(response.data);
     } catch (error) {

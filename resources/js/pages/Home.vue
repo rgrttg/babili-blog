@@ -9,7 +9,7 @@ const blogs = ref([]);
 
 const loadBlogs = async () => {
     try {
-        const response = await axios.get("/api/blogs/all-latest");
+        const response = await axios.get("/api/blogs/latest-three");
         blogs.value = response.data.data;
         console.log(response.data);
     } catch (error) {

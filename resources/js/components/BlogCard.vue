@@ -1,23 +1,6 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-// import { authCleint } from "@/services/AuthService";
-
-const blogs = ref([]);
-const isLoggedIn = ref(false);
-
-const loadBlogs = async () => {
-    try {
-        const response = await axios.get("/api/blogs/latest-three");
-        blogs.value = response.data;
-        console.log(response.data);
-    } catch (error) {
-        console.error("Error loading blogs:", error);
-    }
-};
-
-onMounted(() => {
-    loadBlogs();
+defineProps({
+    blog: Object,
 });
 
 const truncate = (text, maxLength) => {
@@ -28,13 +11,12 @@ const truncate = (text, maxLength) => {
     }
 };
 
-// Method to delete a blog
 const deleteBlog = async (id) => {
     try {
-        await axios.delete(`/api/blogs/${id}`);
-        // Remove the deleted blog from the local list
-        blogs.value = blogs.value.filter((blog) => blog.id !== id);
-        console.log("Blog deleted successfully");
+        const response = await axios.post("api/blogs/delete-blog", {
+            blog_id: id,
+        });
+        console.log("Delete request successful", response);
     } catch (error) {
         console.error("Error deleting blog:", error);
     }
@@ -43,11 +25,11 @@ const deleteBlog = async (id) => {
 
 <template>
     <div>
-        <div class="card" v-for="blog in blogs.data" :key="blog.id">
+        <div class="card">
             <div class="Photo">
                 <img
                     class="Photo"
-                    :src="blog.blog_image || '../assets/Platzhalter-Bild.png'"
+                    :src="blog?.blog_image || './assets/Platzhalter-Bild.png'"
                     alt=""
                 />
             </div>
@@ -67,16 +49,19 @@ const deleteBlog = async (id) => {
                         />
                     </div>
                     <p v-if="blog" class="user-name description">
-                        {{ blog.author_firstName }}
-                        {{ blog.author_lastName }}
+                        {{ blog.author_firstName }} {{ blog.author_lastName }}
                     </p>
                     <p v-if="blog" class="published-on description">
                         {{ blog.updated_at }}
                     </p>
                 </div>
 
-                <!-- Check if user is logged in before showing buttons -->
-                <div v-if="isLoggedIn" class="buttons">
+                <router-link
+                    class="details-link"
+                    :to="{ name: 'blogdetail', params: { id: blog.id } }"
+                    >View Details</router-link
+                >
+                <div class="buttons">
                     <router-link
                         class="button"
                         :to="{ name: 'editBlog', params: { id: blog.id } }"
@@ -88,6 +73,7 @@ const deleteBlog = async (id) => {
         </div>
     </div>
 </template>
+
 <style scoped>
 /* Existing styles */
 .card {
@@ -158,20 +144,16 @@ p {
 }
 
 .button {
-    width: 100%;
-    height: 30px;
+    all: unset;
+    width: fit-content;
     background: black;
     border-radius: 50px;
-    padding: 8px;
     color: white;
     font-weight: bold;
     font-size: 14px;
-    text-align: center;
-    line-height: 30px;
     text-decoration: none;
     margin-left: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 10px 20px;
 }
 
 /* Responsive styles */
