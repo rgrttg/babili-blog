@@ -221,4 +221,9 @@ button {
 .submit {
   padding-top: 5%;
 }
+
+input#blog_image {
+  font-size: 1.2rem;
+
+}
 </style>
