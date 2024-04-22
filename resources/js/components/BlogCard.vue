@@ -1,9 +1,10 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+// import { authCleint } from "@/services/AuthService";
 
 const blogs = ref([]);
-const isLoggedIn = ref(false); // Variable to track login status
+const isLoggedIn = ref(false);
 
 const loadBlogs = async () => {
     try {
@@ -42,13 +43,13 @@ const deleteBlog = async (id) => {
 
 <template>
     <div>
-        <div class="card">
+        <div class="card" v-for="blog in blogs.data" :key="blog.id">
             <div class="Photo">
-                <!-- <img
+                <img
                     class="Photo"
-                    :src="blog.blog_image || './assets/Platzhalter-Bild.png'"
+                    :src="blog.blog_image || '../assets/Platzhalter-Bild.png'"
                     alt=""
-                /> -->
+                />
             </div>
             <div class="details">
                 <div class="title" v-if="blog">
@@ -59,11 +60,11 @@ const deleteBlog = async (id) => {
                 </p>
                 <div class="user-details">
                     <div class="user-photo">
-                        <!-- <img
+                        <img
                             class="user-photo"
                             v-if="blog.profile_picture"
                             :src="blog.profile_picture"
-                        /> -->
+                        />
                     </div>
                     <p v-if="blog" class="user-name description">
                         {{ blog.author_firstName }}
@@ -81,9 +82,7 @@ const deleteBlog = async (id) => {
                         :to="{ name: 'editBlog', params: { id: blog.id } }"
                         >Edit</router-link
                     >
-                    <button class="button" @click="deleteBlog(blog.id)">
-                        Delete
-                    </button>
+                    <a class="button" @click="deleteBlog(blog.id)"> Delete </a>
                 </div>
             </div>
         </div>
