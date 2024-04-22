@@ -26,7 +26,7 @@
 <template>
     <div class="bubble-container">
 
-        <router-link v-for="item in bubbles" :key="item" :to="{ name: 'allBlogs', params: { tag: item.tag.toLowerCase()  } }" customv-slot="{ navigate }">
+        <router-link v-for="item in bubbles" :key="item.tag" :to="{ name: 'allBlogs', params: { tag: item.tag.toLowerCase()  } }" customv-slot="{ navigate }">
             <button class="bubble">{{ item.tag }}</button>
         </router-link>
         </div>
