@@ -14,7 +14,10 @@ const store = useAuthStore();
     <header>
         <div id="header">
             <div class="left">
-                <img v-if="route?.meta?.showLogo" src="../assets/logo.svg" alt="Tech Blog Logo" id="logo">
+                <router-link :to="{ name: 'home' }" customv-slot="{ navigate }">
+                    <img v-if="route?.meta?.showLogo" src="../assets/logo.svg" alt="Tech Blog Logo" id="logo">
+                </router-link>
+                
 
             </div>
             <div class="right">
@@ -186,5 +189,21 @@ const store = useAuthStore();
         padding: 2px;
         font-weight: bold;
     }
+}
+
+@media only screen and (max-width: 375px) {
+  #logo {
+    height: 40px;
+  }
+
+  .menu {
+    gap: 10px;
+    margin-right: 10px;
+    font-size: smaller;
+  }
+
+  #logo {
+    display: none;
+  }
 }
 </style>

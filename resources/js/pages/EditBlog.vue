@@ -83,8 +83,7 @@ onBeforeMount(() => {
 
 
         <div class="content">
-          <label for="content">Beschrei
-bung:</label>
+          <label for="content">Beschreibung:</label>
           <textarea name="" v-model="blog.content"  rows="10">
         {{ blog?.content }} 
       </textarea>
@@ -182,10 +181,10 @@ p {
 }
 
 .profile-picture {
-  width: 100px; /* Ändern Sie die Breite und Höhe nach Bedarf */
+  width: 100px; /* Ć„ndern Sie die Breite und HĆ¶he nach Bedarf */
   height: 100px;
   border-radius: 50%; /* Rundes Bild */
-  object-fit: cover; /* Das Bild wird in das festgelegte Rechteck gezoomt, um es zu füllen */
+  object-fit: cover; /* Das Bild wird in das festgelegte Rechteck gezoomt, um es zu fĆ¼llen */
 }
 
 .author-info {

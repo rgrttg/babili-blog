@@ -31,7 +31,8 @@ class UserController extends Controller
 
         if ($user) {
             return response()->json([
-                'name' => $user->name,
+                'author_firstName' => optional($user)->firstName,
+                'author_lastName' => optional($user)->lastName,
                 'profile_picture' => optional($user)->profile_picture
                     ? asset('profile_images/' . $user->profile_picture)
                     : asset('storage/profile_images/default.jpg'),

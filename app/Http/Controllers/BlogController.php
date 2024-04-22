@@ -21,7 +21,7 @@ class BlogController extends Controller
 
     public function allBlogsByLatest()
     {
-        $blogs = Blog::latest()->get()->paginate(BlogController::paginate);
+        $blogs = Blog::latest()->get();
         return BlogResource::collection($blogs);
     }
 
@@ -206,17 +206,17 @@ class BlogController extends Controller
         $blog->content = $request->content;
 
         if ($request->hasFile('image')) {
-
             if ($oldImage) {
-                $oldImagePath = public_path($oldImage);
+                $oldImagePath = publicpath($oldImage);
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }
             }
-
-
-            $path = Storage::disk('public')->putFile('/blog_images', $request->file('image'));
-            $blog->blog_image = $path;
+            $image = $request->file('image');
+            $imageName = 'blog' . $blog->id . '_' . date('YmdHis') . '.' . $image->extension();
+            
+            Storage::disk('public')->put('/blog_images/' . $imageName, file_get_contents($image));
+            $blog->blog_image = $imageName;
         }
 
         $blog->save();

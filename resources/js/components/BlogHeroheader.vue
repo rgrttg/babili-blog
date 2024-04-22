@@ -1035,7 +1035,7 @@ p {
 @media screen and (max-width: 1419px) {
 
     .matrix-container {
-        position: fixed;
+        position: absolute;
         right: 20px;
         top: 20%;
         transform: translateY(-50%);
