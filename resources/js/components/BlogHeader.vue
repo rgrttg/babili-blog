@@ -190,4 +190,20 @@ const store = useAuthStore();
         font-weight: bold;
     }
 }
+
+@media only screen and (max-width: 375px) {
+  #logo {
+    height: 40px;
+  }
+
+  .menu {
+    gap: 10px;
+    margin-right: 10px;
+    font-size: smaller;
+  }
+
+  #logo {
+    display: none;
+  }
+}
 </style>
