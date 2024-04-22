@@ -72,7 +72,7 @@ onBeforeMount(() => {
         <div class="user-details">
 
           <span v-if="blog">{{ blog?.author_name }} </span>&nbsp;
-          <span v-if="blog">{{ blog?.published_at }}</span>
+          <span v-if="blog">{{ blog?.published_at }}</span>&nbsp;
           <!-- Profilbild und Autorinformationen -->
           <!-- Soziale Symbole -->
         </div>
@@ -160,7 +160,7 @@ p {
 .title, .description, .content {
   display: flex;
   flex-direction: column;
-  width: 598px;
+  width: 32vw;
   margin-top: 5%;
 }
  
