@@ -35,7 +35,7 @@ export const routes = [
         meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
     },
     {
-        path:"/alle-blogs",
+        path:"/alle-blogs/:tag?",
         name: "allBlogs", 
         component: () => import("./pages/AllBlog.vue"),
         meta: { showLogo: true, allBlogs:false, getStarted: false, home: true}
