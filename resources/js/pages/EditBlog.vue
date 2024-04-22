@@ -83,8 +83,7 @@ onBeforeMount(() => {
 
 
         <div class="content">
-          <label for="content">Beschrei
-bung:</label>
+          <label for="content">Beschreibung:</label>
           <textarea name="" v-model="blog.content"  rows="10">
         {{ blog?.content }} 
       </textarea>
