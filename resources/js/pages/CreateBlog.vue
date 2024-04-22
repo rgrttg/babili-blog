@@ -60,7 +60,7 @@ const handleImageUpload = (event) => {
 
   <div class="card">
     <div class="card-container">
-      <form @submit.prevent="createBlog" enctype="multipart/form-data">
+      <form id="form-element" @submit.prevent="createBlog" enctype="multipart/form-data">
 
         <!-- Image-Upload -->
         <div class="image">
