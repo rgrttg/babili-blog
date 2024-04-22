@@ -77,7 +77,7 @@ const handleImageUpload = (event) => {
 
         <!-- Beschreibung -->
         <div class="description" v-if="blog">
-          <label for="description"></label>
+          <label for="description">Beschreibung</label>
           <textarea v-model="blog.description" type="text" id="description" rows="5"></textarea>
           <p>{{ blog?.description }}</p>
         </div>

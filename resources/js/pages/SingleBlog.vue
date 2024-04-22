@@ -4,7 +4,6 @@ import BlogHeader from '../components/BlogHeader.vue';
 import axios from 'axios';
 import {useRouter} from 'vue-router';
 
-
 const router = useRouter();
 // import { convertToHtml } from '@/components/Creator.vue';
 const tweetId = router.currentRoute.value.params.id;
