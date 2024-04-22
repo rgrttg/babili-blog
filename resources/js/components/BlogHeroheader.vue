@@ -179,6 +179,7 @@ body {
 }
 
 .containerOfMatrix {
+    /* margin-top: 10vh; */
     width: 50vw;
 
 }
@@ -222,8 +223,8 @@ p {
 
 .matrix-container {
     position: relative;
-    right: 20px;
-    top: 20%;
+    /* right: 20px; */
+    margin-top: 8vh;
     transform: translateY(-50%);
     width: 37vw;
     height: 26px;
