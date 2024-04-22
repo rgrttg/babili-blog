@@ -1,6 +1,22 @@
 <script setup>
-defineProps({
-    blog: Object,
+import { ref, onMounted } from "vue";
+import axios from "axios";
+
+const blogs = ref([]);
+const isLoggedIn = ref(false); // Variable to track login status
+
+const loadBlogs = async () => {
+    try {
+        const response = await axios.get("/api/blogs/latest-three");
+        blogs.value = response.data;
+        console.log(response.data);
+    } catch (error) {
+        console.error("Error loading blogs:", error);
+    }
+};
+
+onMounted(() => {
+    loadBlogs();
 });
 
 const truncate = (text, maxLength) => {
@@ -8,6 +24,18 @@ const truncate = (text, maxLength) => {
         return text.substring(0, maxLength) + "...";
     } else {
         return text;
+    }
+};
+
+// Method to delete a blog
+const deleteBlog = async (id) => {
+    try {
+        await axios.delete(`/api/blogs/${id}`);
+        // Remove the deleted blog from the local list
+        blogs.value = blogs.value.filter((blog) => blog.id !== id);
+        console.log("Blog deleted successfully");
+    } catch (error) {
+        console.error("Error deleting blog:", error);
     }
 };
 </script>
@@ -38,44 +66,48 @@ const truncate = (text, maxLength) => {
                         /> -->
                     </div>
                     <p v-if="blog" class="user-name description">
-                        {{ blog.author_name }}
+                        {{ blog.author_firstName }}
+                        {{ blog.author_lastName }}
                     </p>
                     <p v-if="blog" class="published-on description">
                         {{ blog.updated_at }}
                     </p>
                 </div>
 
-                <!-- <router-link
-                    class="details-link"
-                    :to="{ name: 'blogdetail', params: { id: blog.id } }"
-                    >View Details</router-link
-                > -->
-                <div class="buttons">
-                    <a class="button" href=""> Edit</a>
-                    <a class="button" href=""> Delete</a>
+                <!-- Check if user is logged in before showing buttons -->
+                <div v-if="isLoggedIn" class="buttons">
+                    <router-link
+                        class="button"
+                        :to="{ name: 'editBlog', params: { id: blog.id } }"
+                        >Edit</router-link
+                    >
+                    <button class="button" @click="deleteBlog(blog.id)">
+                        Delete
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
 <style scoped>
 /* Existing styles */
 .card {
     margin: 20px;
     border-radius: 10px;
+    padding-right: 20px;
     display: flex;
     align-items: center;
     background-color: #ffffff;
     max-width: 1200px;
+    min-width: 1000px;
     min-height: 300px;
     border: 1px solid rgba(0, 0, 0, 0.523);
 }
 
 .Photo {
     margin-left: 10px;
-    width: 80%;
-    height: 100%;
+    width: 300px;
+    height: 250px;
 }
 
 .details {
@@ -84,6 +116,7 @@ const truncate = (text, maxLength) => {
     flex-direction: column;
     color: white;
     justify-content: space-between;
+    padding-left: 30px;
 }
 
 .user-photo {

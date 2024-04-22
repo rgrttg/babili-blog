@@ -21,7 +21,7 @@ class BlogController extends Controller
 
     public function allBlogsByLatest()
     {
-        $blogs = Blog::latest()->get()->paginate(BlogController::paginate);
+        $blogs = Blog::latest()->get();
         return BlogResource::collection($blogs);
     }
 
