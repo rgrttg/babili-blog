@@ -78,14 +78,14 @@ const handleImageUpload = (event) => {
         <!-- Beschreibung -->
         <div class="description" v-if="blog">
           <label for="description">Beschreibung:</label>
-          <textarea v-model="blog.description" type="text" id="description" rows="5"></textarea>
+          <textarea v-model="blog.description" type="text" id="description" rows="5" required></textarea>
           <p>{{ blog?.description }}</p>
         </div>
 
         
         <div class="tags">
           <label  v-for="(tag, index) in tags" :key="index"> 
-            <input type="checkbox" :value="index+1" v-model="blog.tags">
+            <input type="checkbox" :value="index+1" v-model="blog.tags" >
             {{tag}}
           </label>
         </div>
@@ -99,7 +99,7 @@ const handleImageUpload = (event) => {
         <!-- Editor für den Inhalt des Blogs -->
         <div class="content" v-if="blog">
           <label for="content">Beschreibung:</label>
-          <textarea v-model="blog.content" type="text" id="content" rows="10"></textarea>
+          <textarea v-model="blog.content" type="text" id="content" rows="10" required></textarea>
           <p>{{ blog?.content }}</p>
         </div>
         
@@ -129,6 +129,10 @@ h1,h2, p {
 
 p {
     line-height: 1.3;
+}
+
+.image {
+  margin-bottom: 15px;
 }
 
 .card {
@@ -166,6 +170,13 @@ p {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+#blog_image {
+  font-size: 15px;
+    color: white;
+    background-color: black;
+    border-radius: 15px;
 }
 
 .profile-picture {
