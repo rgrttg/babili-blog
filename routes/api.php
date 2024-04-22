@@ -8,7 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TagController;
 
-use App\Http\Controllers\Auth\RegisteredUserController;
+// use App\Http\Controllers\Auth\RegisteredUserController;
 
 // created from Andreas
 Route::get('/tags', [TagController::class, 'index']);
@@ -42,7 +42,7 @@ Route::get('/blogs/by-tags', [BlogController::class, 'getBlogsByTags']);
 Route::get('/user/profile/{id}', [UserController::class, 'getUserProfile']);
 Route::get('/user/profile', [UserController::class, 'profile']);
 
-Route::post('/register', [RegisteredUserController::class, 'store']);
+// Route::post('/register', [RegisteredUserController::class, 'store']);
 
 
 // API-Route für die Suche
@@ -76,7 +76,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //         // Weitere soziale Profile können hinzugefügt werden
     //     ]
     // }
-    Route::put('/user/store/{id}', [UserController::class, 'store']);
+    Route::put('/user/store/{id}', [UserController::class, 'editUser']);
     
 
     // Diese Route ermöglicht das Löschen eines Benutzers.

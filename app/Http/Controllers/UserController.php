@@ -71,7 +71,7 @@ class UserController extends Controller
         return response()->json($userData);
     }
 
-    public function store(Request $request, $id)
+    public function editUser(Request $request, $id)
     {
 
         $request->validate([
