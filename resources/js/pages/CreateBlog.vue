@@ -127,6 +127,14 @@ h1,h2, p {
     color: black;
 }
 
+h1 {
+  line-height: 2;
+}
+
+input, textarea {
+  font-size: large;
+}
+
 p {
     line-height: 1.3;
 }
