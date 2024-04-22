@@ -1,5 +1,6 @@
 <script setup>// workplace Andreas
 import { onMounted } from 'vue';
+import BubbleButton from '../components/BubbleButton.vue';
 
 onMounted(() => {
 
@@ -133,6 +134,9 @@ onMounted(() => {
                 </div>
             </div>
         </div>
+        <div class="bubble-container">
+                    <BubbleButton />
+                </div>
 
     </body>
 </template>
@@ -1016,6 +1020,15 @@ p {
     font-size: 80px;
 
     opacity: 0.7;
+}
+
+.bubble-container {
+    /* margin: 15px 0 0 150px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    
 }
 
 
