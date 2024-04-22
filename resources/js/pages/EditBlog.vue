@@ -2,6 +2,9 @@
 import { ref, onBeforeMount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { authClient } from '@/services/AuthService';
+import BlogHeader from '../components/BlogHeader.vue';
+import axios from 'axios';
+
 
 
 const route = useRoute();
@@ -32,6 +35,7 @@ const editBlog = async () => {
 };
 
 
+
 onBeforeMount(() => {
   loadBlog();
 });
@@ -39,64 +43,71 @@ onBeforeMount(() => {
 
 <template>
 
-  <!-- ES MUSS NOCH EINGEFÜGT WERDEN IF IS AUTHENTICATED NUR DANN KANN MAN EDITIEREN-->
-  <!-- <div class="header"> -->
-  <!-- //hier kommt der header -->
-  <!-- </div> -->
 
-  <body>
+  <BlogHeader />
+  <div class="card">
+    <div class="card-container">
+      <div class="image">
+        <img v-if="blog?.profile_picture" :src="blog?.profile_picture" class="profile-picture" />
+      </div>
+      <form @submit.prevent="editBlog" enctype="multipart/form-data">
 
-    <div class="card">
 
-      <div class="card-container">
-        <form @submit.prevent="editBlog" enctype="multipart/form-data">
 
-          <label for="title"> Title</label>
-          <div class="title" v-if="blog">
-            <input type="text" v-model="blog.title">
-          </div>
+        <!-- Titel -->
+        
+        <div class="title" v-if="blog">
+          <label for="title" id="title" required> Titel:</label>
+          <input type="text" v-model="blog.title">
+        </div>
 
-          <label for="description">Description</label>
+        <!-- Beschreibung -->
+        <div class="description" v-if="blog">
+          <label for="description">Beschreibung:</label>
+          <textarea id="description" v-model="blog.description " rows="5">{{ blog?.description }}</textarea>
+        </div>
 
-          <div class="description" v-if="blog">
-            <textarea name="" v-model="blog.description" cols="30" rows="3">{{ blog?.description }}</textarea>
-          </div>
+        
+        <!-- Benutzerdetails -->
+        <div class="user-details">
 
-          <label for="content">content</label>
-          <div>
-            <textarea name="" v-model="blog.content" cols="30" rows="10">
+          <span v-if="blog">{{ blog?.author_name }} </span>&nbsp;
+          <span v-if="blog">{{ blog?.published_at }}</span>
+          <!-- Profilbild und Autorinformationen -->
+          <!-- Soziale Symbole -->
+        </div>
+
+
+
+
+
+
+        <div class="content">
+          <label for="content">Beschrei
+bung:</label>
+          <textarea name="" v-model="blog.content"  rows="10">
         {{ blog?.content }} 
       </textarea>
-          </div>
+        </div>
+
+        <div class="buttons">
           <div class="submit">
-              <button type="submit">Blog erstellen</button>
-          </div>
-        </form>
-
-          <div class="user-details">
-            <div class="image">
-              <img v-if="blog?.profile_picture" :src="blog?.profile_picture" class="profile-picture" />
-              <div class="author-info">
-                <span v-if="blog">{{ blog?.author_name }} </span>&nbsp;
-                <span v-if="blog">{{ blog?.published_at }}</span>
-              </div>
-            </div>
-
-            <div class="socials">
-              SOCIAL ICONS
-            </div>
-        
+          <button type="submit">Blog erstellen</button>
+        </div>
       </div>
+      </form>
+
     </div>
+  </div>
 
 
 
 
-    <!-- <div>
+  <!-- <div>
         <creator v-if="blog?.content" :content="blog?.content" @saved="getJson" />
       </div> -->
-    </div>
-  </body>
+
+
 
 
 
@@ -109,19 +120,27 @@ onBeforeMount(() => {
 </template>
 
 <style scoped>
+/* *{
+  box-sizing: border-box;
+  margin:0;
+  padding: 0;
+} */
+
+.user-details{
+  margin-top: 5%;
+}
+ 
 body {
   height: 100%;
   background-color: gainsboro;
 }
 
-h1,
-h2,
-p {
-  color: black;
+h1,h2, p {
+    color: black;
 }
 
 p {
-  line-height: 1.3;
+    line-height: 1.3;
 }
 
 .card {
@@ -130,11 +149,23 @@ p {
   flex-direction: column;
   height: 100%;
   font-size: 20px;
+  width: 100%;
 }
 
 .card-container {
-  max-width: 750px;
+  max-width: 80%;
   padding: 5%;
+}
+
+.title, .description, .content {
+  display: flex;
+  flex-direction: column;
+  width: 598px;
+  margin-top: 5%;
+}
+ 
+.content {
+  margin-top: 15%;
 }
 
 .user-details {
@@ -151,16 +182,37 @@ p {
 }
 
 .profile-picture {
-  width: 100px;
-  /* Ändern Sie die Breite und Höhe nach Bedarf */
+  width: 100px; /* Ändern Sie die Breite und Höhe nach Bedarf */
   height: 100px;
-  border-radius: 50%;
-  /* Rundes Bild */
-  object-fit: cover;
-  /* Das Bild wird in das festgelegte Rechteck gezoomt, um es zu füllen */
+  border-radius: 50%; /* Rundes Bild */
+  object-fit: cover; /* Das Bild wird in das festgelegte Rechteck gezoomt, um es zu füllen */
 }
 
 .author-info {
   margin-left: 10px;
+}
+
+select {
+  width: 100%;
+  font-size: 20px;
+}
+
+button {
+    font-size: 15px;
+    color: white;
+    background-color: black;
+    border-radius: 15px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit {
+  padding-top: 5%;
 }
 </style>
