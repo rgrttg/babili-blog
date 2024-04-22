@@ -16,11 +16,11 @@ const truncate = (text, maxLength) => {
     <div>
         <div class="card">
             <div class="Photo">
-                <img
+                <!-- <img
                     class="Photo"
                     :src="blog.blog_image || './assets/Platzhalter-Bild.png'"
                     alt=""
-                />
+                /> -->
             </div>
             <div class="details">
                 <div class="title" v-if="blog">
@@ -31,11 +31,11 @@ const truncate = (text, maxLength) => {
                 </p>
                 <div class="user-details">
                     <div class="user-photo">
-                        <img
+                        <!-- <img
                             class="user-photo"
                             v-if="blog.profile_picture"
                             :src="blog.profile_picture"
-                        />
+                        /> -->
                     </div>
                     <p v-if="blog" class="user-name description">
                         {{ blog.author_name }}
@@ -45,11 +45,11 @@ const truncate = (text, maxLength) => {
                     </p>
                 </div>
 
-                <router-link
+                <!-- <router-link
                     class="details-link"
                     :to="{ name: 'blogdetail', params: { id: blog.id } }"
                     >View Details</router-link
-                >
+                > -->
                 <div class="buttons">
                     <a class="button" href=""> Edit</a>
                     <a class="button" href=""> Delete</a>
