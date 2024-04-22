@@ -25,20 +25,11 @@ const user = ref({
 
 let route = useRoute();
 const userId = store?.authUser?.id;
+
 const loadUser = async () => {
     try {
-        const response = await axios.get(`api/user/profile`); // or 1
+        const response = await axios.get(`api/user/profile/${userId}`);
         user.value = await response.data;
-        console.log(response.data);
-    } catch (error) {
-        console.error("Error loading blogs:", error);
-    }
-};
-
-const loadBlogs = async () => {
-    try {
-        const response = await axios.get("/api/blogs/user/store/{id}");
-        blogs.value = response.data.data;
         console.log(response.data);
     } catch (error) {
         console.error("Error loading blogs:", error);
@@ -47,7 +38,6 @@ const loadBlogs = async () => {
 
 onMounted(() => {
     loadUser();
-    loadBlogs();
 });
 </script>
 
@@ -116,7 +106,7 @@ onMounted(() => {
         </div>
 
         <div class="own-posts">
-            <BlogCard v-for="blog in blogs" :key="blog.id" :blog="blog" />
+            <BlogCard v-for="blog in user.blogs" :key="blog.id" :blog="blog" />
         </div>
     </section>
 </template>

@@ -11,10 +11,10 @@ const truncate = (text, maxLength) => {
     }
 };
 
-const deleteBlog = async () => {
+const deleteBlog = async (id) => {
     try {
-        const response = await axios.post("/blogs/delete-blog", {
-            id: blog.id,
+        const response = await axios.post("api/blogs/delete-blog", {
+            blog_id: id,
         });
         console.log("Delete request successful", response);
     } catch (error) {
@@ -67,7 +67,9 @@ const deleteBlog = async () => {
                         :to="{ name: 'editBlog', params: { id: blog.id } }"
                         >Edit</router-link
                     >
-                    <button @click="deleteBlog">Delete</button>
+                    <button class="button" @click="deleteBlog(blog.id)">
+                        Delete
+                    </button>
                 </div>
             </div>
         </div>
@@ -144,20 +146,16 @@ p {
 }
 
 .button {
-    width: 100%;
-    height: 30px;
+    all: unset;
+    width: fit-content;
     background: black;
     border-radius: 50px;
-    padding: 8px;
     color: white;
     font-weight: bold;
     font-size: 14px;
-    text-align: center;
-    line-height: 30px;
     text-decoration: none;
     margin-left: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 10px 20px;
 }
 
 /* Responsive styles */
