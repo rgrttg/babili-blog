@@ -1,21 +1,6 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-
-const blogs = ref([]);
-
-const loadBlogs = async () => {
-    try {
-        const response = await axios.get("/api/blogs/latest-three");
-        blogs.value = response.data;
-        console.log(response.data);
-    } catch (error) {
-        console.error("Error loading blogs:", error);
-    }
-};
-
-onMounted(() => {
-    loadBlogs();
+defineProps({
+    blog: Object,
 });
 
 const truncate = (text, maxLength) => {
@@ -29,13 +14,13 @@ const truncate = (text, maxLength) => {
 
 <template>
     <div>
-        <div class="card" v-for="blog in blogs.data" :key="blog.id">
+        <div class="card">
             <div class="Photo">
-                <img
+                <!-- <img
                     class="Photo"
-                    :src="blog.blog_image || '../assets/Platzhalter-Bild.png'"
+                    :src="blog.blog_image || './assets/Platzhalter-Bild.png'"
                     alt=""
-                />
+                /> -->
             </div>
             <div class="details">
                 <div class="title" v-if="blog">
@@ -46,26 +31,27 @@ const truncate = (text, maxLength) => {
                 </p>
                 <div class="user-details">
                     <div class="user-photo">
-                        <img
+                        <!-- <img
                             class="user-photo"
                             v-if="blog.profile_picture"
                             :src="blog.profile_picture"
-                        />
+                        /> -->
                     </div>
                     <p v-if="blog" class="user-name description">
-                        {{ blog.author_firstName }}
-                        {{ blog.author_lastName }} 
+                        {{ blog.author_name }}
                     </p>
                     <p v-if="blog" class="published-on description">
                         {{ blog.updated_at }}
                     </p>
                 </div>
-               
-                <router-link class="details-link" :to="{ name: 'blogdetail', params: { id: blog.id } }">View Details</router-link>
+
+                <!-- <router-link
+                    class="details-link"
+                    :to="{ name: 'blogdetail', params: { id: blog.id } }"
+                    >View Details</router-link
+                > -->
                 <div class="buttons">
-                    <a class="button" href="">
-                        <router-link class="details-link" :to="{ name: 'editBlog', params: { id: blog.id } }">Edit</router-link>
-                    </a>
+                    <a class="button" href=""> Edit</a>
                     <a class="button" href=""> Delete</a>
                 </div>
             </div>
