@@ -14,7 +14,10 @@ const store = useAuthStore();
     <header>
         <div id="header">
             <div class="left">
-                <img v-if="route?.meta?.showLogo" src="../assets/logo.svg" alt="Tech Blog Logo" id="logo">
+                <router-link :to="{ name: 'home' }" customv-slot="{ navigate }">
+                    <img v-if="route?.meta?.showLogo" src="../assets/logo.svg" alt="Tech Blog Logo" id="logo">
+                </router-link>
+                
 
             </div>
             <div class="right">
