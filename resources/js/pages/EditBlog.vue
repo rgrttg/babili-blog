@@ -1,30 +1,40 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
-import BlogHeader from '../components/BlogHeader.vue';  
+import { useRoute, useRouter } from 'vue-router';
+import { authClient } from '@/services/AuthService';
+import BlogHeader from '../components/BlogHeader.vue';
 import axios from 'axios';
-import {useRouter} from 'vue-router';
 
+
+
+const route = useRoute();
 const router = useRouter();
-// import { convertToHtml } from '@/components/Creator.vue';
-const tweetId = router.currentRoute.value.params.id;
-console.log(tweetId);
-const blog = ref(null);
-// const blogId = this.$router.
+const blog = ref({
+  title: '',
+  description: '',
+  content: '',
+});
+
+
 const loadBlog = async () => {
   try {
-    const response = await axios.get(`/api/blogs/detail/${tweetId}`); // Beispiel: ID 2
-    console.log(response.data);
+    const response = await authClient.get(`/blogs/detail/${route.params.id}`);
     blog.value = await response.data;
-    // console.log(response.data);
   } catch (error) {
     console.error('Fehler beim Laden des Blogs:', error);
   }
 };
 
-// const someMethod = () => {
-//   const html = convertToHtml(blog.content.value);
-//   // Do something with the generated HTML
-// };
+const editBlog = async () => {
+  try {
+    const response = await authClient.put(`/blogs/store/${route.params.id}`, blog.value);
+    router.push('/');
+  } catch (error) {
+    console.error('Fehler beim Laden des Blogs:', error);
+  }
+};
+
+
 
 onBeforeMount(() => {
   loadBlog();
@@ -32,62 +42,94 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <!-- ES MUSS NOCH EINGEFÜGT WERDEN IF IS AUTHENTICATED NUR DANN KANN MAN EDITIEREN-->
-     <!-- <div class="header"> -->
-    <!-- //hier kommt der header -->
-  <!-- </div> -->
-<body>
-  
-<div class="card">
 
-  <div class="card-container">
-    <div class="title" v-if="blog">
-        <h1>{{ blog?.title }}</h1>
-    </div> 
 
-    <div class="description" v-if="blog">
-      <p>{{ blog?.description }}</p>
-    </div>
-
-    <div class="user-details">
+  <BlogHeader />
+  <div class="card">
+    <div class="card-container">
       <div class="image">
-              <img v-if="blog?.profile_picture" :src="blog?.profile_picture" class="profile-picture"/>
-          <div class="author-info">
-              <span v-if="blog">{{ blog?.author_name }} </span>&nbsp;
-              <span v-if="blog">{{ blog?.published_at }}</span>
-          </div>
+        <img v-if="blog?.profile_picture" :src="blog?.profile_picture" class="profile-picture" />
       </div>
-    
-      <div class="socials">
-        SOCIAL ICONS
-      </div>
-  </div>
-  </div>
-      
-    <div v-if="blog?.content" v-for="(entry,index) in blog.content" :key="index">
-      
-          <h2 v-if="entry.type=='subheader'">{{ entry.value }}</h2> 
-      
-          <p v-if="entry.type=='paragraph'">{{ entry.value }}</p>
-      
-    </div>
-  <div>
-      <creator v-if="blog?.content" :content="blog?.content" @saved="getJson"/>
-  </div>
-<!--   
-    <creator :content="blog?.content" @saved="getJson"/> -->
-</div>
+      <form @submit.prevent="editBlog" enctype="multipart/form-data">
 
-<!-- <div>
+
+
+        <!-- Titel -->
+        
+        <div class="title" v-if="blog">
+          <label for="title" id="title" required> Titel:</label>
+          <input type="text" v-model="blog.title">
+        </div>
+
+        <!-- Beschreibung -->
+        <div class="description" v-if="blog">
+          <label for="description">Beschreibung:</label>
+          <textarea id="description" v-model="blog.description " rows="5">{{ blog?.description }}</textarea>
+        </div>
+
+        
+        <!-- Benutzerdetails -->
+        <div class="user-details">
+
+          <span v-if="blog">{{ blog?.author_name }} </span>&nbsp;
+          <span v-if="blog">{{ blog?.published_at }}</span>&nbsp;
+          <!-- Profilbild und Autorinformationen -->
+          <!-- Soziale Symbole -->
+        </div>
+
+
+
+
+
+
+        <div class="content">
+          <label for="content">Beschrei
+bung:</label>
+          <textarea name="" v-model="blog.content"  rows="10">
+        {{ blog?.content }} 
+      </textarea>
+        </div>
+
+        <div class="buttons">
+          <div class="submit">
+          <button type="submit">Blog erstellen</button>
+        </div>
+      </div>
+      </form>
+
+    </div>
+  </div>
+
+
+
+
+  <!-- <div>
+        <creator v-if="blog?.content" :content="blog?.content" @saved="getJson" />
+      </div> -->
+
+
+
+
+
+  <!-- <div>
     <creator @saved="getJson"/>
 </div> -->
-  
 
-</body>
+
+
 </template>
- 
-<style scoped>
 
+<style scoped>
+/* *{
+  box-sizing: border-box;
+  margin:0;
+  padding: 0;
+} */
+
+.user-details{
+  margin-top: 5%;
+}
+ 
 body {
   height: 100%;
   background-color: gainsboro;
@@ -107,11 +149,23 @@ p {
   flex-direction: column;
   height: 100%;
   font-size: 20px;
+  width: 100%;
 }
 
 .card-container {
-  max-width: 750px;
+  max-width: 80%;
   padding: 5%;
+}
+
+.title, .description, .content {
+  display: flex;
+  flex-direction: column;
+  width: 32vw;
+  margin-top: 5%;
+}
+ 
+.content {
+  margin-top: 15%;
 }
 
 .user-details {
@@ -128,14 +182,37 @@ p {
 }
 
 .profile-picture {
-  width: 100px; /* Ändern Sie die Breite und Höhe nach Bedarf */
+  width: 100px; /* Ć„ndern Sie die Breite und HĆ¶he nach Bedarf */
   height: 100px;
   border-radius: 50%; /* Rundes Bild */
-  object-fit: cover; /* Das Bild wird in das festgelegte Rechteck gezoomt, um es zu füllen */
+  object-fit: cover; /* Das Bild wird in das festgelegte Rechteck gezoomt, um es zu fĆ¼llen */
 }
 
 .author-info {
   margin-left: 10px;
 }
 
+select {
+  width: 100%;
+  font-size: 20px;
+}
+
+button {
+    font-size: 15px;
+    color: white;
+    background-color: black;
+    border-radius: 15px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit {
+  padding-top: 5%;
+}
 </style>
