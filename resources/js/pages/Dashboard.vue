@@ -101,13 +101,13 @@ k" @click="navigate" role="link">
                     </button>
                 </div>
             </div>
-            <div class="profile-btn" v-if="store?.authUser">
+            <!-- <div class="profile-btn" v-if="store?.authUser">
                 <button class="edit-profile-btn">
                     <div class="link" @click="navigate" role="link">
                         <LogoutButton>Abmelden</LogoutButton>   
                     </div>
                 </button>
-            </div>
+            </div> -->
 
 
         <div class="own-posts">
@@ -119,7 +119,7 @@ k" @click="navigate" role="link">
 <style scoped>
 .profile-section {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
     width: 90%;
 }
