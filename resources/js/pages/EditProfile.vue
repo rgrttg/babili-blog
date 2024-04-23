@@ -2,22 +2,24 @@
 import BlogHeader from '../components/BlogHeader.vue';  
 import LogoutButton from "@/components/LogoutButton.vue";
 import { useAuthStore } from "../stores/AuthStore";
-import { ref, onBeforeMount } from 'vue';
+import { ref, onBeforeMount, onMounted } from 'vue';
 import axios from "axios";
 import {useRoute} from 'vue-router';
 
 const store = useAuthStore();
 const route = useRoute();
 
-const user = ref({
-  profilePicture: null,
+let user = ref({
+  profile_picture: null,
   firstName: 'John',
   lastName: 'Doe',
   email: 'john@example.com',
-  skills: '',
-  bio: '',
-  socialMediaLinks: ['']
+  interests: '',
+  about_me: '',
+  socials: ['']
 });
+
+const userId = store.authUser.id;
 
 let profilePictureFile = null;
 
@@ -41,23 +43,82 @@ onBeforeMount(() => {
 const handleProfilePictureChange = (event) => {
   const file = event.target.files[0];
   if (file) {
-    profilePictureFile = file;
-    user.value.profilePicture = URL.createObjectURL(file);
+    const imageUrl = URL.createObjectURL(file);
+    // profilePictureFile = file;
+    user.value.preview = imageUrl;
+    user.value.profile_picture = file;
+
+    user.value.profile_picture = event.target.files[0];
+
   }
 };
 
 const addSocialMediaLink = () => {
-  user.value.socialMediaLinks.push('');
+  user.value.socials.push('');
 };
 
 const removeSocialMediaLink = (index) => {
-  user.value.socialMediaLinks.splice(index, 1);
+  user.value.socials.splice(index, 1);
 };
 
 const saveChanges = () => {
   // Logic to update user profile (send data and image to backend)
-  console.log('Changes saved');
-};
+  try {
+      // const formData = new FormData();
+      // formData.append('profile_picture', user.value.profile_picture);
+      // formData.append('firstName', user.value.firstName);
+      // formData.append('lastName', user.value.lastName); // 'file' ist die ausgewählte Bilddatei
+      // formData.append('about_me', user.value.about_me);
+      // formData.append('interests', JSON.stringify(user.value.interests));
+
+    const response = axios.put(`api/user/profile-information`, user.value);
+    // Optionally, show a success message to the user
+    // console.log('Profile updated successfully:', response.data);
+  } catch (error) {
+    console.error("Error loading blogs:", error);
+    }
+  };
+
+
+  ////////////////////////////////////////CAMERA//////////////////////////////////
+  const video = ref(null);
+  const canvas = ref(null);
+
+    const initCamera= async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.value.srcObject = stream;
+      } catch (error) {
+        console.error('Error accessing camera:', error);
+      }
+    }
+
+    const takePicture = () => {
+      const video = video.value;
+      const canvas = canvas.value;
+      const context = canvas.getContext('2d');
+
+      // Set canvas dimensions to match video
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      // Draw video frame onto canvas
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      // Convert canvas content to data URL
+      const dataURL = canvas.toDataURL('image/png');
+
+      // Initialize camera on component mount
+      initCamera();
+
+      return { video, canvas, takePicture };
+      // You can now use the dataURL for further processing, e.g., uploading to server
+      console.log('Picture taken:', dataURL);
+    }
+
+// onMounted (() =>{
+//   initCamera();
+// });
 </script>
 
 <template>
@@ -68,10 +129,17 @@ const saveChanges = () => {
     <div class="profile-picture-container">
       <input type="file" id="profile-picture" accept="image/*" @change="handleProfilePictureChange">
       <div class="profile-picture">
-        <img v-if="user.profilePicture" :src="user.profile_picture" alt="Profile Picture">
+        <img v-if="user.profile_picture" :src="user.preview" alt="Profile Picture">
         <img v-else src="../assets/Platzhalter-Bild.png" alt="Default Profile Picture">
       </div>
     </div>
+
+<!--     <div>
+      <video ref="video" autoplay></video>
+      <button @click="takePicture">Take Picture</button>
+      <canvas ref="canvas" style="display: none;"></canvas>
+    </div> -->
+
     <div class="form-group">
       <label for="first-name">First Name</label>
       <input type="text" id="first-name" v-model="user.firstName">
@@ -85,18 +153,18 @@ const saveChanges = () => {
       <input type="email" id="email" v-model="user.email" disabled>
     </div>
     <div class="form-group">
-      <label for="skills">Skills</label>
-      <input type="text" id="skills" v-model="user.skills">
+      <label for="interests">interests</label>
+      <input type="text" id="interests" v-model="user.interests">
     </div>
     <div class="form-group">
-      <label for="bio">Bio</label>
-      <textarea id="bio" v-model="user.bio"></textarea>
+      <label for="about_me">about_me</label>
+      <textarea id="about_me" v-model="user.about_me"></textarea>
     </div>
     <div class="form-group">
       <label for="social-media">Social Media Links</label>
       <div class="social-media-inputs">
-        <div v-for="(link, index) in user.socialMediaLinks" :key="index" class="social-media-input">
-          <input type="text" v-model="user.socialMediaLinks[index]" placeholder="Enter link">
+        <div v-for="(link, index) in user.socials" :key="index" class="social-media-input">
+          <input type="text" v-model="user.socials[index]" placeholder="Enter link">
           <button @click="removeSocialMediaLink(index)">Remove</button>
         </div>
         <button @click="addSocialMediaLink">Add Social Media Link</button>
@@ -169,6 +237,7 @@ button:hover {
 
 .profile-picture-container {
   position: relative;
+  display: block;
   width: 200px;
   height: 200px;
   margin-bottom: 20px;

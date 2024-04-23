@@ -64,9 +64,9 @@ onBeforeMount(() => {
         </div>
     </div>
     
-    <div class="socials">
+    <!-- <div class="socials">
       SOCIAL ICONS
-    </div>
+    </div> -->
   </div>
       
   <div v-if="blog?.content" v-for="(entry,index) in blog.content" :key="index">

@@ -21,7 +21,7 @@ class BlogResource extends JsonResource
                 : asset('storage/profile_images/default.jpg'),
             'title' => $this->title,
             'blog_image' => $this->blog_image
-                ? asset('storage/' . $this->blog_image)
+                ? asset('storage/blog_images/' . $this->blog_image)
                 : asset('storage/blog_images/default.png'),
             'description' => $this->description,
             'content' => $this->content,
