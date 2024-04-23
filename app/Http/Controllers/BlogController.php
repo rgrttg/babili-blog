@@ -207,14 +207,13 @@ class BlogController extends Controller
 
         if ($request->hasFile('image')) {
             if ($oldImage) {
-                $oldImagePath = publicpath($oldImage);
+                $oldImagePath = public_path($oldImage);
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }
             }
             $image = $request->file('image');
-            $imageName = 'blog' . $blog->id . '_' . date('YmdHis') . '.' . $image->extension();
-            
+            $imageName = 'blog' . $blog->id . '' . date('YmdHis') . '.' . $image->extension();
             Storage::disk('public')->put('/blog_images/' . $imageName, file_get_contents($image));
             $blog->blog_image = $imageName;
         }

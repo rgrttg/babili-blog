@@ -77,9 +77,8 @@ onMounted(() => {
                             <li
                                 v-for="(link, index) in user.socialMediaLinks"
                                 :key="index"
-                            >
-                                <a :href="link" target="_blank">{{ link }}</a>
-                            </li>
+                            ></li>
+
                         </ul>
                     </div>
                 </div>
@@ -87,7 +86,8 @@ onMounted(() => {
             <div class="profile-btn" v-if="store?.authUser">
                 <button class="edit-profile-btn">
                     <router-link :to="{ name: 'editProfile' }" customv-slot="{ navigate }">
-                            <div class="link" @click="navigate" role="link">
+                            <div class="lin        </div>
+k" @click="navigate" role="link">
                                 Edit Profile
                             </div>
                         </router-link>
@@ -109,8 +109,6 @@ onMounted(() => {
                 </button>
             </div>
 
-        </div>
-        </div>
 
         <div class="own-posts">
             <BlogCard v-for="blog in user.blogs" :key="blog.id" :blog="blog" />
@@ -139,7 +137,7 @@ onMounted(() => {
     align-items: center;
 }
 
-.profile-picture-container {        </div>
+.profile-picture-container {        
 
     width: 120px;
     height: 120px;
